@@ -159,6 +159,220 @@ export default function SolutionPage() {
             </div>
           </div>
         </div>
+        {/* Specifications Section */}
+        <div className="mt-8 bg-white rounded-xl shadow-lg p-8 border border-orange-200">
+          <h2 className="text-2xl font-bold text-orange-800 mb-6">
+            SPECIFICATIONS
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-4">
+              <div className="flex justify-between items-center py-2 border-b border-orange-100">
+                <span className="font-medium text-gray-700">Input Voltage</span>
+                <span className="text-orange-600 font-semibold">
+                  100 V - 265 V AC
+                </span>
+              </div>
+              <div className="flex justify-between items-center py-2 border-b border-orange-100">
+                <span className="font-medium text-gray-700">Frequency</span>
+                <span className="text-orange-600 font-semibold">50/60 Hz</span>
+              </div>
+              <div className="flex justify-between items-center py-2 border-b border-orange-100">
+                <span className="font-medium text-gray-700">
+                  Power Factor @220 VAC
+                </span>
+                <span className="text-orange-600 font-semibold">≥ 0.9</span>
+              </div>
+              <div className="flex justify-between items-center py-2 border-b border-orange-100">
+                <span className="font-medium text-gray-700">
+                  Color Temperatures
+                </span>
+                <span className="text-orange-600 font-semibold">
+                  2700 K / 4000 K / 6000 K
+                </span>
+              </div>
+              <div className="flex justify-between items-center py-2 border-b border-orange-100">
+                <span className="font-medium text-gray-700">
+                  Color Rendering Index
+                </span>
+                <span className="text-orange-600 font-semibold">≥ 80</span>
+              </div>
+            </div>
+            <div className="space-y-4">
+              <div className="flex justify-between items-center py-2 border-b border-orange-100">
+                <span className="font-medium text-gray-700">
+                  Lumen Efficacy
+                </span>
+                <span className="text-orange-600 font-semibold">
+                  ≥ 100 Lumens per Watt
+                </span>
+              </div>
+              <div className="flex justify-between items-center py-2 border-b border-orange-100">
+                <span className="font-medium text-gray-700">
+                  Ingress Protection
+                </span>
+                <span className="text-orange-600 font-semibold">IP65</span>
+              </div>
+              <div className="flex justify-between items-center py-2 border-b border-orange-100">
+                <span className="font-medium text-gray-700">Life Span</span>
+                <span className="text-orange-600 font-semibold">
+                  ≥ 50,000 Hours
+                </span>
+              </div>
+              <div className="flex justify-between items-center py-2 border-b border-orange-100">
+                <span className="font-medium text-gray-700">
+                  Safety Standard
+                </span>
+                <span className="text-orange-600 font-semibold">IEC 60598</span>
+              </div>
+              <div className="flex justify-between items-center py-2 border-b border-orange-100">
+                <span className="font-medium text-gray-700">
+                  EMC/EMI Standard
+                </span>
+                <span className="text-orange-600 font-semibold">
+                  IEC 61547 / EN55015
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Product Comparison Table */}
+        <div className="mt-8 bg-white rounded-xl shadow-lg p-8 border border-orange-200">
+          <h2 className="text-2xl font-bold text-orange-800 mb-6">
+            PRODUCT COMPARISON
+          </h2>
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse border border-orange-200 text-sm">
+              <thead>
+                <tr className="bg-gradient-to-r from-orange-600 to-amber-600 text-white">
+                  <th className="border border-orange-300 p-3 text-left font-semibold">
+                    Product Code
+                  </th>
+                  <th className="border border-orange-300 p-3 text-center font-semibold">
+                    Input Voltage
+                  </th>
+                  <th className="border border-orange-300 p-3 text-center font-semibold">
+                    Luminous Flux
+                  </th>
+                  <th className="border border-orange-300 p-3 text-center font-semibold">
+                    Energy Efficiency
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="hover:bg-orange-50 transition-colors">
+                  <td className="border border-orange-200 p-3 font-medium text-orange-700">
+                    VPL - 036
+                  </td>
+                  <td className="border border-orange-200 p-3 text-center">
+                    36 Watts
+                  </td>
+                  <td className="border border-orange-200 p-3 text-center">
+                    3600
+                  </td>
+                  <td className="border border-orange-200 p-3 text-center">
+                    60%
+                  </td>
+                </tr>
+                <tr className="hover:bg-orange-50 transition-colors">
+                  <td className="border border-orange-200 p-3 font-medium text-orange-700">
+                    VPL - 040
+                  </td>
+                  <td className="border border-orange-200 p-3 text-center">
+                    40 Watts
+                  </td>
+                  <td className="border border-orange-200 p-3 text-center">
+                    4000
+                  </td>
+                  <td className="border border-orange-200 p-3 text-center">
+                    65%
+                  </td>
+                </tr>
+                <tr className="hover:bg-orange-50 transition-colors">
+                  <td className="border border-orange-200 p-3 font-medium text-orange-700">
+                    VPL - 050
+                  </td>
+                  <td className="border border-orange-200 p-3 text-center">
+                    50 Watts
+                  </td>
+                  <td className="border border-orange-200 p-3 text-center">
+                    5000
+                  </td>
+                  <td className="border border-orange-200 p-3 text-center">
+                    70%
+                  </td>
+                </tr>
+                <tr className="hover:bg-orange-50 transition-colors">
+                  <td className="border border-orange-200 p-3 font-medium text-orange-700">
+                    VPL - 060
+                  </td>
+                  <td className="border border-orange-200 p-3 text-center">
+                    60 Watts
+                  </td>
+                  <td className="border border-orange-200 p-3 text-center">
+                    6000
+                  </td>
+                  <td className="border border-orange-200 p-3 text-center">
+                    62%
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* Mechanical Features */}
+        <div className="mt-8 bg-gradient-to-r from-orange-600 to-amber-600 rounded-xl shadow-lg p-8 text-white">
+          <h3 className="text-2xl font-bold mb-6">MECHANICAL FEATURES</h3>
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse border border-orange-300 text-sm">
+              <thead>
+                <tr className="bg-gray-700 bg-opacity-20">
+                  <th className="border border-orange-300 p-3 text-left font-semibold">
+                    Product Code
+                  </th>
+                  <th className="border border-orange-300 p-3 text-center font-semibold">
+                    Size (mm)
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="transition-colors">
+                  <td className="border border-orange-300 p-3 font-medium">
+                    VPL - 036
+                  </td>
+                  <td className="border border-orange-300 p-3 text-center">
+                    1200 x 55 x 70
+                  </td>
+                </tr>
+                <tr className="transition-colors">
+                  <td className="border border-orange-300 p-3 font-medium">
+                    VPL - 144
+                  </td>
+                  <td className="border border-orange-300 p-3 text-center">
+                    1200 x 55 x 70
+                  </td>
+                </tr>
+                <tr className="transition-colors">
+                  <td className="border border-orange-300 p-3 font-medium">
+                    VPL - 336
+                  </td>
+                  <td className="border border-orange-300 p-3 text-center">
+                    1200 x 55 x 50
+                  </td>
+                </tr>
+                <tr className="transition-colors">
+                  <td className="border border-orange-300 p-3 font-medium">
+                    VPL - 348
+                  </td>
+                  <td className="border border-orange-300 p-3 text-center">
+                    1200 x 55 x 50
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   );
