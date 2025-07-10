@@ -15,6 +15,11 @@ import {
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 
 export default function OrittoCorporate() {
     const [currentBanner, setCurrentBanner] = useState(0)
@@ -49,38 +54,40 @@ export default function OrittoCorporate() {
             title: "Laying the foundation stone",
             description: "Acquired 24000 Sqft Industrial land in Mandideep",
         },
-        { 
-            year: "2021 Q3", 
+        {
+            year: "2021 Q3",
             title: "Project Initiation",
-            description: " Project initiated during COVID" 
+            description: " Project initiated during COVID"
         },
-        { 
-            year: " 2022 Q3", 
-            title: "Project Commissioned", 
-            description: "First fully backward integrated facility commissioned" 
+        {
+            year: " 2022 Q3",
+            title: "Project Commissioned",
+            description: "First fully backward integrated facility commissioned"
         },
         {
             year: "2023 Q1",
             title: " First OEM",
             description: "Signed first OEM client for LED T-5 battens",
         },
-        { 
-            year: " 2023 Q3", 
-            title: " Distribution Expanded", 
-            description: "Expanded distribution to Bhopal, Ujjain and Lucknow" 
+        {
+            year: " 2023 Q3",
+            title: " Distribution Expanded",
+            description: "Expanded distribution to Bhopal, Ujjain and Lucknow"
         },
-        { 
-            year: " 2024 Q1", 
-            title: " Market Outreach", 
-            description: " Expanded OEM operations and market Outreach" 
+        {
+            year: " 2024 Q1",
+            title: " Market Outreach",
+            description: " Expanded OEM operations and market Outreach"
         },
     ]
 
     const teamMembers = [
-        { name: "John Smith", position: "CEO & Founder", image: "/placeholder.svg?height=300&width=300" },
-        { name: "Sarah Johnson", position: "CTO", image: "/placeholder.svg?height=300&width=300" },
-        { name: "Michael Chen", position: "Head of Manufacturing", image: "/placeholder.svg?height=300&width=300" },
-        { name: "Emily Davis", position: "VP Operations", image: "/placeholder.svg?height=300&width=300" },
+        { name: "Varun Bansal", position: "Managing Partner", image: "/img/corporate/placeholder.png?height=300&width=300" },
+        { name: "Pramod Bansal", position: "Partner", image: "/img/corporate/placeholder.png?height=300&width=300" },
+        { name: " Leena Bansal", position: " Head of Marketing", image: "/img/corporate/placeholder.png?height=300&width=300" },
+        { name: "Dr. B. P. Bansal", position: "Chairman", image: "/img/corporate/placeholder.png?height=300&width=300" },
+        { name: " Arun Bhatia", position: "Advisor (Technology)", image: "/img/corporate/placeholder.png?height=300&width=300" },
+        { name: " Dr. V. Baskaran", position: "Advisor (Organization Building & Behavior)", image: "/img/corporate/placeholder.png?height=300&width=300" },
     ]
 
     const clients = [
@@ -155,13 +162,13 @@ export default function OrittoCorporate() {
             </section>
 
             {/* Oritto World Animation */}
-            <section className="py-20 bg-gradient-to-br from-blue-50 to-indigo-100">
+            <section className="py-20">
                 <div className="container mx-auto px-4 text-center">
                     <h2 className="text-4xl font-bold mb-12 text-gray-800">Welcome to Oritto World</h2>
                     <div className="relative max-w-4xl mx-auto">
                         <div className="animate-pulse">
                             <Image
-                                src="/placeholder.svg?height=400&width=800"
+                                src="/img/corporate/placeholder.png?height=400&width=800"
                                 alt="Oritto World Animation"
                                 width={800}
                                 height={400}
@@ -204,7 +211,7 @@ export default function OrittoCorporate() {
                             <div className="order-1 md:order-2 w-full">
                                 <div className="relative w-full aspect-[3/2] md:aspect-[6/4]">
                                     <Image
-                                        src="/placeholder.svg?height=400&width=600"
+                                        src="/img/corporate/placeholder.png?height=400&width=600"
                                         alt="Oritto Founding Story"
                                         fill
                                         className="rounded-lg shadow-lg object-cover"
@@ -340,7 +347,7 @@ export default function OrittoCorporate() {
                                 {[1, 2, 3, 4, 5, 6].map((i) => (
                                     <div key={i} className="relative group overflow-hidden rounded-lg">
                                         <Image
-                                            src={`/placeholder.svg?height=300&width=400`}
+                                            src={`/img/corporate/placeholder.png?height=300&width=400`}
                                             alt={`Manufacturing Plant ${i}`}
                                             width={400}
                                             height={300}
@@ -390,32 +397,33 @@ export default function OrittoCorporate() {
                                 <div className="bg-white/20 rounded-full p-6 w-24 h-24 mx-auto mb-4 flex items-center justify-center">
                                     <Award className="h-12 w-12" />
                                 </div>
-                                <h3 className="text-xl font-bold mb-2">Quality Excellence</h3>
-                                <p>Uncompromising quality standards in every product we manufacture.</p>
+                                <h3 className="text-xl font-bold mb-2">Backward Integration</h3>
+                                <p>Inhouse manufacturing ensures complete quality and cost control, on-time delivery (OTD), and the support of an experienced team with decades of prior experience in the same sector.</p>
                             </div>
 
                             <div className="text-center">
                                 <div className="bg-white/20 rounded-full p-6 w-24 h-24 mx-auto mb-4 flex items-center justify-center">
                                     <Globe className="h-12 w-12" />
                                 </div>
-                                <h3 className="text-xl font-bold mb-2">Global Reach</h3>
-                                <p>Worldwide presence with local expertise and support.</p>
-                            </div>
-
-                            <div className="text-center">
-                                <div className="bg-white/20 rounded-full p-6 w-24 h-24 mx-auto mb-4 flex items-center justify-center">
-                                    <Factory className="h-12 w-12" />
-                                </div>
-                                <h3 className="text-xl font-bold mb-2">Advanced Technology</h3>
-                                <p>State-of-the-art manufacturing processes and equipment.</p>
+                                <h3 className="text-xl font-bold mb-2">Innovative R&D</h3>
+                                <p>Continuous improvement &
+                                    New Designs </p>
                             </div>
 
                             <div className="text-center">
                                 <div className="bg-white/20 rounded-full p-6 w-24 h-24 mx-auto mb-4 flex items-center justify-center">
                                     <Users className="h-12 w-12" />
                                 </div>
-                                <h3 className="text-xl font-bold mb-2">Expert Team</h3>
-                                <p>Skilled professionals dedicated to your success.</p>
+                                <h3 className="text-xl font-bold mb-2"> Customer Centric Approach</h3>
+                                <p>Reliable products with exceptional service, the ability to invest to meet growing customer needs, exceptional after-sales service, and a simplified warranty management process.</p>
+                            </div>
+
+                            <div className="text-center">
+                                <div className="bg-white/20 rounded-full p-6 w-24 h-24 mx-auto mb-4 flex items-center justify-center">
+                                    <Factory className="h-12 w-12" />
+                                </div>
+                                <h3 className="text-xl font-bold mb-2">Sustainability</h3>
+                                <p>Commitment to energy-efficient solutions, strategically located in Central India (Madhya Pradesh) for on-time deliveries and reduced lead times.</p>
                             </div>
                         </div>
                     </div>
@@ -430,7 +438,7 @@ export default function OrittoCorporate() {
 
                         <div className="mb-12">
                             <Image
-                                src="/placeholder.svg?height=400&width=800"
+                                src="/img/corporate/placeholder.png?height=400&width=800"
                                 alt="Global Presence Map"
                                 width={800}
                                 height={400}
@@ -485,21 +493,32 @@ export default function OrittoCorporate() {
                     <div className="max-w-6xl mx-auto">
                         <h2 className="text-4xl font-bold text-center mb-16 text-gray-800">Oritto Pillars - Our Leadership Team</h2>
 
-                        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <Swiper
+                            modules={[Navigation, Autoplay]}
+                            spaceBetween={30}
+                            slidesPerView={4}
+                            autoplay={{ delay: 3000, disableOnInteraction: false }}
+                            navigation
+                            loop={true}
+                            pagination={{ clickable: true }}
+                            className="team-carousel"
+                        >
                             {teamMembers.map((member, index) => (
-                                <Card key={index} className="p-6 text-center hover:shadow-lg transition-shadow">
-                                    <Image
-                                        src={member.image || "/placeholder.svg"}
-                                        alt={member.name}
-                                        width={200}
-                                        height={200}
-                                        className="rounded-full mx-auto mb-4"
-                                    />
-                                    <h3 className="text-xl font-bold mb-2 text-gray-800">{member.name}</h3>
-                                    <p className="text-gray-600 mb-4">{member.position}</p>
-                                </Card>
+                                <SwiperSlide key={index}>
+                                    <Card className="p-6 text-center hover:shadow-lg transition-shadow">
+                                        <Image
+                                            src={member.image || "/placeholder.svg"}
+                                            alt={member.name}
+                                            width={200}
+                                            height={200}
+                                            className="rounded-full mx-auto mb-4"
+                                        />
+                                        <h3 className="text-xl font-bold mb-2 text-gray-800">{member.name}</h3>
+                                        <p className="text-gray-600 mb-4">{member.position}</p>
+                                    </Card>
+                                </SwiperSlide>
                             ))}
-                        </div>
+                        </Swiper>
                     </div>
                 </div>
             </section>
@@ -530,7 +549,7 @@ export default function OrittoCorporate() {
                             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((i) => (
                                 <div key={i} className="relative group overflow-hidden rounded-lg aspect-square">
                                     <Image
-                                        src={`/placeholder.svg?height=300&width=300`}
+                                        src={`/img/corporate/placeholder.png?height=300&width=300`}
                                         alt={`Gallery Image ${i}`}
                                         fill
                                         className="object-cover transition-transform group-hover:scale-110"
