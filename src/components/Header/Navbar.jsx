@@ -28,6 +28,8 @@ const Navbar = () => {
 
   const handleSolutionHover = () => setIsSolutionDropdownOpen(true);
   const handleSolutionLeave = () => setIsSolutionDropdownOpen(false);
+  const handleProductClick = () => setIsProductDropdownOpen((prev) => !prev);
+  const handleSolutionClick = () => setIsSolutionDropdownOpen((prev) => !prev);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -84,6 +86,8 @@ const Navbar = () => {
               <button
                 ref={productLinkRef}
                 className="text-gray-700 hover:bg-orange-500 hover:text-white px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200 flex items-center mr-2"
+                onClick={handleProductClick}
+                type="button"
               >
                 <span>Product</span>
                 <FiChevronDown className={`w-4 h-4 transition-transform duration-200 ${isProductDropdownOpen ? 'rotate-180' : ''}`} />
@@ -104,6 +108,8 @@ const Navbar = () => {
               <button
                 ref={solutionLinkRef}
                 className="text-gray-700 hover:bg-orange-500 hover:text-white px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200 flex items-center space-x-1 mr-2"
+                onClick={handleSolutionClick}
+                type="button"
               >
                 <span>Solution</span>
                 <FiChevronDown className={`w-4 h-4 transition-transform duration-200 ${isSolutionDropdownOpen ? 'rotate-180' : ''}`} />
