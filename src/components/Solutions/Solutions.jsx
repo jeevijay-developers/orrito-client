@@ -1,3 +1,5 @@
+"use client"
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const solutions = [
@@ -53,6 +55,7 @@ const solutions = [
 
 
 const Solutions = () => {
+  const router = useRouter()
   return (
     <div className="px-8 py-12 bg-orange-50">
       <div className="text-center mb-16">
@@ -70,7 +73,8 @@ const Solutions = () => {
             <img
               src={solution.image}
               alt={solution.title}
-              className="mx-auto h-32 w-32 object-contain rounded-md shadow-sm"
+              onClick={() => router.push("/solutions/solution-by-id")}
+              className="mx-auto cursor-pointer h-32 w-32 object-contain rounded-md shadow-sm"
             />
             <h2 className="mt-4 text-lg font-semibold">{solution.title}</h2>
           </div>

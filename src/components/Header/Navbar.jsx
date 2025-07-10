@@ -29,7 +29,7 @@ const Navbar = () => {
             <Link href="/product" className="text-gray-700 hover:bg-orange-500 hover:text-white px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200">
               Product
             </Link>
-            <Link href="/solution" className="text-gray-700 hover:bg-orange-500 hover:text-white px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200">
+            <Link href="/solutions/all-solutions" className="text-gray-700 hover:bg-orange-500 hover:text-white px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200">
               Solution
             </Link>
             <Link href="/solar" className="text-gray-700 hover:bg-orange-500 hover:text-white px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200">
