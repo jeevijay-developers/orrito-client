@@ -23,11 +23,12 @@ export default function SolutionPage() {
   ];
  
   const imageCards = [
-    { id: 1, title: "img1", link: "https://picsum.photos" },
-    { id: 2, title: "img2",link: "https://picsum.photos" },
-    { id: 3, title: "img3",link: "https://picsum.photos" },
-    { id: 4, title: "img4",link: "https://picsum.photos" },
+    { id: 1, title: "img1", link: "https://picsum.photos/seed/img1/200" },
+    { id: 2, title: "img2", link: "https://picsum.photos/seed/img2/200" },
+    { id: 3, title: "img3", link: "https://picsum.photos/seed/img3/200" },
+    { id: 4, title: "img4", link: "https://picsum.photos/seed/img4/200" },
   ];
+  
   const [selectedImage, setSelectedImage] = useState(imageCards[0]?.link);
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50 p-6">
@@ -71,7 +72,7 @@ export default function SolutionPage() {
           <div className="space-y-6">
             <div className="bg-white rounded-xl shadow-lg p-8 border border-orange-200 h-80 flex items-center justify-center">
               <Image
-                src="https://picsum.photos/900/900"
+                src={selectedImage}
                 alt="abc1 preview"
                 width={900}
                 height={900}
