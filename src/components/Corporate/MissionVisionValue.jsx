@@ -46,9 +46,9 @@ const MissionVisionValue = () => {
   ]
 
   return (
-    <section className="py-16 bg-[#FFEBE2]/30">
+    <section className="py-16">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-[#F16831] to-[#F16831] bg-clip-text text-transparent">
+        <h2 className="text-4xl font-bold text-center mb-12 bg-[#F26D31] bg-clip-text text-transparent">
           Our Mission, Vision & Values
         </h2>
         
@@ -59,7 +59,7 @@ const MissionVisionValue = () => {
               className="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
             >
               {/* Card Header */}
-              <div className={`bg-gradient-to-r ${card.color} p-6 text-white`}>
+              <div className={`bg-[#F26D31] ${card.color} p-6 text-white`}>
                 <div className="flex items-center justify-between">
                   <h3 className="text-2xl font-bold">{card.title}</h3>
                   <card.icon className="h-8 w-8" />
