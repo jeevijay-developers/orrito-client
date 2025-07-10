@@ -8,7 +8,7 @@ import Image from 'next/image';
 
 const HeroCorporate = () => {
   return (
-    <div style={{ width: '90vw', margin: '0 auto' }}>
+    <div className="w-full overflow-hidden">
       <Swiper
         modules={[Autoplay]}
         spaceBetween={30}
@@ -18,17 +18,18 @@ const HeroCorporate = () => {
           disableOnInteraction: false,
         }}
         loop={true}
-        style={{ width: '100%' }}
+        className="w-full"
       >
         {[1,2,3,4].map((num) => (
           <SwiperSlide key={num}>
-            <div className='relative w-full aspect-[21/9] overflow-hidden'>
+            <div className='relative w-full overflow-hidden' style={{ height: '100vh' }}>
               <Image
-              className='object-cover rounded-[12px]'
+                className='object-cover'
                 src={`/img/corporate/${num}.jpg`}
                 alt={`Corporate Image ${num}`}
                 fill
-                sizes="(max-width: 1200px) 100vw, 1000px"
+                sizes="100%"
+                priority={num === 1}
               />
             </div>
           </SwiperSlide>
