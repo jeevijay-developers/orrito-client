@@ -71,8 +71,8 @@ export default function SolutionPage({id}) {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-orange-800">Product Name</h1>
-          <button className="flex items-center gap-2 cursor-pointer bg-orange-600 text-white px-6 py-3 rounded-lg hover:bg-orange-700 transition-colors shadow-lg">
+          <h1 className="text-3xl font-bold text-gray-800">Product Name</h1>
+          <button className="flex items-center gap-2 cursor-pointer bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors shadow-lg">
             <Download size={20} />
             Download.pdf
           </button>
@@ -82,8 +82,8 @@ export default function SolutionPage({id}) {
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_3fr] gap-8 mb-12">
           {/* Left Column - List */}
           <div className="w-full ">
-            <div className="bg-white rounded-xl shadow-lg p-6 border border-orange-200">
-              <h2 className="text-xl font-semibold text-orange-800 mb-4">
+            <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
+              <h2 className="text-xl font-semibold text-gray-800 mb-4">
                 Product List
               </h2>
               <table className="w-full text-left border-collapse text-sm">
@@ -91,9 +91,9 @@ export default function SolutionPage({id}) {
                   {productList.map((item, index) => (
                     <tr
                       key={index}
-                      className="hover:bg-orange-50 transition-colors"
+                      className="hover:bg-gray-50 transition-colors"
                     >
-                      <td className="py-2 pr-4 text-orange-600 font-medium">
+                      <td className="py-2 pr-4 text-gray-600 font-medium">
                         {index + 1}
                       </td>
                       <td className="py-2 text-gray-700">{item}</td>
@@ -106,7 +106,7 @@ export default function SolutionPage({id}) {
 
           {/* Right Column - Main Image */}
           <div className="space-y-6 ">
-            <div className="bg-white rounded-xl shadow-lg p-6 border border-orange-200 flex items-center justify-center">
+            <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-200 flex items-center justify-center">
               <div className="relative w-full aspect-[4/3] max-h-[500px]">
                 <Image
                   src={selectedImage}
@@ -122,9 +122,9 @@ export default function SolutionPage({id}) {
               {imageCards.map((card) => (
                 <div
                   key={card.id}
-                  className="bg-white rounded-lg shadow-md p-2 border border-orange-200 hover:shadow-lg transition-shadow cursor-pointer group"
+                  className="bg-white rounded-lg shadow-md p-2 border border-gray-200 hover:shadow-lg transition-shadow cursor-pointer group"
                 >
-                  <div className="h-12  md:h-24 bg-gradient-to-br from-orange-100 to-amber-100 rounded-lg overflow-hidden flex items-center justify-center  group-hover:from-orange-200 group-hover:to-amber-200 transition-colors">
+                  <div className="h-12  md:h-24 bg-gradient-to-br from-gray-100 to-amber-100 rounded-lg overflow-hidden flex items-center justify-center  group-hover:from-gray-200 group-hover:to-amber-200 transition-colors">
                     <Image
                       src={card.link}
                       alt={card.title}
@@ -141,18 +141,18 @@ export default function SolutionPage({id}) {
         </div>
 
         {/* Features Section */}
-        <div className="bg-white rounded-xl shadow-lg p-8 border border-orange-200">
-          <h2 className="text-2xl font-bold text-orange-800 mb-6 flex items-center gap-2">
-            <CheckCircle className="text-orange-600" size={24} />
+        <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-200">
+          <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+            <CheckCircle className="text-gray-600" size={24} />
             FEATURES:
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="flex items-start gap-3 p-4 rounded-lg bg-orange-50 hover:bg-orange-100 transition-colors"
+                className="flex items-start gap-3 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
               >
-                <div className="w-2 h-2 bg-orange-500 rounded-full mt-2 flex-shrink-0"></div>
+                <div className="w-2 h-2 bg-gray-500 rounded-full mt-2 flex-shrink-0"></div>
                 <span className="text-gray-700 text-sm leading-relaxed">
                   {feature}
                 </span>
@@ -161,18 +161,18 @@ export default function SolutionPage({id}) {
           </div>
         </div>
         {/* Mechanical Features */}
-        <div className="mt-8 bg-orange-50 rounded-xl shadow-lg p-8">
-          <h3 className="text-2xl font-bold mb-6 text-orange-800">
+        <div className="mt-8 bg-gray-50 rounded-xl shadow-lg p-8">
+          <h3 className="text-2xl font-bold mb-6 text-gray-800">
             MECHANICAL FEATURES
           </h3>
           <div className="overflow-x-auto">
-            <table className="w-full border-collapse border border-orange-300 text-sm">
+            <table className="w-full border-collapse border border-gray-300 text-sm">
               <thead>
-                <tr className="bg-orange-50 bg-opacity-20">
-                  <th className="border border-orange-300 p-3 text-left font-semibold">
+                <tr className="bg-gray-50 bg-opacity-20">
+                  <th className="border border-gray-300 p-3 text-left font-semibold">
                     Product Code
                   </th>
-                  <th className="border border-orange-300 p-3 text-center font-semibold">
+                  <th className="border border-gray-300 p-3 text-center font-semibold">
                     Size (mm)
                   </th>
                 </tr>
@@ -180,10 +180,10 @@ export default function SolutionPage({id}) {
               <tbody>
                 {mechanicalFeatures.map((feature, index) => (
                   <tr key={index} className="transition-colors">
-                    <td className="border border-orange-300 p-3 font-medium">
+                    <td className="border border-gray-300 p-3 font-medium">
                       {feature.code}
                     </td>
-                    <td className="border border-orange-300 p-3 text-center">
+                    <td className="border border-gray-300 p-3 text-center">
                       {feature.size}
                     </td>
                   </tr>
@@ -193,7 +193,7 @@ export default function SolutionPage({id}) {
           </div>
         </div>
         {/* Technical Features */}
-        <div className="mt-8 bg-orange-50 rounded-xl shadow-lg p-8 text-black">
+        {/* <div className="mt-8 bg-gray-50 rounded-xl shadow-lg p-8 text-black">
           <h3 className="text-xl font-bold mb-4">Technical Features</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-3">
@@ -225,10 +225,10 @@ export default function SolutionPage({id}) {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
         {/* Specifications Section */}
-        <div className="mt-8 bg-white rounded-xl shadow-lg p-8 border border-orange-200">
-          <h2 className="text-2xl font-bold text-orange-800 mb-6">
+        <div className="mt-8 bg-white rounded-xl shadow-lg p-8 border border-gray-200">
+          <h2 className="text-2xl font-bold text-gray-800 mb-6">
             SPECIFICATIONS
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -237,7 +237,7 @@ export default function SolutionPage({id}) {
                 {column.map((item, index) => (
                   <div
                     key={index}
-                    className="flex justify-between items-center py-2 border-b border-orange-100"
+                    className="flex justify-between items-center py-2 border-b border-gray-100"
                   >
                     <span className="font-medium text-gray-700">
                       {item.label}
@@ -253,24 +253,24 @@ export default function SolutionPage({id}) {
         </div>
 
         {/* Product Comparison Table */}
-        <div className="mt-8 bg-white text-gray-800 rounded-xl shadow-lg p-8 border border-orange-200">
-          <h2 className="text-2xl font-bold text-orange-800 mb-6">
+        <div className="mt-8 bg-white text-gray-800 rounded-xl shadow-lg p-8 border border-gray-200">
+          <h2 className="text-2xl font-bold text-gray-800 mb-6">
             PRODUCT COMPARISON
           </h2>
           <div className="overflow-x-auto">
             <table className="w-full border-collapse border border-gray-200 text-sm">
               <thead>
                 <tr>
-                  <th className="border border-orange-300 p-3 text-left font-semibold">
+                  <th className="border border-gray-300 p-3 text-left font-semibold">
                     Product Code
                   </th>
-                  <th className="border border-orange-300 p-3 text-center font-semibold">
+                  <th className="border border-gray-300 p-3 text-center font-semibold">
                     Input Voltage
                   </th>
-                  <th className="border border-orange-300 p-3 text-center font-semibold">
+                  <th className="border border-gray-300 p-3 text-center font-semibold">
                     Luminous Flux
                   </th>
-                  <th className="border border-orange-300 p-3 text-center font-semibold">
+                  <th className="border border-gray-300 p-3 text-center font-semibold">
                     Energy Efficiency
                   </th>
                 </tr>
@@ -279,18 +279,18 @@ export default function SolutionPage({id}) {
                 {productComparisons.map((product, index) => (
                   <tr
                     key={index}
-                    className="hover:bg-orange-50 transition-colors"
+                    className="hover:bg-gray-50 transition-colors"
                   >
-                    <td className="border border-orange-300 p-3 font-medium text-gray-700">
+                    <td className="border border-gray-300 p-3 font-medium text-gray-700">
                       {product.code}
                     </td>
-                    <td className="border border-orange-300 p-3 text-center">
+                    <td className="border border-gray-300 p-3 text-center">
                       {product.voltage}
                     </td>
-                    <td className="border border-orange-300 p-3 text-center">
+                    <td className="border border-gray-300 p-3 text-center">
                       {product.flux}
                     </td>
-                    <td className="border border-orange-300 p-3 text-center">
+                    <td className="border border-gray-300 p-3 text-center">
                       {product.efficiency}
                     </td>
                   </tr>
