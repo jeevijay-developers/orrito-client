@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { FiShoppingCart } from "react-icons/fi";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -10,36 +11,34 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white shadow-md border-b border-gray-200 sticky top-0 z-50">
+    <nav className="bg-white shadow-md border-b border-gray-200 sticky top-0 z-40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center">
-              <div className="bg-gray-100 border-2 border-gray-300 rounded-lg px-6 py-2">
-                <span className="text-gray-700 font-semibold text-lg">Logo</span>
-              </div>
+              <img src="/img/logo/logo.png" alt="Oritto Logo" className="h-22 w-auto object-contain" />
             </Link>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-1">
-            <Link href="/corporate" className="text-gray-700 hover:text-blue-600 px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-gray-50">
+            <Link href="/corporate" className="text-gray-700 hover:bg-orange-500 hover:text-white px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200">
               Corporate
             </Link>
-            <Link href="/product" className="text-gray-700 hover:text-blue-600 px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-gray-50">
+            <Link href="/product" className="text-gray-700 hover:bg-orange-500 hover:text-white px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200">
               Product
             </Link>
-            <Link href="/solution" className="text-gray-700 hover:text-blue-600 px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-gray-50">
+            <Link href="/solution" className="text-gray-700 hover:bg-orange-500 hover:text-white px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200">
               Solution
             </Link>
-            <Link href="/solar" className="text-gray-700 hover:text-blue-600 px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-gray-50">
+            <Link href="/solar" className="text-gray-700 hover:bg-orange-500 hover:text-white px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200">
               Solar
             </Link>
-            <Link href="/offer" className="text-gray-700 hover:text-blue-600 px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-gray-50">
+            <Link href="/offer" className="text-gray-700 hover:bg-orange-500 hover:text-white px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200">
               Offer
             </Link>
-            <Link href="/support" className="text-gray-700 hover:text-blue-600 px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-gray-50">
+            <Link href="/support" className="text-gray-700 hover:bg-orange-500 hover:text-white px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200">
               Support
             </Link>
             <Link href="/distribution-enquiry" className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 border border-orange-500 rounded-md text-sm font-medium transition-colors duration-200">
@@ -47,14 +46,14 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* Search Bar and Mobile Menu */}
+          {/* Search Bar and Shopping Cart Icon */}
           <div className="flex items-center space-x-4">
             {/* Desktop Search Bar */}
             <div className="hidden md:block relative">
               <input
                 type="text"
                 placeholder="Search bar"
-                className="w-64 px-4 py-2 pr-10 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
+                className="w-64 px-4 py-2 pr-10 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-0 focus:border-orange-500 bg-white"
               />
               <div className="absolute inset-y-0 right-0 flex items-center pr-3">
                 <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -62,7 +61,10 @@ const Navbar = () => {
                 </svg>
               </div>
             </div>
-
+            {/* Shopping Cart Icon */}
+            <button className="relative text-gray-700 hover:text-orange-500 focus:outline-none">
+              <FiShoppingCart size={24} />
+            </button>
             {/* Mobile menu button */}
             <div className="lg:hidden flex items-center space-x-2">
               {/* Mobile Search Button */}
