@@ -159,7 +159,38 @@ export default function SolutionPage({id}) {
             ))}
           </div>
         </div>
-
+        {/* Mechanical Features */}
+        <div className="mt-8 bg-orange-50 rounded-xl shadow-lg p-8">
+          <h3 className="text-2xl font-bold mb-6 text-orange-800">
+            MECHANICAL FEATURES
+          </h3>
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse border border-orange-300 text-sm">
+              <thead>
+                <tr className="bg-orange-50 bg-opacity-20">
+                  <th className="border border-orange-300 p-3 text-left font-semibold">
+                    Product Code
+                  </th>
+                  <th className="border border-orange-300 p-3 text-center font-semibold">
+                    Size (mm)
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {mechanicalFeatures.map((feature, index) => (
+                  <tr key={index} className="transition-colors">
+                    <td className="border border-orange-300 p-3 font-medium">
+                      {feature.code}
+                    </td>
+                    <td className="border border-orange-300 p-3 text-center">
+                      {feature.size}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
         {/* Technical Features */}
         <div className="mt-8 bg-orange-50 rounded-xl shadow-lg p-8 text-black">
           <h3 className="text-xl font-bold mb-4">Technical Features</h3>
@@ -260,39 +291,6 @@ export default function SolutionPage({id}) {
                     </td>
                     <td className="border border-orange-300 p-3 text-center">
                       {product.efficiency}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        {/* Mechanical Features */}
-        <div className="mt-8 bg-orange-50 rounded-xl shadow-lg p-8">
-          <h3 className="text-2xl font-bold mb-6 text-orange-800">
-            MECHANICAL FEATURES
-          </h3>
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse border border-orange-300 text-sm">
-              <thead>
-                <tr className="bg-orange-50 bg-opacity-20">
-                  <th className="border border-orange-300 p-3 text-left font-semibold">
-                    Product Code
-                  </th>
-                  <th className="border border-orange-300 p-3 text-center font-semibold">
-                    Size (mm)
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {mechanicalFeatures.map((feature, index) => (
-                  <tr key={index} className="transition-colors">
-                    <td className="border border-orange-300 p-3 font-medium">
-                      {feature.code}
-                    </td>
-                    <td className="border border-orange-300 p-3 text-center">
-                      {feature.size}
                     </td>
                   </tr>
                 ))}
