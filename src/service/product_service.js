@@ -68,3 +68,19 @@ export const submitProductQuery = async (data) => {
         throw error;
     }
 }       
+
+
+// Solutions
+export const getAllSolutions = async() =>{
+    try {
+      const res = await apiClient.get(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/solutions/get-all-solutions`,
+      );
+      console.log("Product query submission response: ", res.data);
+
+      return res.data;
+    } catch (error) {
+      console.error("Error submitting product query: ", error);
+      throw error;
+    }
+}

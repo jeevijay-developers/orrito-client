@@ -47,8 +47,24 @@ const ProductHome = () => {
                         delay: 2000,
                         disableOnInteraction: false,
                       }}
+					  breakpoints={
+						{
+							400: {
+								slidesPerView: 3,
+							},
+							768: {
+								slidesPerView: 4,
+							},
+							1024: {
+								slidesPerView: 4,
+							},
+							1280: {
+								slidesPerView: 5,
+							},
+						}
+					  }
                     loop={true}
-					className="category-swiper w-4xl"
+					className="category-swiper w-[26rem] md:w-2xl lg:w-4xl"
 				>
 					{categories.map((cat) => (
 						<SwiperSlide key={cat.name}>
