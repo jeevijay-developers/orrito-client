@@ -67,7 +67,7 @@ export default function SolutionPage({id}) {
   const [selectedImage, setSelectedImage] = useState(imageCards[0]?.link);
   const [selectedProduct, setSelectedProduct] = useState(productList[0]);
   return (
-    <div className="min-h-screen bg-gradient-to-br mt-32 from-orange-50 to-amber-50 p-6">
+    <div className="min-h-screen  p-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
