@@ -1,4 +1,5 @@
 import Hero from '@/components/Hero'
+import Gallery from '@/components/Home/Gallery'
 import Offers from '@/components/Home/Offers'
 import OurClients from '@/components/Home/OurClients'
 
@@ -16,6 +17,7 @@ const page = () => {
       <WhyOritto />
       <Offers />
       <OurClients />
+      <Gallery />
     </div>
   )
 }

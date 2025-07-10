@@ -109,7 +109,7 @@ const OurClients = () => {
     borderRadius: '20px',
     padding: '40px 20px',
     margin: '0 20px',
-    boxShadow: '0 15px 35px rgba(242, 109, 49, 0.2)',
+    // boxShadow: '0 15px 35px rgba(242, 109, 49, 0.2)',
     overflow: 'hidden',
     border: '2px solid rgba(242, 109, 49, 0.1)'
   }
@@ -130,7 +130,7 @@ const OurClients = () => {
     background: '#ffffff',
     borderRadius: '15px',
     margin: '0 15px',
-    boxShadow: '0 10px 30px rgba(242, 109, 49, 0.15)',
+    // boxShadow: '0 10px 30px rgba(242, 109, 49, 0.15)',
     transition: 'all 0.3s ease',
     border: '1px solid rgba(242, 109, 49, 0.1)',
     height: '140px',
@@ -197,7 +197,7 @@ const OurClients = () => {
         </div>
 
         {/* Background decorative elements */}
-        <div 
+        {/* <div 
           style={{
             position: 'absolute',
             top: '-50px',
@@ -220,7 +220,7 @@ const OurClients = () => {
             borderRadius: '50%',
             zIndex: 1
           }}
-        ></div>
+        ></div> */}
       </div>
     </section>
   )
