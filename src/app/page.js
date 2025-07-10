@@ -1,6 +1,7 @@
 import Hero from '@/components/Hero'
 
 import ProductHome from '@/components/Home/ProductHome'
+import SolutionHome from '@/components/Home/SolutionHome'
 import React from 'react'
 
 const page = () => {
@@ -8,6 +9,7 @@ const page = () => {
     <div>
       <Hero />
       <ProductHome />
+      <SolutionHome />
     </div>
   )
 }
