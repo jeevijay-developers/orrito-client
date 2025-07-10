@@ -58,16 +58,16 @@ export default function SolutionPage({id}) {
   ];
  
   const imageCards = [
-    { id: 1, title: "img1", link: "https://picsum.photos/seed/img1/200" },
-    { id: 2, title: "img2", link: "https://picsum.photos/seed/img2/200" },
-    { id: 3, title: "img3", link: "https://picsum.photos/seed/img3/200" },
-    { id: 4, title: "img4", link: "https://picsum.photos/seed/img4/200" },
+    { id: 1, title: "img1", link: "https://picsum.photos/seed/img1/900" },
+    { id: 2, title: "img2", link: "https://picsum.photos/seed/img2/900" },
+    { id: 3, title: "img3", link: "https://picsum.photos/seed/img3/900" },
+    { id: 4, title: "img4", link: "https://picsum.photos/seed/img4/900" },
   ];
   
   const [selectedImage, setSelectedImage] = useState(imageCards[0]?.link);
   const [selectedProduct, setSelectedProduct] = useState(productList[0]);
   return (
-    <div className="min-h-screen  p-6">
+    <div className="min-h-screen mt-32 p-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
@@ -105,25 +105,26 @@ export default function SolutionPage({id}) {
           </div>
 
           {/* Right Column - Main Image */}
-          <div className="space-y-6">
-            <div className="bg-white rounded-xl shadow-lg p-8 border border-orange-200 h-80 flex items-center justify-center">
-              <Image
-                src={selectedImage}
-                alt="abc1 preview"
-                width={900}
-                height={900}
-                className="w-full h-full object-cover rounded-md m-2"
-              />
+          <div className="space-y-6 ">
+            <div className="bg-white rounded-xl shadow-lg p-6 border border-orange-200 flex items-center justify-center">
+              <div className="relative w-full aspect-[4/3] max-h-[500px]">
+                <Image
+                  src={selectedImage}
+                  alt="Main product preview"
+                  fill
+                  className="object-cover rounded-md"
+                />
+              </div>
             </div>
 
             {/* Image Gallery */}
-            <div className="grid grid-cols-4 gap-4">
+            <div className="grid grid-cols-4 gap-4 w-full md:w-1/2">
               {imageCards.map((card) => (
                 <div
                   key={card.id}
                   className="bg-white rounded-lg shadow-md p-2 border border-orange-200 hover:shadow-lg transition-shadow cursor-pointer group"
                 >
-                  <div className="h-12 md:h-24 bg-gradient-to-br from-orange-100 to-amber-100 rounded-lg overflow-hidden flex items-center justify-center  group-hover:from-orange-200 group-hover:to-amber-200 transition-colors">
+                  <div className="h-12  md:h-24 bg-gradient-to-br from-orange-100 to-amber-100 rounded-lg overflow-hidden flex items-center justify-center  group-hover:from-orange-200 group-hover:to-amber-200 transition-colors">
                     <Image
                       src={card.link}
                       alt={card.title}
