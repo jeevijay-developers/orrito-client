@@ -86,18 +86,17 @@ export default function SolutionPage() {
               {imageCards.map((card) => (
                 <div
                   key={card.id}
-                  className="bg-white rounded-lg shadow-md p-6 border border-orange-200 hover:shadow-lg transition-shadow cursor-pointer group"
+                  className="bg-white rounded-lg shadow-md p-2 border border-orange-200 hover:shadow-lg transition-shadow cursor-pointer group"
                 >
-                  <div className="h-24 bg-gradient-to-br from-orange-100 to-amber-100 rounded-lg flex items-center justify-center mb-3 group-hover:from-orange-200 group-hover:to-amber-200 transition-colors">
-                    <span className="text-orange-600 font-medium">
-                      <Image
-                        className="w-full "
-                        src={card.link}
-                        onClick={()=> setSelectedImage(card.link)}
-                        width={200}
-                        height={200}
-                      />
-                    </span>
+                  <div className="h-12 md:h-24 bg-gradient-to-br from-orange-100 to-amber-100 rounded-lg overflow-hidden flex items-center justify-center  group-hover:from-orange-200 group-hover:to-amber-200 transition-colors">
+                    <Image
+                      src={card.link}
+                      alt={card.title}
+                      width={120}
+                      height={120}
+                      className="object-cover w-full h-full cursor-pointer"
+                      onClick={() => setSelectedImage(card.link)}
+                    />
                   </div>
                 </div>
               ))}
