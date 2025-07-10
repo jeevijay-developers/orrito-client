@@ -10,7 +10,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-white text-gray-800 px-6 py-12 text-sm font-sans">
+    <footer className="bg-white text-gray-800 px-6 py-12 text-sm font-sans border-t border-gray-300">
       <div className="max-w-7xl mx-auto flex flex-wrap md:flex-nowrap justify-between gap-y-8 md:gap-y-0 md:gap-x-10">
 
         {/* Company Info */}
