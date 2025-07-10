@@ -14,7 +14,6 @@ const solutionCategories = [
     { name: 'Landscape', href: '/solutions/landscape' },
     { name: 'Swimming Pools', href: '/solutions/swimming-pools' },
     { name: 'Emergency & Exits', href: '/solutions/emergency-exits' },
-    { name: 'Footer', href: '/solutions/footer' },
 ];
 
 const SolutionsDropdown = ({ dropdownRef, handleSolutionHover, handleSolutionLeave, setIsSolutionDropdownOpen }) => {
