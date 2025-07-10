@@ -28,12 +28,12 @@ const SolutionsDropdown = ({ dropdownRef, handleSolutionHover, handleSolutionLea
             <div className="p-8 w-full">
                 <div className="grid grid-cols-1 md:grid-cols-2">
                     {solutionCategories.slice(0,7).map((cat, i) => (
-                        <Link key={i} href={cat.href} className="text-gray-600 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 rounded-md text-base transition-colors duration-200 block font-medium" onClick={() => setIsSolutionDropdownOpen(false)}>
+                        <Link key={i} href={cat.href} className="text-gray-600 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 rounded-md text-sm transition-colors duration-200 block" onClick={() => setIsSolutionDropdownOpen(false)}>
                             {cat.name}
                         </Link>
                     ))}
                     {solutionCategories.slice(7).map((cat, i) => (
-                        <Link key={i+7} href={cat.href} className="text-gray-600 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 rounded-md text-base transition-colors duration-200 block font-medium" onClick={() => setIsSolutionDropdownOpen(false)}>
+                        <Link key={i+7} href={cat.href} className="text-gray-600 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 rounded-md text-sm transition-colors duration-200 block" onClick={() => setIsSolutionDropdownOpen(false)}>
                             {cat.name}
                         </Link>
                     ))}
