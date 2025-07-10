@@ -84,3 +84,18 @@ export const getAllSolutions = async() =>{
       throw error;
     }
 }
+// get solution by id
+export const getSolution = async (data) => {
+  try {
+    const res = await apiClient.post(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/solutions/get-all-solutions`,
+      data
+    );
+    console.log("Product query submission response: ", res.data);
+
+    return res.data;
+  } catch (error) {
+    console.error("Error submitting product query: ", error);
+    throw error;
+  }
+};  

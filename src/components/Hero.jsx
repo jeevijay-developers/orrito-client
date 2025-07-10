@@ -20,20 +20,23 @@ const Hero = () => {
         loop={true}
         className="w-full"
       >
-        {[1,2,3,4].map((num) => (
-          <SwiperSlide key={num}>
-            <div className='relative w-full overflow-hidden' style={{ height: '100vh' }}>
-              <Image
-                className='object-cover'
-                src={`/img/corporate/${num}.jpg`}
-                alt={`Corporate Image ${num}`}
-                fill
-                sizes="100%"
-                priority={num === 1}
-              />
-            </div>
-          </SwiperSlide>
-        ))}
+    {[1, 2, 3, 4].map((num) => (
+  <SwiperSlide key={num}>
+    <div
+      className="relative w-full overflow-hidden h-[60vh] md:h-[85vh]"
+    >
+      <Image
+        src={`/img/corporate/${num}.jpg`}
+        alt={`Corporate Image ${num}`}
+        fill
+        className="object-cover object-center"
+        sizes="100vw"
+        priority={num === 1}
+      />
+    </div>
+  </SwiperSlide>
+))}
+
       </Swiper>
     </div>
   )

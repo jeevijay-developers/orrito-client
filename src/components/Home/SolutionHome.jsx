@@ -35,7 +35,7 @@ const SolutionHome = () => {
 				Solution By Categories
 			</h2>
 			<div className="relative px-4 md:px-50">
-				<button className="solution-swiper-prev absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-gray-800/80 text-white border border-white shadow-lg rounded-full w-10 h-10 flex items-center justify-center hover:bg-orange-500 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-orange-400">
+				<button className="solution-swiper-prev absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-gray-800/80 text-white border border-white shadow-lg rounded-full w-10 h-10 flex items-center justify-center hover:bg-orange-500 transition-colors duration-200 focus:outline-none ">
 					<span className="sr-only">Previous</span>
 					<svg
 						width="20"
@@ -52,7 +52,7 @@ const SolutionHome = () => {
 						/>
 					</svg>
 				</button>
-				<button className="solution-swiper-next absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-gray-800/80 text-white border border-white shadow-lg rounded-full w-10 h-10 flex items-center justify-center hover:bg-orange-500 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-orange-400">
+				<button className="solution-swiper-next absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-gray-800/80 text-white border border-white shadow-lg rounded-full w-10 h-10 flex items-center justify-center hover:bg-orange-500 transition-colors duration-200 focus:outline-none ">
 					<span className="sr-only">Next</span>
 					<svg
 						width="20"
@@ -94,7 +94,7 @@ const SolutionHome = () => {
 									alt={sol.name}
 									className="w-full h-56 sm:h-64 md:h-[320px] lg:h-[370px] object-cover rounded-2xl"
 								/>
-								<button className="mt-4 py-2 px-5 bg-gray-900 text-white rounded-full font-semibold text-xs sm:text-sm hover:bg-orange-500 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-orange-400">
+								<button className="mt-4 py-2 px-5 bg-gray-900 text-white rounded-full font-semibold text-xs sm:text-sm hover:bg-orange-500 transition-colors duration-200 focus:outline-none ">
 									{sol.btn}
 								</button>
 							</div>
