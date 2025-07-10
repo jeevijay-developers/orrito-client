@@ -10,7 +10,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-white text-gray-800 px-6 py-12 text-sm font-sans">
+    <footer className="bg-white text-gray-800 px-6 py-12 text-sm font-sans border-t border-gray-300">
       <div className="max-w-7xl mx-auto flex flex-wrap md:flex-nowrap justify-between gap-y-8 md:gap-y-0 md:gap-x-10">
 
         {/* Company Info */}
@@ -27,8 +27,8 @@ export default function Footer() {
 
           <div className="mt-4">
             <p className="text-gray-500 font-semibold mb-1">Phone Numbers</p>
-            <p className="text-gray-700">Tel No: <span className="text-red-600">07480 - 49398</span></p>
-            <p className="text-gray-700">Toll Free No: <span className="text-red-600">1800-889-4722</span></p>
+            <p className="text-gray-700">Tel No: <span className="text-gray-700">07480 - 49398</span></p>
+            <p className="text-gray-700">Toll Free No: <span className="text-gray-700">1800-889-4722</span></p>
             <p className="text-gray-700">WhatsApp No: 9993971796</p>
           </div>
         </div>
@@ -113,20 +113,20 @@ export default function Footer() {
           <h3 className="text-base font-semibold mb-3 text-gray-900">EMAIL ADDRESS</h3>
           <p className="text-gray-700 mb-2">
             Service Request, Quality & Product complaints:{" "}
-            <a href="mailto:support@polycab.com" className="text-red-600 underline">support@polycab.com</a>
+            <a href="mailto:support@polycab.com" className="text-gray-500 hover:underline">support@polycab.com</a>
           </p>
           <p className="text-gray-700 mb-1">
             Sales Enquiry:{" "}
-            <a href="mailto:sales@oritto.com" className="text-red-600 underline">sales@oritto.com</a>
+            <a href="mailto:sales@oritto.com" className="text-gray-500 hover:underline">sales@oritto.com</a>
           </p>
           <p className="text-gray-700 mb-1">
             Distributor/Dealership <br /> & Investor Relations  Enquiry:{" "}
-            <a href="mailto:info@oritto.com" className="text-red-600 underline">info@oritto.com</a>
+            <a href="mailto:info@oritto.com" className="text-gray-500 hover:underline">info@oritto.com</a>
           </p>
          
           <p className="text-gray-700 mb-4">
             Exports Enquiry:{" "}
-            <a href="mailto:exports@oritto.com" className="text-red-600 underline">exports@oritto.com</a>
+            <a href="mailto:exports@oritto.com" className="text-gray-500 hover:underline">exports@oritto.com</a>
           </p>
 
           <div className="flex gap-4 text-xl text-gray-700">
@@ -144,7 +144,10 @@ export default function Footer() {
       </div>
 
       <div className="text-center text-xs text-gray-500 mt-10 pt-4">
-        &copy; {new Date().getFullYear()} ORITTO. All rights reserved.
+        <p>&copy; {new Date().getFullYear()} ORITTO. All rights reserved. </p>
+        <br />
+        <p>All trademarks used herein are property of their respective owners.
+Any use of third party trademarks is for identification purposes only and does not imply endorsement.</p>
       </div>
     </footer>
   );
