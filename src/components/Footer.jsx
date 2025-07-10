@@ -16,8 +16,8 @@ export default function Footer() {
         {/* Company Info */}
         <div className="flex-1 min-w-[230px] mr-16">
           <img src="/img/logo/logo.png" alt="Oritto Logo" className="h-14 mb-2" />
-          <p className="text-gray-500 mb-1">Registered Office/Plant:</p>
-          <p className="font-semibold mb-1">Prabuddha Power</p>
+          <p className="font-semibold mb-1">Registered Office/Plant:</p>
+          <p className="font-semibold text-gray-500 mb-1">Prabuddha Power</p>
           <p className="text-gray-700 leading-relaxed text-[15px]">
             Plot no. E-1(D), New II Industrial Area,
             Opposite MPEB Substation,
