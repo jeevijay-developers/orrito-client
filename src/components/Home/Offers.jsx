@@ -170,7 +170,7 @@ const Offers = () => {
                       </span>
                     </div>
                     
-                    <h3 className="text-xl font-bold text-gray-800 mb-3 group-hover:text-orange-500 transition-colors duration-300">
+                    <h3 className="text-xl font-bold text-gray-800 mb-3  transition-colors duration-300">
                       {offer.name}
                     </h3>
 
@@ -201,7 +201,7 @@ const Offers = () => {
                         className="flex-1 text-white py-2 px-4 rounded-lg font-semibold transition-colors duration-300 transform hover:scale-105"
                         style={{ 
                           backgroundColor: '#313841',
-                          ':hover': { backgroundColor: '#2a3038' }
+                          
                         }}
                         onMouseEnter={(e) => e.target.style.backgroundColor = '#2a3038'}
                         onMouseLeave={(e) => e.target.style.backgroundColor = '#313841'}
@@ -238,8 +238,8 @@ const Offers = () => {
           </Swiper>
 
           {/* Custom Navigation Buttons */}
-          <div className="swiper-button-prev !text-orange-500 !w-10 !h-10 !mt-0 !left-0 !top-1/2 !transform !-translate-y-1/2 bg-white !rounded-full !shadow-lg hover:!bg-orange-500 hover:!text-white !transition-all !duration-300"></div>
-          <div className="swiper-button-next !text-orange-500 !w-10 !h-10 !mt-0 !right-0 !top-1/2 !transform !-translate-y-1/2 bg-white !rounded-full !shadow-lg hover:!bg-orange-500 hover:!text-white !transition-all !duration-300"></div>
+          <div className="swiper-button-prev !text-orange-500 !w-10 !h-10 !mt-0 !left-0 !top-1/2 !transform !-translate-y-1/2 bg-white !rounded-full !shadow-lg  hover:!text-white !transition-all !duration-300"></div>
+          <div className="swiper-button-next !text-orange-500 !w-10 !h-10 !mt-0 !right-0 !top-1/2 !transform !-translate-y-1/2 bg-white !rounded-full !shadow-lg  hover:!text-white !transition-all !duration-300"></div>
         </div>
 
         {/* Call to Action */}
