@@ -12,7 +12,6 @@ import {
     Eye,
     Heart,
 } from "lucide-react"
-import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Swiper, SwiperSlide } from 'swiper/react';
