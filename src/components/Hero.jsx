@@ -6,7 +6,7 @@ import 'swiper/css';
 import 'swiper/css/autoplay';
 import Image from 'next/image';
 
-const HeroCorporate = () => {
+const Hero = () => {
   return (
     <div className="w-full overflow-hidden">
       <Swiper
@@ -39,4 +39,4 @@ const HeroCorporate = () => {
   )
 }
 
-export default HeroCorporate
+export default Hero
