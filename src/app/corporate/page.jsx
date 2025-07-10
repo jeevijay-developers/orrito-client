@@ -15,6 +15,11 @@ import {
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 
 export default function OrittoCorporate() {
     const [currentBanner, setCurrentBanner] = useState(0)
@@ -77,10 +82,12 @@ export default function OrittoCorporate() {
     ]
 
     const teamMembers = [
-        { name: "John Smith", position: "CEO & Founder", image: "/img/corporate/placeholder.png?height=300&width=300" },
-        { name: "Sarah Johnson", position: "CTO", image: "/img/corporate/placeholder.png?height=300&width=300" },
-        { name: "Michael Chen", position: "Head of Manufacturing", image: "/img/corporate/placeholder.png?height=300&width=300" },
-        { name: "Emily Davis", position: "VP Operations", image: "/img/corporate/placeholder.png?height=300&width=300" },
+        { name: "Varun Bansal", position: "Managing Partner", image: "/img/corporate/placeholder.png?height=300&width=300" },
+        { name: "Pramod Bansal", position: "Partner", image: "/img/corporate/placeholder.png?height=300&width=300" },
+        { name: " Leena Bansal", position: " Head of Marketing", image: "/img/corporate/placeholder.png?height=300&width=300" },
+        { name: "Dr. B. P. Bansal", position: "Chairman", image: "/img/corporate/placeholder.png?height=300&width=300" },
+        { name: " Arun Bhatia", position: "Advisor (Technology)", image: "/img/corporate/placeholder.png?height=300&width=300" },
+        { name: " Dr. V. Baskaran", position: "Advisor (Organization Building & Behavior)", image: "/img/corporate/placeholder.png?height=300&width=300" },
     ]
 
     const clients = [
@@ -486,21 +493,32 @@ export default function OrittoCorporate() {
                     <div className="max-w-6xl mx-auto">
                         <h2 className="text-4xl font-bold text-center mb-16 text-gray-800">Oritto Pillars - Our Leadership Team</h2>
 
-                        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <Swiper
+                            modules={[Navigation, Autoplay]}
+                            spaceBetween={30}
+                            slidesPerView={4}
+                            autoplay={{ delay: 3000, disableOnInteraction: false }}
+                            navigation
+                            loop={true}
+                            pagination={{ clickable: true }}
+                            className="team-carousel"
+                        >
                             {teamMembers.map((member, index) => (
-                                <Card key={index} className="p-6 text-center hover:shadow-lg transition-shadow">
-                                    <Image
-                                        src={member.image || "/placeholder.svg"}
-                                        alt={member.name}
-                                        width={200}
-                                        height={200}
-                                        className="rounded-full mx-auto mb-4"
-                                    />
-                                    <h3 className="text-xl font-bold mb-2 text-gray-800">{member.name}</h3>
-                                    <p className="text-gray-600 mb-4">{member.position}</p>
-                                </Card>
+                                <SwiperSlide key={index}>
+                                    <Card className="p-6 text-center hover:shadow-lg transition-shadow">
+                                        <Image
+                                            src={member.image || "/placeholder.svg"}
+                                            alt={member.name}
+                                            width={200}
+                                            height={200}
+                                            className="rounded-full mx-auto mb-4"
+                                        />
+                                        <h3 className="text-xl font-bold mb-2 text-gray-800">{member.name}</h3>
+                                        <p className="text-gray-600 mb-4">{member.position}</p>
+                                    </Card>
+                                </SwiperSlide>
                             ))}
-                        </div>
+                        </Swiper>
                     </div>
                 </div>
             </section>
