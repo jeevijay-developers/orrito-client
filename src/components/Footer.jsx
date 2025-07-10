@@ -1,80 +1,140 @@
 import {
-  FaPhoneAlt,
-  FaEnvelope,
-  FaTwitter,
   FaFacebookF,
-  FaInstagram,
-  FaWhatsapp,
+  FaYoutube,
   FaLinkedinIn,
-  FaYoutube
+  FaTwitter,
+  FaInstagram,
+  FaWhatsapp
 } from "react-icons/fa";
 import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-white text-gray-800 px-6 py-12">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-center md:items-start items-center gap-10 flex-wrap">
+    <footer className="bg-white text-gray-800 px-6 py-12 text-sm font-sans">
+      <div className="max-w-7xl mx-auto flex flex-wrap md:flex-nowrap justify-between gap-y-8 md:gap-y-0 md:gap-x-10">
 
-        {/* Corporate Address */}
-        <div className="flex-1 min-w-[250px] flex flex-col items-center md:items-start">
-          <h2 className="text-xl font-semibold mb-2">Get in Touch</h2>
-          <div className="h-1 w-16 bg-orange-500 mb-4" />
-          <p className="text-gray-600 text-sm mb-1">Corporate Address</p>
-          <p className="font-bold text-sm">Oritto</p>
+        {/* Company Info */}
+        <div className="flex-1 min-w-[230px] mr-16">
+          <img src="/img/logo/logo.png" alt="Oritto Logo" className="h-14 mb-2" />
+          <p className="text-gray-500 mb-1">Registered Office/Plant:</p>
+          <p className="font-semibold mb-1">Prabuddha Power</p>
+          <p className="text-gray-700 leading-relaxed text-[15px]">
+            Plot no. E-1(D), New II Industrial Area,
+            Opposite MPEB Substation,
+            Mandideep, Bhopal
+            Madhya Pradesh, India - 462046
+          </p>
 
-          <div className="text-sm mt-1 flex flex-col items-center md:items-start">
-            <p>240, Okhla Industrial Estate Phase - III</p>
-            <p>New Delhi – 110 020</p>
+          <div className="mt-4">
+            <p className="text-gray-500 font-semibold mb-1">Phone Numbers</p>
+            <p className="text-gray-700">Tel No: <span className="text-red-600">07480 - 49398</span></p>
+            <p className="text-gray-700">Toll Free No: <span className="text-red-600">1800-889-4722</span></p>
+            <p className="text-gray-700">WhatsApp No: 9993971796</p>
           </div>
-          <button className="mt-6 px-4 py-2 text-sm border rounded hover:bg-orange-500 hover:text-white transition">
-            Contact Us
-          </button>
+        </div>
+          {/* Categories */}
+        <div className="flex-1 min-w-[220px]">
+          <h3 className="text-base font-semibold mb-3 text-gray-900">CATEGORIES</h3>
+          <ul className="space-y-2 text-gray-600">
+            {[
+              { name: "Fans", href: "/categories/fans" },
+              { name: "Lighting", href: "/categories/lighting" },
+              { name: "Switches", href: "/categories/switches" },
+              { name: "Home Appliances", href: "/categories/home-appliances" },
+              { name: "Smart Home", href: "/categories/smart-home" },
+              { name: "Personal Grooming", href: "/categories/personal-grooming" },
+              { name: "Switchgears", href: "/categories/switchgears" },
+            ].map((item, idx) => (
+              <li key={idx}>
+                <Link
+                  href={item.href}
+                  className="hover:text-orange-500 hover:underline transition"
+                >
+                  {item.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
 
-        {/* Contact Info */}
-        <div className="flex-1 min-w-[250px] flex flex-col items-center md:items-start">
-          <p className="text-sm text-gray-600 mb-1">For Business Orders</p>
-          <div className="flex items-center gap-2 text-sm">
-            <FaPhoneAlt /> <span>+91 9993971796</span>
-          </div>
-          <div className="flex items-center gap-2 text-sm mt-1">
-            <FaEnvelope /> <a href="mailto:sales@oritto.com" className="underline">sales@oritto.com</a>
-          </div>
-
-          <p className="text-sm text-gray-600 mt-4">For International Sales</p>
-          <div className="flex items-center gap-2 text-sm mt-1">
-            <FaEnvelope /> <a href="mailto:sales@oritto.com" className="underline">sales@oritto.com</a>
-          </div>
-
-          <button className="mt-6 text-sm px-4 py-2 border rounded hover:bg-orange-500 hover:text-white transition">
-            Corporate Enquiry
-          </button>
+        {/* Discover Us */}
+        <div className="flex-1 min-w-[220px]">
+          <h3 className="text-base font-semibold mb-3 text-gray-900">DISCOVER US</h3>
+          <ul className="space-y-2 text-gray-600">
+            {[
+              { name: "About Us", href: "/about" },
+              { name: "Blogs", href: "/blogs" },
+              { name: "Careers", href: "/careers" },
+              { name: "Quick Fix", href: "/quick-fix" },
+              { name: "Track Your Order", href: "/track-order" },
+              { name: "FAQs", href: "/faqs" },
+              { name: "Sitemap", href: "/sitemap" },
+            ].map((item, idx) => (
+              <li key={idx}>
+                <Link
+                  href={item.href}
+                  className="hover:text-orange-500 hover:underline transition"
+                >
+                  {item.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
 
-        {/* Complaints & Social */}
-        <div className="flex-1 min-w-[250px] flex flex-col items-center md:items-start">
-          <p className="text-sm text-gray-600">For Consumer Complaints</p>
-          <div className="flex items-center gap-2 text-sm">
-            <FaPhoneAlt /> <span>18008894722</span>
-          </div>
-          <div className="flex items-center gap-2 text-sm mt-1">
-            <FaEnvelope /> <a href="mailto:customer@oritto.com" className="underline">customer@oritto.com</a>
-          </div>
+        {/* Policies */}
+        <div className="flex-1 min-w-[180px]">
+          <h3 className="text-base font-semibold mb-3 text-gray-900">POLICIES</h3>
+          <ul className="space-y-2 text-gray-600">
+            {[
+              { name: "Customer Policy", href: "/policies/customer" },
+              { name: "Product Policy", href: "/policies/product" },
+              { name: "Vendor Policy", href: "/policies/vendor" },
+              { name: "Investor Relations", href: "/policies/investor-relations" },
+              { name: "POSH", href: "/policies/posh" },
+              { name: "Code of Conduct", href: "/policies/code-of-conduct" },
+            ].map((item, idx) => (
+              <li key={idx}>
+                <Link
+                  href={item.href}
+                  className="hover:text-orange-500 hover:underline transition"
+                >
+                  {item.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-          <p className="text-sm text-gray-600 mt-4">For Escalations</p>
-          <div className="flex items-center gap-2 text-sm mt-1">
-            <FaEnvelope /> <a href="mailto:service@oritto.com" className="underline">service@oritto.com</a>
-          </div>
+      
 
-          <div className="h-1 w-16 bg-orange-500 my-6" />
-          <p className="text-sm text-gray-600 mb-2 text-center md:text-left">FOLLOW US</p>
+        {/* Contact & Emails */}
+        <div className="flex-1 min-w-[220px]">
+          <h3 className="text-base font-semibold mb-3 text-gray-900">EMAIL ADDRESS</h3>
+          <p className="text-gray-700 mb-2">
+            Service Request, Quality & Product complaints:{" "}
+            <a href="mailto:support@polycab.com" className="text-red-600 underline">support@polycab.com</a>
+          </p>
+          <p className="text-gray-700 mb-1">
+            Sales Enquiry:{" "}
+            <a href="mailto:sales@oritto.com" className="text-red-600 underline">sales@oritto.com</a>
+          </p>
+          <p className="text-gray-700 mb-1">
+            Distributor/Dealership <br /> & Investor Relations  Enquiry:{" "}
+            <a href="mailto:info@oritto.com" className="text-red-600 underline">info@oritto.com</a>
+          </p>
+         
+          <p className="text-gray-700 mb-4">
+            Exports Enquiry:{" "}
+            <a href="mailto:exports@oritto.com" className="text-red-600 underline">exports@oritto.com</a>
+          </p>
 
-          <div className="flex justify-center md:justify-start gap-4 text-xl text-gray-800">
-            {[FaTwitter, FaFacebookF, FaInstagram, FaWhatsapp, FaLinkedinIn, FaYoutube].map((Icon, idx) => (
+          <div className="flex gap-4 text-xl text-gray-700">
+            {[FaFacebookF, FaYoutube, FaLinkedinIn, FaTwitter, FaInstagram, FaWhatsapp].map((Icon, i) => (
               <Link
-                key={idx}
                 href="#"
-                className="hover:text-orange-500 transition duration-300 transform hover:scale-110"
+                key={i}
+                className="hover:text-orange-500 hover:scale-110 transition-transform"
               >
                 <Icon />
               </Link>
@@ -83,10 +143,8 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="text-center flex flex-col text-xs text-gray-500 mt-10">
-        <p>&copy; {new Date().getFullYear()} ORITTO. All rights reserved.</p>
-        <p>All trademarks used herein are property of their respective owners.
-Any use of third party trademarks is for identification purposes only and does not imply endorsement.</p>
+      <div className="text-center text-xs text-gray-500 mt-10 pt-4">
+        &copy; {new Date().getFullYear()} ORITTO. All rights reserved.
       </div>
     </footer>
   );
