@@ -1,14 +1,62 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
-import { FiShoppingCart } from "react-icons/fi";
+import { FiShoppingCart, FiChevronDown } from "react-icons/fi";
+import ProductDropdown from './ProductDropdown';
+import SolutionsDropdown from './SolutionsDropdown';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isProductDropdownOpen, setIsProductDropdownOpen] = useState(false);
+  const [isSolutionDropdownOpen, setIsSolutionDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+  const productLinkRef = useRef(null);
+  const solutionDropdownRef = useRef(null);
+  const solutionLinkRef = useRef(null);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  const handleProductHover = () => {
+    setIsProductDropdownOpen(true);
+  };
+
+  const handleProductLeave = () => {
+    setIsProductDropdownOpen(false);
+  };
+
+  const handleSolutionHover = () => setIsSolutionDropdownOpen(true);
+  const handleSolutionLeave = () => setIsSolutionDropdownOpen(false);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target) && 
+          productLinkRef.current && !productLinkRef.current.contains(event.target)) {
+        setIsProductDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  // Close solution dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        solutionDropdownRef.current && !solutionDropdownRef.current.contains(event.target) &&
+        solutionLinkRef.current && !solutionLinkRef.current.contains(event.target)
+      ) {
+        setIsSolutionDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   return (
     <nav className="bg-white shadow-md border-b border-gray-200 fixed top-12 left-0 w-full z-40">
@@ -22,16 +70,49 @@ const Navbar = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-1">
+          <div className="hidden lg:flex items-center space-x-2">
             <Link href="/corporate" className="text-gray-700 hover:bg-orange-500 hover:text-white px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200">
               Corporate
             </Link>
-            <Link href="/product" className="text-gray-700 hover:bg-orange-500 hover:text-white px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200">
-              Product
-            </Link>
-            <Link href="/solutions/all-solutions" className="text-gray-700 hover:bg-orange-500 hover:text-white px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200">
-              Solution
-            </Link>
+            
+            {/* Product Dropdown */}
+            <div 
+              className="relative mx-auto"
+              onMouseEnter={handleProductHover}
+              onMouseLeave={handleProductLeave}
+            >
+              <button
+                ref={productLinkRef}
+                className="text-gray-700 hover:bg-orange-500 hover:text-white px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200 flex items-center mr-2"
+              >
+                <span>Product</span>
+                <FiChevronDown className={`w-4 h-4 transition-transform duration-200 ${isProductDropdownOpen ? 'rotate-180' : ''}`} />
+              </button>
+
+              {/* Mega Menu Dropdown */}
+              {isProductDropdownOpen && (
+                <ProductDropdown dropdownRef={dropdownRef} handleProductHover={handleProductHover} handleProductLeave={handleProductLeave} setIsProductDropdownOpen={setIsProductDropdownOpen} />
+              )}
+            </div>
+
+            {/* Solution Dropdown */}
+            <div
+              className="relative mx-auto"
+              onMouseEnter={handleSolutionHover}
+              onMouseLeave={handleSolutionLeave}
+            >
+              <button
+                ref={solutionLinkRef}
+                className="text-gray-700 hover:bg-orange-500 hover:text-white px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200 flex items-center space-x-1 mr-2"
+              >
+                <span>Solution</span>
+                <FiChevronDown className={`w-4 h-4 transition-transform duration-200 ${isSolutionDropdownOpen ? 'rotate-180' : ''}`} />
+              </button>
+              {isSolutionDropdownOpen && (
+                <SolutionsDropdown dropdownRef={solutionDropdownRef} handleSolutionHover={handleSolutionHover} handleSolutionLeave={handleSolutionLeave} setIsSolutionDropdownOpen={setIsSolutionDropdownOpen} />
+              )}
+            </div>
+
             <Link href="/solar" className="text-gray-700 hover:bg-orange-500 hover:text-white px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200">
               Solar
             </Link>
@@ -108,7 +189,7 @@ const Navbar = () => {
                   <input
                     type="text"
                     placeholder="Search bar"
-                    className="w-full px-4 py-2 pr-10 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-2 pr-10 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                   />
                   <div className="absolute inset-y-0 right-0 flex items-center pr-3">
                     <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -120,42 +201,87 @@ const Navbar = () => {
               
               <Link
                 href="/corporate"
-                className="text-gray-700 hover:text-blue-600 hover:bg-white block px-3 py-2 border border-gray-300 rounded-md text-base font-medium transition-colors duration-200 mx-3"
+                className="text-gray-700 hover:text-orange-500 hover:bg-orange-50 block px-3 py-2 border border-gray-300 rounded-md text-base font-medium transition-colors duration-200 mx-3"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Corporate
               </Link>
-              <Link
-                href="/product"
-                className="text-gray-700 hover:text-blue-600 hover:bg-white block px-3 py-2 border border-gray-300 rounded-md text-base font-medium transition-colors duration-200 mx-3"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Product
-              </Link>
-              <Link
-                href="/solution"
-                className="text-gray-700 hover:text-blue-600 hover:bg-white block px-3 py-2 border border-gray-300 rounded-md text-base font-medium transition-colors duration-200 mx-3"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Solution
-              </Link>
+              
+              {/* Mobile Product Menu */}
+              <div className="mx-3">
+                <button
+                  onClick={() => setIsProductDropdownOpen(!isProductDropdownOpen)}
+                  className="w-full text-gray-700 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 border border-gray-300 rounded-md text-base font-medium transition-colors duration-200 flex items-center justify-between"
+                >
+                  <span>Product</span>
+                  <FiChevronDown className={`w-4 h-4 transition-transform duration-200 ${isProductDropdownOpen ? 'rotate-180' : ''}`} />
+                </button>
+                
+                {isProductDropdownOpen && (
+                  <div className="mt-2 ml-4 space-y-1 max-h-60 overflow-y-auto">
+                    {productCategories.map((category, index) => (
+                      <Link
+                        key={index}
+                        href={category.href}
+                        className="text-gray-600 hover:text-orange-500 hover:bg-orange-50 block px-3 py-2 rounded-md text-sm transition-colors duration-200"
+                        onClick={() => {
+                          setIsMenuOpen(false);
+                          setIsProductDropdownOpen(false);
+                        }}
+                      >
+                        {category.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Mobile Solution Menu */}
+              <div className="mx-3">
+                <button
+                  onClick={() => setIsSolutionDropdownOpen(!isSolutionDropdownOpen)}
+                  className="w-full text-gray-700 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 border border-gray-300 rounded-md text-base font-medium transition-colors duration-200 flex items-center justify-between"
+                >
+                  <span>Solution</span>
+                  <FiChevronDown className={`w-4 h-4 transition-transform duration-200 ${isSolutionDropdownOpen ? 'rotate-180' : ''}`} />
+                </button>
+                
+                {isSolutionDropdownOpen && (
+                  <div className="mt-2 ml-4 space-y-1 max-h-60 overflow-y-auto">
+                    {solutionCategories.map((category, index) => (
+                      <Link
+                        key={index}
+                        href={category.href}
+                        className="text-gray-600 hover:text-orange-500 hover:bg-orange-50 block px-3 py-2 rounded-md text-sm transition-colors duration-200"
+                        onClick={() => {
+                          setIsMenuOpen(false);
+                          setIsSolutionDropdownOpen(false);
+                        }}
+                      >
+                        {category.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+
               <Link
                 href="/solar"
-                className="text-gray-700 hover:text-blue-600 hover:bg-white block px-3 py-2 border border-gray-300 rounded-md text-base font-medium transition-colors duration-200 mx-3"
+                className="text-gray-700 hover:text-orange-500 hover:bg-orange-50 block px-3 py-2 border border-gray-300 rounded-md text-base font-medium transition-colors duration-200 mx-3"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Solar
               </Link>
               <Link
                 href="/offer"
-                className="text-gray-700 hover:text-blue-600 hover:bg-white block px-3 py-2 border border-gray-300 rounded-md text-base font-medium transition-colors duration-200 mx-3"
+                className="text-gray-700 hover:text-orange-500 hover:bg-orange-50 block px-3 py-2 border border-gray-300 rounded-md text-base font-medium transition-colors duration-200 mx-3"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Offer
               </Link>
               <Link
                 href="/support"
-                className="text-gray-700 hover:text-blue-600 hover:bg-white block px-3 py-2 border border-gray-300 rounded-md text-base font-medium transition-colors duration-200 mx-3"
+                className="text-gray-700 hover:text-orange-500 hover:bg-orange-50 block px-3 py-2 border border-gray-300 rounded-md text-base font-medium transition-colors duration-200 mx-3"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Support
