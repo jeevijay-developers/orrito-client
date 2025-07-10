@@ -4,7 +4,7 @@ import { Download, ArrowRight, CheckCircle } from "lucide-react";
 import Image from "next/image";
 
 export default function SolutionPage() {
-  const listItems = [
+  const productList = [
    "product 1",
    "product 2",
    "product 3",
@@ -30,8 +30,9 @@ export default function SolutionPage() {
   ];
   
   const [selectedImage, setSelectedImage] = useState(imageCards[0]?.link);
+  const [selectedProduct, setSelectedProduct] = useState(productList[0]);
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50 p-6">
+    <div className="min-h-screen bg-gradient-to-br mt-32 from-orange-50 to-amber-50 p-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
@@ -52,7 +53,7 @@ export default function SolutionPage() {
               </h2>
               <table className="w-full text-left border-collapse text-sm">
                 <tbody>
-                  {listItems.map((item, index) => (
+                  {productList.map((item, index) => (
                     <tr
                       key={index}
                       className="hover:bg-orange-50 transition-colors"
