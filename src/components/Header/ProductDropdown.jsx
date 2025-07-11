@@ -16,7 +16,7 @@ const ProductDropdown = ({dropdownRef, handleProductHover, handleProductLeave, s
     return (
         <div
             ref={dropdownRef}
-            className="absolute top-full mt-1 left-1/2 transform -translate-x-1/4 w-screen max-w-6xl bg-white border border-gray-200 rounded-lg shadow-2xl z-50"
+            className="absolute top-full mt-1 left-1/2 transform -translate-x-1/4 w-screen max-w-7xl bg-white border border-gray-200 rounded-lg shadow-2xl z-50"
             onMouseEnter={handleProductHover}
             onMouseLeave={handleProductLeave}
         >
