@@ -2,7 +2,7 @@
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useBreadcrumb } from '@/context/BreadcrumbContext';
-import { useMemo, useEffect, useState } from 'react';
+import { useMemo } from 'react';
 import {
   Breadcrumb,
   BreadcrumbList,
@@ -15,17 +15,7 @@ import {
 const DynamicBreadcrumb = () => {
   const pathname = usePathname();
   const { getBreadcrumb } = useBreadcrumb();
-  const [show, setShow] = useState(true);
-
-  // Hide breadcrumb when scrolled down
-  useEffect(() => {
-    const handleScroll = () => {
-      setShow(window.scrollY === 0);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
+  
   // Don't show breadcrumb on home page
   if (pathname === '/') {
     return null;
@@ -86,11 +76,7 @@ const DynamicBreadcrumb = () => {
   }, [pathname, getBreadcrumb]);
 
   return (
-    <div
-      className={`bg-gray-50 border-b border-gray-200 py-4 fixed top-[114px] left-0 w-full z-30 transition-all duration-300 ${
-        show ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-      }`}
-    >
+    <div className="bg-gray-50 border-b border-gray-200 py-4 fixed top-[114px] left-0 w-full z-30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Breadcrumb>
           <BreadcrumbList>
