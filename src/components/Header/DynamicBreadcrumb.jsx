@@ -76,7 +76,7 @@ const DynamicBreadcrumb = () => {
   }, [pathname, getBreadcrumb]);
 
   return (
-    <div className="bg-gray-50 border-b border-gray-200 py-4 fixed top-[114px] left-0 w-full z-30">
+    <div className="bg-gray-50 border-b border-gray-200 py-4 fixed top-[114px] left-0 w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Breadcrumb>
           <BreadcrumbList>
