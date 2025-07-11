@@ -93,7 +93,11 @@ const OurClients = () => {
     // background: 'linear-gradient(135deg, #EC1B3B 0%, #EA4631 50%, #F26D31 100%)',
     padding: '60px 0',
     position: 'relative',
-    overflow: 'hidden'
+    overflow: 'hidden',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 
   const headingStyle = {
@@ -101,22 +105,29 @@ const OurClients = () => {
     fontWeight: '700',
     textAlign: 'center',
     marginBottom: '50px',
-    textShadow: '0 2px 4px rgba(0,0,0,0.1)'
+    textShadow: '0 2px 4px rgba(0,0,0,0.1)',
+    width: '100%'
   }
 
   const containerStyle = {
     background: '#ffffff',
     borderRadius: '20px',
     padding: '40px 20px',
-    margin: '0 20px',
+    margin: '0 auto',
+    maxWidth: '1200px',
+    width: '90%',
     // boxShadow: '0 15px 35px rgba(242, 109, 49, 0.2)',
     overflow: 'hidden',
-    border: '2px solid rgba(242, 109, 49, 0.1)'
+    border: '2px solid rgba(242, 109, 49, 0.1)',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 
   const carouselContainerStyle = {
     overflow: 'hidden',
-    width: '100%'
+    width: '100%',
+    padding: '20px 0' // Added vertical padding to prevent hover cut-off
   }
 
   const carouselTrackStyle = {
@@ -152,8 +163,8 @@ const OurClients = () => {
 
   return (
     <section style={sectionStyle}>
-      <div className="container">
-        <div className="row">
+      <div className="container-fluid">
+        <div className="row justify-content-center">
           <div className="col-12">
             <h2 style={headingStyle}>
               <span style={{ color: 'black' }}>Join our </span>
@@ -196,32 +207,6 @@ const OurClients = () => {
             </div>
           </div>
         </div>
-
-        {/* Background decorative elements */}
-        {/* <div 
-          style={{
-            position: 'absolute',
-            top: '-50px',
-            right: '-50px',
-            width: '200px',
-            height: '200px',
-            background: 'rgba(242, 109, 49, 0.15)',
-            borderRadius: '50%',
-            zIndex: 1
-          }}
-        ></div>
-        <div 
-          style={{
-            position: 'absolute',
-            bottom: '-100px',
-            left: '-100px',
-            width: '300px',
-            height: '300px',
-            background: 'rgba(234, 70, 49, 0.1)',
-            borderRadius: '50%',
-            zIndex: 1
-          }}
-        ></div> */}
       </div>
     </section>
   )

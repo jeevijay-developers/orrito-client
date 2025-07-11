@@ -26,21 +26,9 @@ const solutions = [
 		img: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
 		btn: "Solution4",
 	},
-	{
-		name: "Coffee Machines",
-		img: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
-		btn: "Solution4",
-	},
-	{
-		name: "Coffee Machines",
-		img: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
-		btn: "Solution4",
-	},
-	{
-		name: "Coffee Machines",
-		img: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
-		btn: "Solution4",
-	},
+	
+	
+	
 ];
 
 const SolutionHome = () => {
@@ -101,8 +89,8 @@ const SolutionHome = () => {
                         
 					}}
 				>
-					{solutions.map((sol) => (
-						<SwiperSlide key={sol.name}>
+					{solutions.map((sol, index) => (
+						<SwiperSlide key={`${sol.name}-${index}`}>
 							<div className="flex flex-col items-center rounded-2xl overflow-hidden mx-auto pb-4 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-xs">
 								<img
 									src={sol.img}
