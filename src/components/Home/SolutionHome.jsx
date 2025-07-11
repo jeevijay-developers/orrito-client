@@ -26,6 +26,21 @@ const solutions = [
 		img: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
 		btn: "Solution4",
 	},
+	{
+		name: "Coffee Machines",
+		img: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
+		btn: "Solution4",
+	},
+	{
+		name: "Coffee Machines",
+		img: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
+		btn: "Solution4",
+	},
+	{
+		name: "Coffee Machines",
+		img: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
+		btn: "Solution4",
+	},
 ];
 
 const SolutionHome = () => {
