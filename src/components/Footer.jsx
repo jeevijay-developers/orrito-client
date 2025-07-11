@@ -48,7 +48,7 @@ export default function Footer() {
               <li key={idx}>
                 <Link
                   href={item.href}
-                  className="hover:text-orange-500 hover:underline transition"
+                  className="hover:text-orange-500 hover:no-underline transition"
                 >
                   {item.name}
                 </Link>
@@ -73,7 +73,7 @@ export default function Footer() {
               <li key={idx}>
                 <Link
                   href={item.href}
-                  className="hover:text-orange-500 hover:underline transition"
+                  className="hover:text-orange-500 hover:no-underline transition"
                 >
                   {item.name}
                 </Link>
@@ -97,7 +97,7 @@ export default function Footer() {
               <li key={idx}>
                 <Link
                   href={item.href}
-                  className="hover:text-orange-500 hover:underline transition"
+                  className="hover:text-orange-500 hover:no-underline transition"
                 >
                   {item.name}
                 </Link>
