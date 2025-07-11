@@ -5,7 +5,7 @@ import Navbar from "@/components/Header/Navbar";
 import Footer from "@/components/Footer";
 import SiteMap from "@/components/Sitemap";
 import { Toaster } from "react-hot-toast";
-
+import { QueryProvider } from "@/context/QueryContext";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -29,10 +29,12 @@ export default function RootLayout({ children }) {
         suppressHydrationWarning
       >
         <TopBar />
+        <QueryProvider>
         <Navbar />
         {children}
         {/* <SiteMap /> */}
         <Footer />
+        </QueryProvider>
         <Toaster />
       </body>
     </html>
