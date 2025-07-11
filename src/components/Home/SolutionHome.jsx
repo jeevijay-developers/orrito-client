@@ -46,7 +46,7 @@ const SolutionHome = () => {
 				Solution By Categories
 			</h2>
 			<div className="relative px-4 md:px-50">
-				<button className="solution-swiper-prev absolute left-55 top-3/7 -translate-y-1/2 z-20 bg-gray-800/80 text-white border border-white shadow-lg rounded-full w-10 h-10 flex items-center justify-center hover:cursor-pointer transition-colors duration-200 focus:outline-none ">
+				<button className="solution-swiper-prev absolute left-20 md:left-55  top-3/7 -translate-y-1/2 z-20 bg-gray-800/80 text-white border border-white shadow-lg rounded-full w-10 h-10 flex items-center justify-center hover:cursor-pointer transition-colors duration-200 focus:outline-none ">
 					<span className="sr-only">Previous</span>
 					<svg
 						width="20"
@@ -63,7 +63,7 @@ const SolutionHome = () => {
 						/>
 					</svg>
 				</button>
-				<button className="solution-swiper-next absolute right-55 top-3/7 -translate-y-1/2 z-20 bg-gray-800/80 text-white border border-white shadow-lg rounded-full w-10 h-10 flex items-center justify-center hover:cursor-pointer transition-colors duration-200 focus:outline-none ">
+				<button className="solution-swiper-next absolute right-20 md:right-55 top-3/7 -translate-y-1/2 z-20 bg-gray-800/80 text-white border border-white shadow-lg rounded-full w-10 h-10 flex items-center justify-center hover:cursor-pointer transition-colors duration-200 focus:outline-none ">
 					<span className="sr-only">Next</span>
 					<svg
 						width="20"
