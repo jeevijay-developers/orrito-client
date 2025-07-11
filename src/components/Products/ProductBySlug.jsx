@@ -195,9 +195,6 @@ export default function ProductBySlug({ slug }) {
                         fill
                         className="object-cover rounded"
                       />
-                      <div className="absolute bottom-1 left-1 bg-white bg-opacity-80 text-xs px-1 rounded">
-                        img{index + 1}
-                      </div>
                     </div>
                   ))}
                   {/* Fill remaining slots if less than 4 images */}
@@ -342,37 +339,6 @@ export default function ProductBySlug({ slug }) {
           </div>
         )}
 
-        {/* Related Products */}
-        {product.relatedProducts && product.relatedProducts.length > 0 && (
-          <div className="bg-white rounded-lg border border-gray-200 p-4 sm:p-6 mt-4 sm:mt-6">
-            <h2 className="text-lg font-bold text-gray-900 mb-4">RELATED PRODUCTS</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {product.relatedProducts.map((relatedProduct, index) => (
-                <div
-                  key={index}
-                  className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
-                >
-                  <div className="relative h-20 sm:h-24 bg-gray-100 rounded-md mb-3">
-                    {relatedProduct.image ? (
-                      <Image
-                        src={relatedProduct.image}
-                        alt={relatedProduct.name}
-                        fill
-                        className="object-cover rounded-md"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center">
-                        <span className="text-gray-400 text-xl">📷</span>
-                      </div>
-                    )}
-                  </div>
-                  <h4 className="font-medium text-gray-800 mb-1 text-sm">{relatedProduct.name}</h4>
-                  <p className="text-blue-600 font-bold text-sm">{formatPrice(relatedProduct.price)}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );
