@@ -1,29 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
-
-const productCategories = [
-    { name: 'Ceiling Luminaires', href: '/products/ceiling-luminaires' },
-    { name: 'Surface Luminaires', href: '/products/surface-luminaires' },
-    { name: 'Panel Luminaires', href: '/products/panel-luminaires' },
-    { name: 'Bulbs', href: '/products/bulbs' },
-    { name: 'Battens', href: '/products/battens' },
-    { name: 'Wall Luminaires', href: '/products/wall-luminaires' },
-    { name: 'Bulkheads', href: '/products/bulkheads' },
-    { name: 'CoB Luminaires', href: '/products/cob-luminaires' },
-    { name: 'Mirror Luminaires', href: '/products/mirror-luminaires' },
-    { name: 'Cabinet Luminaires', href: '/products/cabinet-luminaires' },
-    { name: 'Smart Luminaires', href: '/products/smart-luminaires' },
-    { name: 'Emergency Inverter Luminaires', href: '/products/emergency-inverter-luminaires' },
-    { name: 'Facade Luminaires', href: '/products/facade-luminaires' },
-    { name: 'Road Luminaires', href: '/products/road-luminaires' },
-    { name: 'Flood High Mast Luminaires', href: '/products/flood-high-mast-luminaires' },
-    { name: 'High-Bay Luminaires', href: '/products/high-bay-luminaires' },
-    { name: 'Flame Proof Luminaires', href: '/products/flame-proof-luminaires' },
-    { name: 'Bollards', href: '/products/bollards' },
-    { name: 'Post Top Lanterns', href: '/products/post-top-lanterns' },
-    { name: 'Swimming Pool Luminaires', href: '/products/swimming-pool-luminaires' },
-    { name: 'Designer Poles & Furniture', href: '/products/designer-poles-furniture' },
-];
+import {productCategories} from '../../service/Data'
 
 const ProductDropdown = ({dropdownRef, handleProductHover, handleProductLeave, setIsProductDropdownOpen}) => {
     return (

@@ -1,20 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
-
-const solutionCategories = [
-    { name: 'Residential & Apartments', href: '/solutions/residential-apartments' },
-    { name: 'Offices (Banks, Hotels, Hospitals & Schools)', href: '/solutions/offices' },
-    { name: 'Retail & Museums', href: '/solutions/retail-museums' },
-    { name: 'Pharma, Operation theaters and Cold Storages', href: '/solutions/pharma-cold-storage' },
-    { name: 'Entertainment & Sports', href: '/solutions/entertainment-sports' },
-    { name: 'Ports and SEZs', href: '/solutions/ports-sezs' },
-    { name: 'Airports, Metros and Railway Stations', href: '/solutions/airports-metros-railways' },
-    { name: 'Industrial and Warehouses', href: '/solutions/industrial-warehouses' },
-    { name: 'Architectural Monuments', href: '/solutions/architectural-monuments' },
-    { name: 'Landscape', href: '/solutions/landscape' },
-    { name: 'Swimming Pools', href: '/solutions/swimming-pools' },
-    { name: 'Emergency & Exits', href: '/solutions/emergency-exits' },
-];
+import {solutionCategories} from '@/service/Data'
 
 const SolutionsDropdown = ({ dropdownRef, handleSolutionHover, handleSolutionLeave, setIsSolutionDropdownOpen }) => {
     return (
