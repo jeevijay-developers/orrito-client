@@ -57,7 +57,7 @@ const Hero = () => {
                 src={`/img/corporate/${num}.jpg`}
                 alt={`Corporate Image ${num}`}
                 fill
-                className=" object-center"
+                className=" object-cover object-center"
                 sizes="100vw"
                 priority={num === 1}
               />
