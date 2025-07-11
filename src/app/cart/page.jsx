@@ -1,11 +1,12 @@
-import React from 'react'
-import Cart from '@/components/cart/cart'
+import Cart from "@/components/cart/Cart";
+import React from "react";
+
 const Page = () => {
   return (
-    <div className="mt-28">
+    <div className="mt-36">
       <Cart />
     </div>
   );
-}
+};
 
-export default Page
+export default Page;

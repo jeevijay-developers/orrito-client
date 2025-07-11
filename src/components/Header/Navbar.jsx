@@ -6,7 +6,7 @@ import ProductDropdown from './ProductDropdown';
 import SolutionsDropdown from './SolutionsDropdown';
 import SolarDropdown from './SolarDropdown';
 import {productCategories, solutionCategories, solarCategories} from '@/service/Data';
-
+import { useQuery } from "@/context/QueryContext";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProductDropdownOpen, setIsProductDropdownOpen] = useState(false);
@@ -21,7 +21,9 @@ const Navbar = () => {
   const solutionLinkRef = useRef(null);
   const solarDropdownRef = useRef(null);
   const solarLinkRef = useRef(null);
-
+  const { queryItems } = useQuery();
+  const cartQuantity = queryItems?.length || 0;
+  
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -88,22 +90,32 @@ const Navbar = () => {
   return (
     <nav className="bg-white shadow-md border-b border-gray-200 fixed top-12 left-0 w-full z-40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center" style={{ height: '66px' }}>
+        <div
+          className="flex justify-between items-center"
+          style={{ height: "66px" }}
+        >
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center">
-              <img src="/img/logo/logo.png" alt="Oritto Logo" className="h-22 w-auto object-contain" />
+              <img
+                src="/img/logo/logo.png"
+                alt="Oritto Logo"
+                className="h-22 w-auto object-contain"
+              />
             </Link>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-2">
-            <Link href="/corporate" className="text-gray-700 hover:bg-orange-500 hover:text-white px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200">
+            <Link
+              href="/corporate"
+              className="text-gray-700 hover:bg-orange-500 hover:text-white px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200"
+            >
               Corporate
             </Link>
-            
+
             {/* Product Dropdown */}
-            <div 
+            <div
               className="relative mx-auto"
               onMouseEnter={handleProductHover}
               onMouseLeave={handleProductLeave}
@@ -115,12 +127,21 @@ const Navbar = () => {
                 type="button"
               >
                 <span>Product</span>
-                <FiChevronDown className={`w-4 h-4 transition-transform duration-200 ${isProductDropdownOpen ? 'rotate-180' : ''}`} />
+                <FiChevronDown
+                  className={`w-4 h-4 transition-transform duration-200 ${
+                    isProductDropdownOpen ? "rotate-180" : ""
+                  }`}
+                />
               </button>
 
               {/* Mega Menu Dropdown */}
               {isProductDropdownOpen && (
-                <ProductDropdown dropdownRef={dropdownRef} handleProductHover={handleProductHover} handleProductLeave={handleProductLeave} setIsProductDropdownOpen={setIsProductDropdownOpen} />
+                <ProductDropdown
+                  dropdownRef={dropdownRef}
+                  handleProductHover={handleProductHover}
+                  handleProductLeave={handleProductLeave}
+                  setIsProductDropdownOpen={setIsProductDropdownOpen}
+                />
               )}
             </div>
 
@@ -137,10 +158,19 @@ const Navbar = () => {
                 type="button"
               >
                 <span>Solution</span>
-                <FiChevronDown className={`w-4 h-4 transition-transform duration-200 ${isSolutionDropdownOpen ? 'rotate-180' : ''}`} />
+                <FiChevronDown
+                  className={`w-4 h-4 transition-transform duration-200 ${
+                    isSolutionDropdownOpen ? "rotate-180" : ""
+                  }`}
+                />
               </button>
               {isSolutionDropdownOpen && (
-                <SolutionsDropdown dropdownRef={solutionDropdownRef} handleSolutionHover={handleSolutionHover} handleSolutionLeave={handleSolutionLeave} setIsSolutionDropdownOpen={setIsSolutionDropdownOpen} />
+                <SolutionsDropdown
+                  dropdownRef={solutionDropdownRef}
+                  handleSolutionHover={handleSolutionHover}
+                  handleSolutionLeave={handleSolutionLeave}
+                  setIsSolutionDropdownOpen={setIsSolutionDropdownOpen}
+                />
               )}
             </div>
 
@@ -157,7 +187,11 @@ const Navbar = () => {
                 type="button"
               >
                 <span>Solar</span>
-                <FiChevronDown className={`w-4 h-4 transition-transform duration-200 ${isSolarDropdownOpen ? 'rotate-180' : ''}`} />
+                <FiChevronDown
+                  className={`w-4 h-4 transition-transform duration-200 ${
+                    isSolarDropdownOpen ? "rotate-180" : ""
+                  }`}
+                />
               </button>
               {isSolarDropdownOpen && (
                 <SolarDropdown
@@ -169,13 +203,22 @@ const Navbar = () => {
               )}
             </div>
 
-            <Link href="/offer" className="text-gray-700 hover:bg-orange-500 hover:text-white px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200">
+            <Link
+              href="/offer"
+              className="text-gray-700 hover:bg-orange-500 hover:text-white px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200"
+            >
               Offer
             </Link>
-            <Link href="/support" className="text-gray-700 hover:bg-orange-500 hover:text-white px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200">
+            <Link
+              href="/support"
+              className="text-gray-700 hover:bg-orange-500 hover:text-white px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200"
+            >
               Support
             </Link>
-            <Link href="/distribution-enquiry" className="text-gray-700 hover:bg-orange-500 hover:text-white px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200">
+            <Link
+              href="/distribution-enquiry"
+              className="text-gray-700 hover:bg-orange-500 hover:text-white px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200"
+            >
               Distribution Enquiry
             </Link>
           </div>
@@ -190,22 +233,53 @@ const Navbar = () => {
                 className="w-64 px-4 py-2 pr-10 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-0 focus:border-orange-500 bg-white"
               />
               <div className="absolute inset-y-0 right-0 flex items-center pr-3">
-                <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                <svg
+                  className="w-4 h-4 text-gray-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
                 </svg>
               </div>
             </div>
             {/* Shopping Cart Icon */}
-          <Link href="/cart" className="relative text-gray-700 hover:text-orange-500 focus:outline-none">
-            <FiShoppingCart size={24} />
-          </Link>
+            <Link
+              href="/cart"
+              className="relative text-gray-700 hover:text-orange-500 focus:outline-none"
+            >
+              <FiShoppingCart size={24} />
+              {cartQuantity > 0 && (
+                <span
+                  className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs font-bold px-1.5 py-0.5 rounded-full
+"
+                >
+                  {cartQuantity}
+                </span>
+              )}
+            </Link>
 
             {/* Mobile menu button */}
             <div className="lg:hidden flex items-center space-x-2">
               {/* Mobile Search Button */}
               <button className="text-gray-700  p-2 border border-gray-300 rounded">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
                 </svg>
               </button>
               <button
@@ -246,13 +320,23 @@ const Navbar = () => {
                     className="w-full px-4 py-2 pr-10 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                   />
                   <div className="absolute inset-y-0 right-0 flex items-center pr-3">
-                    <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    <svg
+                      className="w-4 h-4 text-gray-500"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                      />
                     </svg>
                   </div>
                 </div>
               </div>
-              
+
               <Link
                 href="/corporate"
                 className="text-gray-700 hover:text-orange-500 hover:bg-orange-50 block px-3 py-2 border border-gray-300 rounded-md text-base font-medium transition-colors duration-200 mx-3"
@@ -260,15 +344,21 @@ const Navbar = () => {
               >
                 Corporate
               </Link>
-              
+
               {/* Mobile Product Menu */}
               <div className="mx-3">
                 <button
-                  onClick={() => setIsMobileProductDropdownOpen(!isMobileProductDropdownOpen)}
+                  onClick={() =>
+                    setIsMobileProductDropdownOpen(!isMobileProductDropdownOpen)
+                  }
                   className="w-full text-gray-700 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 border border-gray-300 rounded-md text-base font-medium transition-colors duration-200 flex items-center justify-between"
                 >
                   <span>Product</span>
-                  <FiChevronDown className={`w-4 h-4 transition-transform duration-200 ${isMobileProductDropdownOpen ? 'rotate-180' : ''}`} />
+                  <FiChevronDown
+                    className={`w-4 h-4 transition-transform duration-200 ${
+                      isMobileProductDropdownOpen ? "rotate-180" : ""
+                    }`}
+                  />
                 </button>
                 {isMobileProductDropdownOpen && (
                   <div className="mt-2 ml-4 space-y-1 max-h-60 overflow-y-auto">
@@ -292,11 +382,19 @@ const Navbar = () => {
               {/* Mobile Solution Menu */}
               <div className="mx-3">
                 <button
-                  onClick={() => setIsMobileSolutionDropdownOpen(!isMobileSolutionDropdownOpen)}
+                  onClick={() =>
+                    setIsMobileSolutionDropdownOpen(
+                      !isMobileSolutionDropdownOpen
+                    )
+                  }
                   className="w-full text-gray-700 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 border border-gray-300 rounded-md text-base font-medium transition-colors duration-200 flex items-center justify-between"
                 >
                   <span>Solution</span>
-                  <FiChevronDown className={`w-4 h-4 transition-transform duration-200 ${isMobileSolutionDropdownOpen ? 'rotate-180' : ''}`} />
+                  <FiChevronDown
+                    className={`w-4 h-4 transition-transform duration-200 ${
+                      isMobileSolutionDropdownOpen ? "rotate-180" : ""
+                    }`}
+                  />
                 </button>
                 {isMobileSolutionDropdownOpen && (
                   <div className="mt-2 ml-4 space-y-1 max-h-60 overflow-y-auto">
@@ -320,11 +418,17 @@ const Navbar = () => {
               {/* Mobile Solar Menu */}
               <div className="mx-3">
                 <button
-                  onClick={() => setIsMobileSolarDropdownOpen(!isMobileSolarDropdownOpen)}
+                  onClick={() =>
+                    setIsMobileSolarDropdownOpen(!isMobileSolarDropdownOpen)
+                  }
                   className="w-full text-gray-700 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 border border-gray-300 rounded-md text-base font-medium transition-colors duration-200 flex items-center justify-between"
                 >
                   <span>Solar</span>
-                  <FiChevronDown className={`w-4 h-4 transition-transform duration-200 ${isMobileSolarDropdownOpen ? 'rotate-180' : ''}`} />
+                  <FiChevronDown
+                    className={`w-4 h-4 transition-transform duration-200 ${
+                      isMobileSolarDropdownOpen ? "rotate-180" : ""
+                    }`}
+                  />
                 </button>
                 {isMobileSolarDropdownOpen && (
                   <div className="mt-2 ml-4 space-y-1 max-h-60 overflow-y-auto">
@@ -359,7 +463,7 @@ const Navbar = () => {
               >
                 Support
               </Link>
-              
+
               {/* Mobile Distribution Enquiry Button */}
               <div className="pt-2 px-3">
                 <Link
