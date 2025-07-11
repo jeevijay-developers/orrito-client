@@ -1,40 +1,29 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getAllProductsByCategory } from '@/server/categoryServer';
+import { getAllSolarByCategory } from '@/server/solarServer';
 
-const ProductCategoryPage = ({ category }) => {
-  const router = useRouter();  
-  const [products, setProducts] = useState([]);
+const SolarCategoryPage = ({ category }) => {
+  const [solarProducts, setSolarProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     if (category) {
-      fetchProducts(category);
+      fetchSolarProducts(category);
     }
   }, [category]);
 
-  const fetchProducts = async (categoryName) => {
+  const fetchSolarProducts = async (categoryName) => {
     try {
-      const products = await getAllProductsByCategory(categoryName);
-      setProducts(products);
+      const products = await getAllSolarByCategory(categoryName);
+      setSolarProducts(Array.isArray(products) ? products : []);
     } catch (error) {
-      setError('Failed to load products. Please try again.');
+      setError('Failed to load solar products. Please try again.');
     } finally {
       setLoading(false);
     }
-  };
-
-  const formatPrice = (price) => {
-    return new Intl.NumberFormat('en-IN', {
-      style: 'currency',
-      currency: 'INR',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    }).format(price);
   };
 
   const formatCategoryName = (categoryName) => {
@@ -72,8 +61,8 @@ const ProductCategoryPage = ({ category }) => {
           <div className="text-red-500 text-xl mb-4">⚠️ Error</div>
           <p className="text-gray-600 mb-4">{error}</p>
           <button
-            onClick={() => category && fetchProducts(category)}
-            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition-colors"
+            onClick={() => category && fetchSolarProducts(category)}
+            className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md transition-colors"
           >
             Try Again
           </button>
@@ -88,34 +77,34 @@ const ProductCategoryPage = ({ category }) => {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            {formatCategoryName(category)} Products
+            {formatCategoryName(category)} Solar Products
           </h1>
           <p className="text-gray-600">
-            {products.length} {products.length === 1 ? 'product' : 'products'} found
+            {solarProducts.length} {solarProducts.length === 1 ? 'product' : 'products'} found
           </p>
         </div>
 
-        {/* Products Grid */}
-        {products.length === 0 ? (
+        {/* Solar Products Grid */}
+        {solarProducts.length === 0 ? (
           <div className="text-center py-12">
-            <div className="text-gray-400 text-6xl mb-4">📦</div>
+            <div className="text-yellow-400 text-6xl mb-4">☀️</div>
             <h3 className="text-xl font-semibold text-gray-700 mb-2">
-              No products found
+              No solar products found
             </h3>
             <p className="text-gray-500">
-              No products available in the "{formatCategoryName(category)}" category.
+              No solar products available in the "{formatCategoryName(category)}" category.
             </p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {products.map((product) => (
+            {solarProducts.map((product) => (
               <div
                 key={product._id}
                 className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 group"
               >
-                <Link href={`/products/product/${product.slug}`}>
+                <Link href={`/solar/${product.slug}`}>
                   <div className="cursor-pointer">
-                    {/* Product Image */}
+                    {/* Solar Product Image */}
                     <div className="relative h-48 bg-gray-100 overflow-hidden">
                       {product.images && product.images.length > 0 ? (
                         <Image
@@ -126,20 +115,20 @@ const ProductCategoryPage = ({ category }) => {
                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                         />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center bg-gray-200">
-                          <span className="text-gray-400 text-4xl">📷</span>
+                        <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-yellow-100 to-orange-100">
+                          <span className="text-yellow-500 text-4xl">☀️</span>
                         </div>
                       )}
                     </div>
 
-                    {/* Product Details */}
+                    {/* Solar Product Details */}
                     <div className="p-4">
                       {/* Category Badge */}
                       <div className="flex flex-wrap gap-1 mb-2">
                         {product.categoryName && product.categoryName.map((cat, index) => (
                           <span
                             key={index}
-                            className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full font-medium"
+                            className="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full font-medium"
                           >
                             {formatCategoryName(cat)}
                           </span>
@@ -147,26 +136,30 @@ const ProductCategoryPage = ({ category }) => {
                       </div>
 
                       {/* Product Name */}
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-yellow-600 transition-colors">
                         {formatCategoryName(product.name)}
                       </h3>
 
-                      {/* Price */}
+                      {/* Description */}
+                      <div className="text-gray-700 text-sm mb-2 line-clamp-2">
+                        {product.description}
+                      </div>
+
+                      {/* Power & Status */}
                       <div className="flex items-center justify-between">
-                        <span className="text-xl font-bold text-gray-900">
-                          {formatPrice(product.price)}
+                        <div className="flex flex-col">
+                          {product.power && (
+                            <span className="text-yellow-600 text-sm font-medium">
+                              {product.power}W
+                            </span>
+                          )}
+                          <span className="text-yellow-600 text-sm font-medium">
+                            {product.status || 'Available'}
+                          </span>
+                        </div>
+                        <span className="text-gray-500 text-xs">
+                          {product.updatedAt ? new Date(product.updatedAt).toLocaleDateString() : ''}
                         </span>
-                        
-                        {/* Stock Status */}
-                        {product.stock > 0 ? (
-                          <span className="text-green-600 text-sm font-medium">
-                            In Stock
-                          </span>
-                        ) : (
-                          <span className="text-red-600 text-sm font-medium">
-                            Out of Stock
-                          </span>
-                        )}
                       </div>
                     </div>
                   </div>
@@ -180,4 +173,4 @@ const ProductCategoryPage = ({ category }) => {
   );
 };
 
-export default ProductCategoryPage;
+export default SolarCategoryPage;
