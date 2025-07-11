@@ -86,7 +86,7 @@ const SolutionHome = () => {
 				</button>
 				<Swiper
 					modules={[Navigation]}
-					spaceBetween={16}
+					spaceBetween={1}
 					slidesPerView={1}
 					navigation={{
 						nextEl: ".solution-swiper-next",
