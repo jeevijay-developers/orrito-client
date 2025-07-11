@@ -129,18 +129,18 @@ export default function OrittoCorporate() {
     return (
         <div className="min-h-screen bg-white">
             {/* Hero Banners */}
-            <section className="relative h-screen overflow-hidden">
+            <section className="relative h-[60vh] md:h-[85vh]  overflow-hidden">
                 {banners.map((banner, index) => (
                     <div
                         key={index}
-                        className={`absolute inset-0 transition-opacity duration-1000 ${index === currentBanner ? "opacity-100" : "opacity-0"
+                        className={` absolute  inset-0 transition-opacity duration-1000 ${index === currentBanner ? "opacity-100" : "opacity-0"
                             }`}
                     >
-                        <Image src={banner.image || "/placeholder.svg"} alt={banner.title} fill className="object-cover" />
-                        <div className="absolute inset-0 bg-black/20" />
-                        <div className="absolute inset-0 flex items-center justify-center text-center text-white">
-                            <div className="max-w-4xl px-4">
-                                <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">{banner.title}</h1>
+                        <Image src={banner.image || "/placeholder.svg"} alt={banner.title} fill className="object-cover"  />
+                        <div className="absolute inset-0 bg-black/20 " />
+                        <div className="absolute inset-0 flex items-center justify-center text-center  text-white">
+                            <div className="max-w-4xl px-4 ">
+                                <h1 className=" text-3xl md:text-7xl font-bold mb-6 animate-fade-in">{banner.title}</h1>
                                 <p className="text-xl md:text-2xl mb-8 animate-fade-in-delay">{banner.subtitle}</p>
                                 {/* <Button size="lg" className="animate-fade-in-delay-2">
                   Discover More <ArrowRight className="ml-2 h-5 w-5" />
