@@ -65,16 +65,16 @@ export default function ProductBySlug({ slug }) {
 
   if (loading) {
     return (
-      <div className="min-h-screen mt-32 p-6">
+      <div className="min-h-screen mt-32 p-4 sm:p-6">
         <div className="max-w-7xl mx-auto">
           <div className="animate-pulse">
-            <div className="h-8 bg-gray-300 rounded w-1/3 mb-8"></div>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <div className="h-96 bg-gray-300 rounded-xl"></div>
+            <div className="h-6 sm:h-8 bg-gray-300 rounded w-1/2 sm:w-1/3 mb-6 sm:mb-8"></div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-8">
+              <div className="h-64 sm:h-80 lg:h-96 bg-gray-300 rounded-xl"></div>
               <div className="space-y-4">
-                <div className="h-6 bg-gray-300 rounded w-3/4"></div>
-                <div className="h-4 bg-gray-300 rounded w-1/2"></div>
-                <div className="h-8 bg-gray-300 rounded w-1/4"></div>
+                <div className="h-4 sm:h-6 bg-gray-300 rounded w-3/4"></div>
+                <div className="h-3 sm:h-4 bg-gray-300 rounded w-1/2"></div>
+                <div className="h-6 sm:h-8 bg-gray-300 rounded w-1/4"></div>
               </div>
             </div>
           </div>
@@ -85,13 +85,13 @@ export default function ProductBySlug({ slug }) {
 
   if (error) {
     return (
-      <div className="min-h-screen mt-32 p-6 flex items-center justify-center">
+      <div className="min-h-screen mt-32 p-4 sm:p-6 flex items-center justify-center">
         <div className="text-center">
           <div className="text-red-500 text-xl mb-4">⚠️ Error</div>
-          <p className="text-gray-600 mb-4">{error}</p>
+          <p className="text-gray-600 mb-4 text-sm sm:text-base">{error}</p>
           <button
             onClick={() => slug && fetchProduct(slug)}
-            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition-colors"
+            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition-colors text-sm sm:text-base"
           >
             Try Again
           </button>
@@ -102,11 +102,11 @@ export default function ProductBySlug({ slug }) {
 
   if (!product) {
     return (
-      <div className="min-h-screen mt-32 p-6 flex items-center justify-center">
+      <div className="min-h-screen mt-32 p-4 sm:p-6 flex items-center justify-center">
         <div className="text-center">
-          <div className="text-gray-400 text-6xl mb-4">📦</div>
-          <h3 className="text-xl font-semibold text-gray-700 mb-2">Product not found</h3>
-          <p className="text-gray-500">The product you're looking for doesn't exist.</p>
+          <div className="text-gray-400 text-4xl sm:text-6xl mb-4">📦</div>
+          <h3 className="text-lg sm:text-xl font-semibold text-gray-700 mb-2">Product not found</h3>
+          <p className="text-gray-500 text-sm sm:text-base">The product you're looking for doesn't exist.</p>
         </div>
       </div>
     );
@@ -115,11 +115,11 @@ export default function ProductBySlug({ slug }) {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header with Title and Download Button */}
-      <div className="bg-white border-b border-gray-200 px-6 py-4 mt-32">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="flex items-center gap-4">
-            <h1 className="text-2xl font-bold text-gray-900">{product.name}</h1>
-            <div className="flex items-center gap-2">
+      <div className="bg-white border-b border-gray-200 px-4 sm:px-6 py-4 mt-32 sm:mt-40">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mt-15 sm:mt-0">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900">{product.name}</h1>
+            <div className="flex items-center gap-2 flex-wrap">
               {product.categoryName && product.categoryName.map((cat, index) => (
                 <span
                   key={index}
@@ -130,25 +130,25 @@ export default function ProductBySlug({ slug }) {
               ))}
             </div>
           </div>
-          <button className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors text-sm">
+          <button className="flex items-center justify-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors text-sm w-full sm:w-auto">
             <Download size={16} />
-            Download pdf
+            <span className="sm:inline">Download pdf</span>
           </button>
         </div>
       </div>
 
       {/* Main Layout */}
-      <div className="max-w-7xl mx-auto p-6">
-        <div className="grid grid-cols-12 gap-6">
-          {/* Left Sidebar - Product List */}
-          <div className="col-span-3">
-            <div className="bg-white rounded-lg border border-gray-200 p-4">
+      <div className="max-w-7xl mx-auto p-4 sm:p-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6">
+          {/* Left Sidebar - Product List - Hidden on mobile, collapsible */}
+          <div className="lg:col-span-3 order-2 lg:order-1">
+            <div className="bg-white rounded-lg border border-gray-200 p-4 lg:sticky lg:top-24">
               <h3 className="text-sm font-medium text-gray-700 mb-3">Products</h3>
-              <div className="space-y-2">
+              <div className="space-y-2 max-h-96 lg:max-h-screen overflow-y-auto">
                 {categoryProducts.map((p) => (
                   <Link key={p._id} href={`/products/product/${p.slug}`}>
                     <span
-                      className={`block cursor-pointer text-sm py-2 px-3 rounded border-b border-gray-100 hover:bg-gray-50 ${p.slug === slug ? 'bg-blue-50 text-blue-700 font-semibold' : 'text-gray-600'}`}
+                      className={`block cursor-pointer text-sm py-2 px-3 rounded border-b border-gray-100 hover:bg-gray-50 transition-colors ${p.slug === slug ? 'bg-blue-50 text-blue-700 font-semibold' : 'text-gray-600'}`}
                     >
                       {formatCategoryName(p.name)}
                     </span>
@@ -159,10 +159,10 @@ export default function ProductBySlug({ slug }) {
           </div>
 
           {/* Right Content Area */}
-          <div className="col-span-9">
+          <div className="lg:col-span-9 order-1 lg:order-2">
             {/* Main Image Area */}
-            <div className="bg-white rounded-lg border border-gray-200 p-6 mb-6">
-              <div className="relative w-full h-96 bg-gray-100 rounded-lg flex items-center justify-center">
+            <div className="bg-white rounded-lg border border-gray-200 p-4 sm:p-6 mb-4 sm:mb-6">
+              <div className="relative w-full h-64 sm:h-80 lg:h-96 bg-gray-100 rounded-lg flex items-center justify-center">
                 {selectedImage ? (
                   <Image
                     src={selectedImage}
@@ -181,12 +181,12 @@ export default function ProductBySlug({ slug }) {
 
             {/* Image Gallery */}
             {product.images && product.images.length > 0 && (
-              <div className="bg-white rounded-lg border border-gray-200 p-4 mb-6">
-                <div className="grid grid-cols-4 gap-4">
+              <div className="bg-white rounded-lg border border-gray-200 p-4 mb-4 sm:mb-6">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4">
                   {product.images.map((image, index) => (
                     <div
                       key={index}
-                      className="relative h-20 bg-gray-100 rounded border border-gray-200 cursor-pointer hover:border-blue-500 transition-colors"
+                      className="relative h-16 sm:h-20 bg-gray-100 rounded border border-gray-200 cursor-pointer hover:border-blue-500 transition-colors"
                       onClick={() => setSelectedImage(image.url)}
                     >
                       <Image
@@ -204,7 +204,7 @@ export default function ProductBySlug({ slug }) {
                   {[...Array(Math.max(0, 4 - (product.images?.length || 0)))].map((_, index) => (
                     <div
                       key={`empty-${index}`}
-                      className="h-20 bg-gray-100 rounded border border-gray-200 flex items-center justify-center"
+                      className="h-16 sm:h-20 bg-gray-100 rounded border border-gray-200 flex items-center justify-center"
                     >
                       <span className="text-gray-400 text-xs">img{(product.images?.length || 0) + index + 1}</span>
                     </div>
@@ -214,42 +214,42 @@ export default function ProductBySlug({ slug }) {
             )}
 
             {/* Features Section */}
-            <div className="bg-white rounded-lg border border-gray-200 p-6">
+            <div className="bg-white rounded-lg border border-gray-200 p-4 sm:p-6">
               <h2 className="text-lg font-bold text-gray-900 mb-4">FEATURES:</h2>
               <div className="space-y-3">
                 {product.highlights && product.highlights.length > 0 ? (
                   product.highlights.map((highlight, index) => (
                     <div key={index} className="flex items-start gap-3">
-                      <div className="text-blue-500 mt-1">▷</div>
-                      <span className="text-gray-700 text-sm">{highlight}</span>
+                      <div className="text-blue-500 mt-1 flex-shrink-0">▷</div>
+                      <span className="text-gray-700 text-sm leading-relaxed">{highlight}</span>
                     </div>
                   ))
                 ) : (
                   // Default features from wireframe
                   <>
                     <div className="flex items-start gap-3">
-                      <div className="text-blue-500 mt-1">▷</div>
-                      <span className="text-gray-700 text-sm">Mounting : Suspended</span>
+                      <div className="text-blue-500 mt-1 flex-shrink-0">▷</div>
+                      <span className="text-gray-700 text-sm leading-relaxed">Mounting : Suspended</span>
                     </div>
                     <div className="flex items-start gap-3">
-                      <div className="text-blue-500 mt-1">▷</div>
-                      <span className="text-gray-700 text-sm">Housing : Pressure die cast aluminium</span>
+                      <div className="text-blue-500 mt-1 flex-shrink-0">▷</div>
+                      <span className="text-gray-700 text-sm leading-relaxed">Housing : Pressure die cast aluminium</span>
                     </div>
                     <div className="flex items-start gap-3">
-                      <div className="text-blue-500 mt-1">▷</div>
-                      <span className="text-gray-700 text-sm">Finishes : Anodized Aluminium</span>
+                      <div className="text-blue-500 mt-1 flex-shrink-0">▷</div>
+                      <span className="text-gray-700 text-sm leading-relaxed">Finishes : Anodized Aluminium</span>
                     </div>
                     <div className="flex items-start gap-3">
-                      <div className="text-blue-500 mt-1">▷</div>
-                      <span className="text-gray-700 text-sm">Installation Holder : Stainless Steel</span>
+                      <div className="text-blue-500 mt-1 flex-shrink-0">▷</div>
+                      <span className="text-gray-700 text-sm leading-relaxed">Installation Holder : Stainless Steel</span>
                     </div>
                     <div className="flex items-start gap-3">
-                      <div className="text-blue-500 mt-1">▷</div>
-                      <span className="text-gray-700 text-sm">Best in class power LEDs</span>
+                      <div className="text-blue-500 mt-1 flex-shrink-0">▷</div>
+                      <span className="text-gray-700 text-sm leading-relaxed">Best in class power LEDs</span>
                     </div>
                     <div className="flex items-start gap-3">
-                      <div className="text-blue-500 mt-1">▷</div>
-                      <span className="text-gray-700 text-sm">Standard Body Colour : White & Other option available</span>
+                      <div className="text-blue-500 mt-1 flex-shrink-0">▷</div>
+                      <span className="text-gray-700 text-sm leading-relaxed">Standard Body Colour : White & Other option available</span>
                     </div>
                   </>
                 )}
@@ -257,7 +257,7 @@ export default function ProductBySlug({ slug }) {
 
               {/* Product Info */}
               <div className="mt-6 pt-6 border-t border-gray-200">
-                <div className="flex items-center justify-between mb-4">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
                   <div className="text-2xl font-bold text-gray-900">
                     {formatPrice(product.price)}
                   </div>
@@ -274,12 +274,12 @@ export default function ProductBySlug({ slug }) {
                   </div>
                 </div>
                 
-                <div className="flex gap-4 mb-4">
+                <div className="flex flex-col sm:flex-row gap-4 mb-4">
                   <button className="flex-1 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2">
                     <ShoppingCart size={20} />
                     Add to Cart
                   </button>
-                  <button className="bg-gray-200 text-gray-800 px-6 py-3 rounded-lg hover:bg-gray-300 transition-colors">
+                  <button className="bg-gray-200 text-gray-800 px-6 py-3 rounded-lg hover:bg-gray-300 transition-colors flex items-center justify-center sm:w-auto">
                     <Star size={20} />
                   </button>
                 </div>
@@ -297,60 +297,62 @@ export default function ProductBySlug({ slug }) {
 
         {/* Attributes Section as Table */}
         {product.attributes && Array.isArray(product.attributes) && product.attributes.length > 0 && (
-          <div className="max-w-full overflow-x-auto bg-white rounded-lg border border-gray-200 p-6 mt-6">
+          <div className="w-full overflow-x-auto bg-white rounded-lg border border-gray-200 p-4 sm:p-6 mt-4 sm:mt-6">
             <h2 className="text-lg font-bold text-gray-900 mb-4">SPECIFICATION</h2>
-            <table className="min-w-max w-full border-collapse">
-              <thead>
-                <tr>
-                  {product.attributes.map((attribute, idx) => (
-                    <th key={attribute._id || idx} className="px-4 py-2 border-b border-gray-200 text-left font-semibold text-gray-800 capitalize bg-gray-50">
-                      {attribute.name}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {/* Find max number of variants among all attributes */}
-                {(() => {
-                  const maxVariants = Math.max(...product.attributes.map(attr => attr.varients?.length || 0));
-                  return Array.from({ length: maxVariants }).map((_, rowIdx) => (
-                    <tr key={rowIdx}>
-                      {product.attributes.map((attribute, colIdx) => {
-                        const variant = attribute.varients && attribute.varients[rowIdx];
-                        return (
-                          <td key={colIdx} className="px-4 py-2 border-b border-gray-100 text-sm text-gray-700">
-                            {variant ? (
-                              <div className="flex flex-row gap-5">
-                                <span>{variant.name || `Variant ${rowIdx + 1}`}</span>
-                                <span className={`text-[10px] px-2 py-1 rounded-full font-medium w-fit ${variant.enabled ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-                                  {variant.enabled ? 'Available' : 'Unavailable'}
-                                </span>
-                              </div>
-                            ) : (
-                              <span className="text-gray-400 italic">-</span>
-                            )}
-                          </td>
-                        );
-                      })}
-                    </tr>
-                  ));
-                })()}
-              </tbody>
-            </table>
+            <div className="overflow-x-auto">
+              <table className="min-w-full border-collapse">
+                <thead>
+                  <tr>
+                    {product.attributes.map((attribute, idx) => (
+                      <th key={attribute._id || idx} className="px-2 sm:px-4 py-2 border-b border-gray-200 text-left font-semibold text-gray-800 capitalize bg-gray-50 text-sm">
+                        {attribute.name}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {/* Find max number of variants among all attributes */}
+                  {(() => {
+                    const maxVariants = Math.max(...product.attributes.map(attr => attr.varients?.length || 0));
+                    return Array.from({ length: maxVariants }).map((_, rowIdx) => (
+                      <tr key={rowIdx}>
+                        {product.attributes.map((attribute, colIdx) => {
+                          const variant = attribute.varients && attribute.varients[rowIdx];
+                          return (
+                            <td key={colIdx} className="px-2 sm:px-4 py-2 border-b border-gray-100 text-sm text-gray-700">
+                              {variant ? (
+                                <div className="flex flex-col sm:flex-row gap-1 sm:gap-3">
+                                  <span className="text-xs sm:text-sm">{variant.name || `Variant ${rowIdx + 1}`}</span>
+                                  <span className={`text-[8px] sm:text-[10px] px-1 sm:px-2 py-1 rounded-full font-medium w-fit ${variant.enabled ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                                    {variant.enabled ? 'Available' : 'Unavailable'}
+                                  </span>
+                                </div>
+                              ) : (
+                                <span className="text-gray-400 italic">-</span>
+                              )}
+                            </td>
+                          );
+                        })}
+                      </tr>
+                    ));
+                  })()}
+                </tbody>
+              </table>
+            </div>
           </div>
         )}
 
         {/* Related Products */}
         {product.relatedProducts && product.relatedProducts.length > 0 && (
-          <div className="bg-white rounded-lg border border-gray-200 p-6 mt-6">
+          <div className="bg-white rounded-lg border border-gray-200 p-4 sm:p-6 mt-4 sm:mt-6">
             <h2 className="text-lg font-bold text-gray-900 mb-4">RELATED PRODUCTS</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {product.relatedProducts.map((relatedProduct, index) => (
                 <div
                   key={index}
                   className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
                 >
-                  <div className="relative h-24 bg-gray-100 rounded-md mb-3">
+                  <div className="relative h-20 sm:h-24 bg-gray-100 rounded-md mb-3">
                     {relatedProduct.image ? (
                       <Image
                         src={relatedProduct.image}
