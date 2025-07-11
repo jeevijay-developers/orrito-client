@@ -26,8 +26,16 @@ const solutions = [
 		img: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
 		btn: "Solution4",
 	},
-	
-	
+	{
+		name: "Coffee Machines",
+		img: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
+		btn: "Solution4",
+	},
+	{
+		name: "Coffee Machines",
+		img: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
+		btn: "Solution4",
+	},
 	
 ];
 
@@ -38,7 +46,7 @@ const SolutionHome = () => {
 				Solution By Categories
 			</h2>
 			<div className="relative px-4 md:px-50">
-				<button className="solution-swiper-prev absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-gray-800/80 text-white border border-white shadow-lg rounded-full w-10 h-10 flex items-center justify-center hover:bg-orange-500 transition-colors duration-200 focus:outline-none ">
+				<button className="solution-swiper-prev absolute left-55 top-3/7 -translate-y-1/2 z-20 bg-gray-800/80 text-white border border-white shadow-lg rounded-full w-10 h-10 flex items-center justify-center hover:cursor-pointer transition-colors duration-200 focus:outline-none ">
 					<span className="sr-only">Previous</span>
 					<svg
 						width="20"
@@ -55,7 +63,7 @@ const SolutionHome = () => {
 						/>
 					</svg>
 				</button>
-				<button className="solution-swiper-next absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-gray-800/80 text-white border border-white shadow-lg rounded-full w-10 h-10 flex items-center justify-center hover:bg-orange-500 transition-colors duration-200 focus:outline-none ">
+				<button className="solution-swiper-next absolute right-55 top-3/7 -translate-y-1/2 z-20 bg-gray-800/80 text-white border border-white shadow-lg rounded-full w-10 h-10 flex items-center justify-center hover:cursor-pointer transition-colors duration-200 focus:outline-none ">
 					<span className="sr-only">Next</span>
 					<svg
 						width="20"
@@ -74,7 +82,7 @@ const SolutionHome = () => {
 				</button>
 				<Swiper
 					modules={[Navigation]}
-					spaceBetween={1}
+					spaceBetween={16}
 					slidesPerView={1}
 					navigation={{
 						nextEl: ".solution-swiper-next",
@@ -89,8 +97,8 @@ const SolutionHome = () => {
                         
 					}}
 				>
-					{solutions.map((sol, index) => (
-						<SwiperSlide key={`${sol.name}-${index}`}>
+					{solutions.map((sol) => (
+						<SwiperSlide key={sol.name}>
 							<div className="flex flex-col items-center rounded-2xl overflow-hidden mx-auto pb-4 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-xs">
 								<img
 									src={sol.img}
