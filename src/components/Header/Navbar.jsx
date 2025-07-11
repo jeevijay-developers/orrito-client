@@ -1,20 +1,27 @@
 "use client";
-import React, { useState, useRef, useEffect } from 'react';
-import Link from 'next/link';
+import React, { useState, useRef, useEffect } from "react";
+import Link from "next/link";
 import { FiShoppingCart, FiChevronDown } from "react-icons/fi";
-import ProductDropdown from './ProductDropdown';
-import SolutionsDropdown from './SolutionsDropdown';
-import SolarDropdown from './SolarDropdown';
-import {productCategories, solutionCategories, solarCategories} from '@/service/Data';
+import ProductDropdown from "./ProductDropdown";
+import SolutionsDropdown from "./SolutionsDropdown";
+import SolarDropdown from "./SolarDropdown";
+import {
+  productCategories,
+  solutionCategories,
+  solarCategories,
+} from "@/service/Data";
 import { useQuery } from "@/context/QueryContext";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProductDropdownOpen, setIsProductDropdownOpen] = useState(false);
   const [isSolutionDropdownOpen, setIsSolutionDropdownOpen] = useState(false);
   const [isSolarDropdownOpen, setIsSolarDropdownOpen] = useState(false);
-  const [isMobileProductDropdownOpen, setIsMobileProductDropdownOpen] = useState(false);
-  const [isMobileSolutionDropdownOpen, setIsMobileSolutionDropdownOpen] = useState(false);
-  const [isMobileSolarDropdownOpen, setIsMobileSolarDropdownOpen] = useState(false);
+  const [isMobileProductDropdownOpen, setIsMobileProductDropdownOpen] =
+    useState(false);
+  const [isMobileSolutionDropdownOpen, setIsMobileSolutionDropdownOpen] =
+    useState(false);
+  const [isMobileSolarDropdownOpen, setIsMobileSolarDropdownOpen] =
+    useState(false);
   const dropdownRef = useRef(null);
   const productLinkRef = useRef(null);
   const solutionDropdownRef = useRef(null);
@@ -22,8 +29,9 @@ const Navbar = () => {
   const solarDropdownRef = useRef(null);
   const solarLinkRef = useRef(null);
   const { queryItems } = useQuery();
-  const cartQuantity = queryItems?.length || 0;
-  
+  const cartQuantity =
+    queryItems?.reduce((acc, item) => acc + item.quantity, 0) || 0;
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -47,15 +55,19 @@ const Navbar = () => {
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target) && 
-          productLinkRef.current && !productLinkRef.current.contains(event.target)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target) &&
+        productLinkRef.current &&
+        !productLinkRef.current.contains(event.target)
+      ) {
         setIsProductDropdownOpen(false);
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
@@ -63,28 +75,32 @@ const Navbar = () => {
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
-        solutionDropdownRef.current && !solutionDropdownRef.current.contains(event.target) &&
-        solutionLinkRef.current && !solutionLinkRef.current.contains(event.target)
+        solutionDropdownRef.current &&
+        !solutionDropdownRef.current.contains(event.target) &&
+        solutionLinkRef.current &&
+        !solutionLinkRef.current.contains(event.target)
       ) {
         setIsSolutionDropdownOpen(false);
       }
     };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   // Close solar dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
-        solarDropdownRef.current && !solarDropdownRef.current.contains(event.target) &&
-        solarLinkRef.current && !solarLinkRef.current.contains(event.target)
+        solarDropdownRef.current &&
+        !solarDropdownRef.current.contains(event.target) &&
+        solarLinkRef.current &&
+        !solarLinkRef.current.contains(event.target)
       ) {
         setIsSolarDropdownOpen(false);
       }
     };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
