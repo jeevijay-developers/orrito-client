@@ -17,7 +17,8 @@ const DynamicBreadcrumb = () => {
   const { getBreadcrumb } = useBreadcrumb();
   const [show, setShow] = useState(true);
 
-  // Hide breadcrumb when scrolled down
+
+  // Hide breadcrumb when scrolled down 
   useEffect(() => {
     const handleScroll = () => {
       setShow(window.scrollY === 0);
@@ -26,15 +27,14 @@ const DynamicBreadcrumb = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Don't show breadcrumb on home page
-  if (pathname === '/') {
-    return null;
-  }
+  // All hooks above, now safe to return null
+
+
 
   const breadcrumbItems = useMemo(() => {
     const pathSegments = pathname.split('/').filter(Boolean);
-    
-    // Static name mappings for certain paths
+
+    // Only map static, top-level routes
     const staticNameMap = {
       'products': 'Products',
       'solutions': 'Solutions',
@@ -45,42 +45,80 @@ const DynamicBreadcrumb = () => {
       'distribution-enquiry': 'Distribution Enquiry',
       'all-solutions': 'All Solutions',
     };
-    
-    // Check if we have custom breadcrumb data for this path
+
     const customBreadcrumbData = getBreadcrumb(pathname);
-    
-    // Create breadcrumb items
-    return pathSegments.map((segment, index) => {
-      const href = '/' + pathSegments.slice(0, index + 1).join('/');
-      const isLast = index === pathSegments.length - 1;
+
+    // Handle special case for /products/product/[slug] route
+    if (pathSegments.length >= 3 && pathSegments[0] === 'products' && pathSegments[1] === 'product') {
+      const items = [];
       
-      // If it's the last segment and we have custom data, use that
-      if (isLast && customBreadcrumbData && customBreadcrumbData.name) {
-        return {
-          href,
-          name: customBreadcrumbData.name,
-          isLast,
-        };
+      // Add Products
+      items.push({
+        href: '/products',
+        name: 'Products',
+        isLast: false
+      });
+
+      // Add Category if available from product data
+      if (customBreadcrumbData && customBreadcrumbData.category) {
+        const categoryName = customBreadcrumbData.category
+          .replace(/-/g, ' ')
+          .replace(/\b\w/g, (char) => char.toUpperCase());
+        
+        items.push({
+          href: `/products/${customBreadcrumbData.category}`,
+          name: categoryName,
+          isLast: false
+        });
       }
-      
-      // For the first segment, check static mappings
+
+      // Add Product name
+      const productName = customBreadcrumbData && (typeof customBreadcrumbData === 'string' ? customBreadcrumbData : customBreadcrumbData.name)
+        ? (typeof customBreadcrumbData === 'string' ? customBreadcrumbData : customBreadcrumbData.name)
+        : pathSegments[2].replace(/-/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase());
+
+      items.push({
+        href: '/' + pathSegments.join('/'),
+        name: productName,
+        isLast: true
+      });
+
+      return items;
+    }
+
+    // Handle regular routes
+    let filteredSegments = pathSegments;
+
+    return filteredSegments.map((segment, index) => {
+      const href = '/' + filteredSegments.slice(0, index + 1).join('/');
+      const isLast = index === filteredSegments.length - 1;
+
+      // If custom name is set for the last segment, use it
+      if (isLast && customBreadcrumbData) {
+        const name = typeof customBreadcrumbData === 'string' ? customBreadcrumbData : customBreadcrumbData.name;
+        if (name) {
+          return { href, name, isLast };
+        }
+      }
+
+      // Use static name for the first/top-level segment only
       let displayName;
       if (index === 0 && staticNameMap[segment]) {
         displayName = staticNameMap[segment];
       } else {
-        // Otherwise, format normally
+        // For all other segments, use the actual segment, formatted
         displayName = segment
           .replace(/-/g, ' ')
           .replace(/\b\w/g, (char) => char.toUpperCase());
       }
-      
-      return {
-        href,
-        name: displayName,
-        isLast,
-      };
+
+      return { href, name: displayName, isLast };
     });
   }, [pathname, getBreadcrumb]);
+
+  if (pathname === '/') {
+    return null;
+  }
 
   return (
     <div
@@ -98,7 +136,6 @@ const DynamicBreadcrumb = () => {
                 </Link>
               </BreadcrumbLink>
             </BreadcrumbItem>
-            
             {breadcrumbItems.map((item, index) => (
               <div key={item.href} className="flex items-center">
                 <BreadcrumbSeparator />

@@ -4,10 +4,12 @@ import { Download, ArrowRight, CheckCircle, ShoppingCart, Star } from "lucide-re
 import Image from "next/image";
 import { getProductBySlug, getAllProductsByCategory } from "@/server/categoryServer";
 import Link from "next/link";
+import { useBreadcrumb } from "@/context/BreadcrumbContext";
 
 export default function ProductBySlug({ slug }) {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { setBreadcrumb } = useBreadcrumb();
   const [error, setError] = useState(null);
   const [selectedImage, setSelectedImage] = useState("");
   const [categoryProducts, setCategoryProducts] = useState([]);
@@ -24,6 +26,17 @@ export default function ProductBySlug({ slug }) {
       fetchCategoryProducts(product.categoryName[0]);
     }
   }, [product]);
+
+  // Set breadcrumb with product name and category
+  useEffect(() => {
+    if (product && product.name && product.categoryName && product.categoryName.length > 0) {
+      // Set breadcrumb with category and product info
+      setBreadcrumb(window.location.pathname, {
+        name: product.name,
+        category: product.categoryName[0] // Use first category
+      });
+    }
+  }, [product, setBreadcrumb]);
 
   const fetchProduct = async (productSlug) => {
     try {
