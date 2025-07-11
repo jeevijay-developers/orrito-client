@@ -149,9 +149,10 @@ const Navbar = () => {
               </div>
             </div>
             {/* Shopping Cart Icon */}
-            <button className="relative text-gray-700 hover:text-orange-500 focus:outline-none">
-              <FiShoppingCart size={24} />
-            </button>
+          <Link href="/cart" className="relative text-gray-700 hover:text-orange-500 focus:outline-none">
+            <FiShoppingCart size={24} />
+          </Link>
+
             {/* Mobile menu button */}
             <div className="lg:hidden flex items-center space-x-2">
               {/* Mobile Search Button */}
