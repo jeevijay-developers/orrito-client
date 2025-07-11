@@ -44,8 +44,8 @@ const SolutionHome = () => {
 			<h2 className="text-4xl font-light text-center mb-10 text-gray-800">
 				Solution By Categories
 			</h2>
-			<div className="relative px-4 md:px-50">
-				<button className="solution-swiper-prev absolute left-20 md:left-55  top-3/7 -translate-y-1/2 z-20 bg-gray-800/80 text-white border border-white shadow-lg rounded-full w-10 h-10 flex items-center justify-center hover:cursor-pointer transition-colors duration-200 focus:outline-none ">
+			<div className="relative px-6 md:px-20">
+				<button className="solution-swiper-prev absolute left-10 md:left-22  top-3/7 -translate-y-1/2 z-20 bg-gray-800/80 text-white border border-white shadow-lg rounded-full w-10 h-10 flex items-center justify-center hover:cursor-pointer transition-colors duration-200 focus:outline-none ">
 					<span className="sr-only">Previous</span>
 					<svg
 						width="20"
@@ -62,7 +62,7 @@ const SolutionHome = () => {
 						/>
 					</svg>
 				</button>
-				<button className="solution-swiper-next absolute right-20 md:right-55 top-3/7 -translate-y-1/2 z-20 bg-gray-800/80 text-white border border-white shadow-lg rounded-full w-10 h-10 flex items-center justify-center hover:cursor-pointer transition-colors duration-200 focus:outline-none ">
+				<button className="solution-swiper-next absolute right-10 md:right-22 top-3/7 -translate-y-1/2 z-20 bg-gray-800/80 text-white border border-white shadow-lg rounded-full w-10 h-10 flex items-center justify-center hover:cursor-pointer transition-colors duration-200 focus:outline-none ">
 					<span className="sr-only">Next</span>
 					<svg
 						width="20"
@@ -98,11 +98,11 @@ const SolutionHome = () => {
 				>
 					{solutions.map((sol) => (
 						<SwiperSlide key={sol.name}>
-							<div className="flex flex-col items-center rounded-2xl overflow-hidden mx-auto pb-4 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-xs">
+							<div className="flex flex-col items-center rounded-2xl overflow-hidden mx-auto pb-4 px-1 w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-sm">
 								<img
 									src={sol.img}
 									alt={sol.name}
-									className="w-full h-72 sm:h-80 md:h-[400px] lg:h-[480px] object-cover rounded-2xl"
+									className="w-full h-80 sm:h-96 md:h-[450px] lg:h-[520px] object-cover rounded-2xl"
 								/>
 								<button className="mt-4 py-2 px-5 bg-gray-900 text-white rounded-full font-semibold text-xs sm:text-sm hover:bg-orange-500 transition-colors duration-200 focus:outline-none ">
 									{sol.btn}
