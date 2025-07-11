@@ -2,7 +2,7 @@
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useBreadcrumb } from '@/context/BreadcrumbContext';
-import { useMemo } from 'react';
+import { useMemo, useEffect, useState } from 'react';
 import {
   Breadcrumb,
   BreadcrumbList,
@@ -15,7 +15,17 @@ import {
 const DynamicBreadcrumb = () => {
   const pathname = usePathname();
   const { getBreadcrumb } = useBreadcrumb();
-  
+  const [show, setShow] = useState(true);
+
+  // Hide breadcrumb when scrolled down
+  useEffect(() => {
+    const handleScroll = () => {
+      setShow(window.scrollY === 0);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   // Don't show breadcrumb on home page
   if (pathname === '/') {
     return null;
@@ -24,8 +34,8 @@ const DynamicBreadcrumb = () => {
   const breadcrumbItems = useMemo(() => {
     const pathSegments = pathname.split('/').filter(Boolean);
     
-    // Custom name mappings for better display
-    const nameMap = {
+    // Static name mappings for certain paths
+    const staticNameMap = {
       'products': 'Products',
       'solutions': 'Solutions',
       'solar': 'Solar',
@@ -34,9 +44,6 @@ const DynamicBreadcrumb = () => {
       'cart': 'Cart',
       'distribution-enquiry': 'Distribution Enquiry',
       'all-solutions': 'All Solutions',
-      'product': 'Product Details',
-      'category': 'Category',
-      // Add more mappings as needed
     };
     
     // Check if we have custom breadcrumb data for this path
@@ -47,25 +54,25 @@ const DynamicBreadcrumb = () => {
       const href = '/' + pathSegments.slice(0, index + 1).join('/');
       const isLast = index === pathSegments.length - 1;
       
-      // Format the segment name
-      const formatSegment = (str) => {
-        // Check if we have custom breadcrumb data and it's the last segment
-        if (isLast && customBreadcrumbData && customBreadcrumbData.name) {
-          return customBreadcrumbData.name;
-        }
-        
-        // Check if we have a custom mapping
-        if (nameMap[str]) {
-          return nameMap[str];
-        }
-        
-        // Otherwise format normally
-        return str
+      // If it's the last segment and we have custom data, use that
+      if (isLast && customBreadcrumbData && customBreadcrumbData.name) {
+        return {
+          href,
+          name: customBreadcrumbData.name,
+          isLast,
+        };
+      }
+      
+      // For the first segment, check static mappings
+      let displayName;
+      if (index === 0 && staticNameMap[segment]) {
+        displayName = staticNameMap[segment];
+      } else {
+        // Otherwise, format normally
+        displayName = segment
           .replace(/-/g, ' ')
           .replace(/\b\w/g, (char) => char.toUpperCase());
-      };
-      
-      const displayName = formatSegment(segment);
+      }
       
       return {
         href,
@@ -76,7 +83,11 @@ const DynamicBreadcrumb = () => {
   }, [pathname, getBreadcrumb]);
 
   return (
-    <div className="bg-gray-50 border-b border-gray-200 py-4 fixed top-[114px] left-0 w-full z-30">
+    <div
+      className={`bg-gray-50 border-b border-gray-200 py-4 fixed top-[114px] left-0 w-full z-30 transition-all duration-300 ${
+        show ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Breadcrumb>
           <BreadcrumbList>
