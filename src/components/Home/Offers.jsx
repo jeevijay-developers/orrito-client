@@ -206,9 +206,9 @@ const Offers = () => {
                         onMouseEnter={(e) => e.target.style.backgroundColor = '#2a3038'}
                         onMouseLeave={(e) => e.target.style.backgroundColor = '#313841'}
                       >
-                        Buy Now
+                        Add to Query
                       </button>
-                      <button 
+                      {/* <button 
                         className="px-4 py-2 rounded-lg transition-all duration-300"
                         style={{ 
                           border: '1px solid #313841',
@@ -226,12 +226,12 @@ const Offers = () => {
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                         </svg>
-                      </button>
+                      </button> */}
                     </div>
                   </div>
 
                   {/* Glowing Border Effect */}
-                  <div className="absolute inset-0 border-2 border-transparent group-hover:border-orange-500/30 rounded-2xl transition-all duration-500"></div>
+                  {/* <div className="absolute inset-0 border-2 border-transparent group-hover:border-orange-500/30 rounded-2xl transition-all duration-500"></div> */}
                 </div>
               </SwiperSlide>
             ))}
