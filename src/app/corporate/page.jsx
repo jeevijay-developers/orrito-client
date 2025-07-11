@@ -19,6 +19,8 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+import Gallery from "@/components/Home/Gallery"
+import ClienteleTicker from "@/components/Corporate/ClienteleTicker"
 
 export default function OrittoCorporate() {
     const [currentBanner, setCurrentBanner] = useState(0)
@@ -523,61 +525,10 @@ export default function OrittoCorporate() {
             </section>
 
             {/* Clientele Ticker */}
-            <section className="py-12 bg-gradient-to-r from-[#EC1B3B] via-[#EA4631] to-[#F26D31] text-white overflow-hidden">
-                <div className="container mx-auto px-4">
-                    <h2 className="text-3xl font-bold text-center mb-8">Trusted by Industry Leaders</h2>
-                    <div className="relative">
-                        <div className="flex animate-scroll space-x-12">
-                            {[...clients, ...clients].map((client, index) => (
-                                <div key={index} className="flex-shrink-0 text-2xl font-bold whitespace-nowrap">
-                                    {client}
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <ClienteleTicker />
 
             {/* Gallery */}
-            <section className="py-20 bg-gray-50">
-                <div className="container mx-auto px-4">
-                    <div className="max-w-6xl mx-auto">
-                        <h2 className="text-4xl font-bold text-center mb-16 text-gray-800">Gallery</h2>
-
-                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((i) => (
-                                <div key={i} className="relative group overflow-hidden rounded-lg aspect-square">
-                                    <Image
-                                        src={`/img/corporate/placeholder.png?height=300&width=300`}
-                                        alt={`Gallery Image ${i}`}
-                                        fill
-                                        className="object-cover transition-transform group-hover:scale-110"
-                                    />
-                                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity" />
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <Gallery />
         </div>
     )
 }
-
-// import AboutOritto from '@/components/Corporate/AboutOritto'
-
-// import MissionVisionValue from '@/components/Corporate/MissionVisionValue'
-// import React from 'react'
-// import Hero from '@/components/Hero'
-
-// const page = () => {
-//   return (
-//     <div>
-//       <Hero />
-//       <AboutOritto />
-//       <MissionVisionValue />
-//     </div>
-//   )
-// }
-
-// export default page

@@ -4,15 +4,23 @@ import Link from 'next/link';
 import { FiShoppingCart, FiChevronDown } from "react-icons/fi";
 import ProductDropdown from './ProductDropdown';
 import SolutionsDropdown from './SolutionsDropdown';
+import SolarDropdown from './SolarDropdown';
+import {productCategories, solutionCategories, solarCategories} from '@/service/Data';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProductDropdownOpen, setIsProductDropdownOpen] = useState(false);
   const [isSolutionDropdownOpen, setIsSolutionDropdownOpen] = useState(false);
+  const [isSolarDropdownOpen, setIsSolarDropdownOpen] = useState(false);
+  const [isMobileProductDropdownOpen, setIsMobileProductDropdownOpen] = useState(false);
+  const [isMobileSolutionDropdownOpen, setIsMobileSolutionDropdownOpen] = useState(false);
+  const [isMobileSolarDropdownOpen, setIsMobileSolarDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
   const productLinkRef = useRef(null);
   const solutionDropdownRef = useRef(null);
   const solutionLinkRef = useRef(null);
+  const solarDropdownRef = useRef(null);
+  const solarLinkRef = useRef(null);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -30,6 +38,9 @@ const Navbar = () => {
   const handleSolutionLeave = () => setIsSolutionDropdownOpen(false);
   const handleProductClick = () => setIsProductDropdownOpen((prev) => !prev);
   const handleSolutionClick = () => setIsSolutionDropdownOpen((prev) => !prev);
+  const handleSolarHover = () => setIsSolarDropdownOpen(true);
+  const handleSolarLeave = () => setIsSolarDropdownOpen(false);
+  const handleSolarClick = () => setIsSolarDropdownOpen((prev) => !prev);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -54,6 +65,20 @@ const Navbar = () => {
         solutionLinkRef.current && !solutionLinkRef.current.contains(event.target)
       ) {
         setIsSolutionDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  // Close solar dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        solarDropdownRef.current && !solarDropdownRef.current.contains(event.target) &&
+        solarLinkRef.current && !solarLinkRef.current.contains(event.target)
+      ) {
+        setIsSolarDropdownOpen(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -119,9 +144,31 @@ const Navbar = () => {
               )}
             </div>
 
-            <Link href="/solar" className="text-gray-700 hover:bg-orange-500 hover:text-white px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200">
-              Solar
-            </Link>
+            {/* Solar Dropdown */}
+            <div
+              className="relative mx-auto"
+              onMouseEnter={handleSolarHover}
+              onMouseLeave={handleSolarLeave}
+            >
+              <button
+                ref={solarLinkRef}
+                className="text-gray-700 hover:bg-orange-500 hover:text-white px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200 flex items-center space-x-1 mr-2"
+                onClick={handleSolarClick}
+                type="button"
+              >
+                <span>Solar</span>
+                <FiChevronDown className={`w-4 h-4 transition-transform duration-200 ${isSolarDropdownOpen ? 'rotate-180' : ''}`} />
+              </button>
+              {isSolarDropdownOpen && (
+                <SolarDropdown
+                  dropdownRef={solarDropdownRef}
+                  handleSolutionHover={handleSolarHover}
+                  handleSolutionLeave={handleSolarLeave}
+                  setIsSolutionDropdownOpen={setIsSolarDropdownOpen}
+                />
+              )}
+            </div>
+
             <Link href="/offer" className="text-gray-700 hover:bg-orange-500 hover:text-white px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200">
               Offer
             </Link>
@@ -216,14 +263,13 @@ const Navbar = () => {
               {/* Mobile Product Menu */}
               <div className="mx-3">
                 <button
-                  onClick={() => setIsProductDropdownOpen(!isProductDropdownOpen)}
+                  onClick={() => setIsMobileProductDropdownOpen(!isMobileProductDropdownOpen)}
                   className="w-full text-gray-700 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 border border-gray-300 rounded-md text-base font-medium transition-colors duration-200 flex items-center justify-between"
                 >
                   <span>Product</span>
-                  <FiChevronDown className={`w-4 h-4 transition-transform duration-200 ${isProductDropdownOpen ? 'rotate-180' : ''}`} />
+                  <FiChevronDown className={`w-4 h-4 transition-transform duration-200 ${isMobileProductDropdownOpen ? 'rotate-180' : ''}`} />
                 </button>
-                
-                {isProductDropdownOpen && (
+                {isMobileProductDropdownOpen && (
                   <div className="mt-2 ml-4 space-y-1 max-h-60 overflow-y-auto">
                     {productCategories.map((category, index) => (
                       <Link
@@ -232,7 +278,7 @@ const Navbar = () => {
                         className="text-gray-600 hover:text-orange-500 hover:bg-orange-50 block px-3 py-2 rounded-md text-sm transition-colors duration-200"
                         onClick={() => {
                           setIsMenuOpen(false);
-                          setIsProductDropdownOpen(false);
+                          setIsMobileProductDropdownOpen(false);
                         }}
                       >
                         {category.name}
@@ -245,14 +291,13 @@ const Navbar = () => {
               {/* Mobile Solution Menu */}
               <div className="mx-3">
                 <button
-                  onClick={() => setIsSolutionDropdownOpen(!isSolutionDropdownOpen)}
+                  onClick={() => setIsMobileSolutionDropdownOpen(!isMobileSolutionDropdownOpen)}
                   className="w-full text-gray-700 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 border border-gray-300 rounded-md text-base font-medium transition-colors duration-200 flex items-center justify-between"
                 >
                   <span>Solution</span>
-                  <FiChevronDown className={`w-4 h-4 transition-transform duration-200 ${isSolutionDropdownOpen ? 'rotate-180' : ''}`} />
+                  <FiChevronDown className={`w-4 h-4 transition-transform duration-200 ${isMobileSolutionDropdownOpen ? 'rotate-180' : ''}`} />
                 </button>
-                
-                {isSolutionDropdownOpen && (
+                {isMobileSolutionDropdownOpen && (
                   <div className="mt-2 ml-4 space-y-1 max-h-60 overflow-y-auto">
                     {solutionCategories.map((category, index) => (
                       <Link
@@ -261,7 +306,7 @@ const Navbar = () => {
                         className="text-gray-600 hover:text-orange-500 hover:bg-orange-50 block px-3 py-2 rounded-md text-sm transition-colors duration-200"
                         onClick={() => {
                           setIsMenuOpen(false);
-                          setIsSolutionDropdownOpen(false);
+                          setIsMobileSolutionDropdownOpen(false);
                         }}
                       >
                         {category.name}
@@ -271,13 +316,34 @@ const Navbar = () => {
                 )}
               </div>
 
-              <Link
-                href="/solar"
-                className="text-gray-700 hover:text-orange-500 hover:bg-orange-50 block px-3 py-2 border border-gray-300 rounded-md text-base font-medium transition-colors duration-200 mx-3"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Solar
-              </Link>
+              {/* Mobile Solar Menu */}
+              <div className="mx-3">
+                <button
+                  onClick={() => setIsMobileSolarDropdownOpen(!isMobileSolarDropdownOpen)}
+                  className="w-full text-gray-700 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 border border-gray-300 rounded-md text-base font-medium transition-colors duration-200 flex items-center justify-between"
+                >
+                  <span>Solar</span>
+                  <FiChevronDown className={`w-4 h-4 transition-transform duration-200 ${isMobileSolarDropdownOpen ? 'rotate-180' : ''}`} />
+                </button>
+                {isMobileSolarDropdownOpen && (
+                  <div className="mt-2 ml-4 space-y-1 max-h-60 overflow-y-auto">
+                    {solarCategories.map((category, index) => (
+                      <Link
+                        key={index}
+                        href={category.href}
+                        className="text-gray-600 hover:text-orange-500 hover:bg-orange-50 block px-3 py-2 rounded-md text-sm transition-colors duration-200"
+                        onClick={() => {
+                          setIsMenuOpen(false);
+                          setIsMobileSolarDropdownOpen(false);
+                        }}
+                      >
+                        {category.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+
               <Link
                 href="/offer"
                 className="text-gray-700 hover:text-orange-500 hover:bg-orange-50 block px-3 py-2 border border-gray-300 rounded-md text-base font-medium transition-colors duration-200 mx-3"
