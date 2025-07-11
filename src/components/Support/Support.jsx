@@ -89,9 +89,9 @@ const Support = () => {
             {/* Tab Navigation */}
             <div className="flex flex-wrap gap-3 mb-8">
               <button
-                className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${
+                className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 cursor-pointer ${
                   activeTab === 'sales' 
-                    ? 'bg-orange-500 text-white shadow-lg shadow-orange-500/25 scale-105' 
+                    ? 'bg-orange-500 text-white shadow-lg scale-105' 
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:shadow-md'
                 }`}
                 onClick={() => setActiveTab('sales')}
@@ -99,9 +99,9 @@ const Support = () => {
                 Sales Enquiry
               </button>
               <button
-                className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${
+                className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 cursor-pointer ${
                   activeTab === 'service' 
-                    ? 'bg-orange-500 text-white shadow-lg shadow-orange-500/25 scale-105' 
+                    ? 'bg-orange-500 text-white shadow-lg  scale-105' 
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:shadow-md'
                 }`}
                 onClick={() => setActiveTab('service')}
@@ -109,9 +109,9 @@ const Support = () => {
                 Service Request
               </button>
               <button
-                className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${
+                className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 cursor-pointer ${
                   activeTab === 'track' 
-                    ? 'bg-orange-500 text-white shadow-lg shadow-orange-500/25 scale-105' 
+                    ? 'bg-orange-500 text-white shadow-lg scale-105' 
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:shadow-md'
                 }`}
                 onClick={() => setActiveTab('track')}
@@ -119,9 +119,9 @@ const Support = () => {
                 Track Complaint
               </button>
               <button
-                className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${
+                className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 cursor-pointer ${
                   activeTab === 'downloads' 
-                    ? 'bg-orange-500 text-white shadow-lg shadow-orange-500/25 scale-105' 
+                    ? 'bg-orange-500 text-white shadow-lg scale-105' 
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:shadow-md'
                 }`}
                 onClick={() => setActiveTab('downloads')}
@@ -145,7 +145,7 @@ const Support = () => {
                         name="name"
                         value={formData.name}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 bg-white hover:border-gray-300"
+                        className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:border-gray-300 transition-all duration-300 bg-white hover:border-gray-300"
                         placeholder="Enter your full name"
                         required
                       />
@@ -159,7 +159,7 @@ const Support = () => {
                         name="email"
                         value={formData.email}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 bg-white hover:border-gray-300"
+                        className="w-full px-4 py-4 border border-gray-200 rounded-xl   focus:border-gray-300 transition-all duration-300 bg-white hover:border-gray-300"
                         placeholder="Enter your email address"
                         required
                       />
@@ -176,7 +176,7 @@ const Support = () => {
                         name="mobile"
                         value={formData.mobile}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 bg-white hover:border-gray-300"
+                        className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:border-gray-300 transition-all duration-300 bg-white hover:border-gray-300"
                         placeholder="Enter your mobile number"
                         required
                       />
@@ -189,7 +189,7 @@ const Support = () => {
                         name="country"
                         value={formData.country}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 bg-white hover:border-gray-300"
+                        className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:border-gray-300 transition-all duration-300 bg-white hover:border-gray-300"
                       >
                         <option value="India">India</option>
                         <option value="Others">Others</option>
@@ -206,7 +206,7 @@ const Support = () => {
                         name="state"
                         value={formData.state}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 bg-white hover:border-gray-300"
+                        className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:border-gray-300 transition-all duration-300 bg-white hover:border-gray-300"
                         required
                       >
                         <option value="">Select State</option>
@@ -225,7 +225,7 @@ const Support = () => {
                         name="city"
                         value={formData.city}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 bg-white hover:border-gray-300"
+                        className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:border-gray-300 transition-all duration-300 bg-white hover:border-gray-300"
                         required
                         disabled={!formData.state}
                       >
@@ -250,7 +250,7 @@ const Support = () => {
                       value={formData.address}
                       onChange={handleInputChange}
                       rows={3}
-                      className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 bg-white hover:border-gray-300 resize-none"
+                      className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:border-gray-300 transition-all duration-300 bg-white hover:border-gray-300 resize-none"
                       placeholder="Enter your complete address"
                     />
                   </div>
@@ -264,7 +264,7 @@ const Support = () => {
                       value={formData.message}
                       onChange={handleInputChange}
                       rows={4}
-                      className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 bg-white hover:border-gray-300 resize-none"
+                      className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:border-gray-300 transition-all duration-300 bg-white hover:border-gray-300 resize-none"
                       placeholder="Please describe your inquiry in detail"
                       required
                     />
@@ -283,7 +283,7 @@ const Support = () => {
                         name="customerType"
                         value={formData.customerType}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 bg-white hover:border-gray-300"
+                        className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:border-gray-300 transition-all duration-300 bg-white hover:border-gray-300"
                         required
                       >
                         <option value="">Select Customer Type</option>
@@ -301,7 +301,7 @@ const Support = () => {
                         name="requestType"
                         value={formData.requestType}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 bg-white hover:border-gray-300"
+                        className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:border-gray-300 transition-all duration-300 bg-white hover:border-gray-300"
                         required
                       >
                         <option value="">Select Request Type</option>
@@ -320,7 +320,7 @@ const Support = () => {
                       value={formData.message}
                       onChange={handleInputChange}
                       rows={5}
-                      className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 bg-white hover:border-gray-300 resize-none"
+                      className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:border-gray-300 transition-all duration-300 bg-white hover:border-gray-300 resize-none"
                       placeholder="Please describe your service request or issue in detail"
                       required
                     />
@@ -350,7 +350,7 @@ const Support = () => {
                         name="ticketNo"
                         value={formData.ticketNo}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 bg-white hover:border-gray-300"
+                        className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:border-gray-300 transition-all duration-300 bg-white hover:border-gray-300"
                         placeholder="Enter your ticket number"
                         required
                       />
@@ -374,7 +374,7 @@ const Support = () => {
                         name="mobileNoTrack"
                         value={formData.mobileNoTrack}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 bg-white hover:border-gray-300"
+                        className="w-full px-4 py-4 border border-gray-200 rounded-xl focus:border-gray-300 transition-all duration-300 bg-white hover:border-gray-300"
                         placeholder="Enter your registered mobile number"
                         required
                       />
@@ -507,7 +507,7 @@ const Support = () => {
               {activeTab !== 'downloads' && (
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white py-4 px-8 rounded-2xl font-semibold hover:from-orange-600 hover:to-orange-700 transform hover:scale-105 transition-all duration-300 shadow-lg shadow-orange-500/25"
+                  className="w-full bg-orange-500 text-white py-4 px-8 rounded-2xl font-semibold cursor-pointer transform hover:scale-105 transition-all duration-300 shadow-lg "
                 >
                   Submit Request
                 </button>
@@ -521,7 +521,7 @@ const Support = () => {
         <div className="lg:col-span-1">
           <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl shadow-xl border border-gray-100 p-8 sticky top-6">
             <div className="flex items-center mb-6">
-              <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center mr-4">
+              <div className="w-12 h-12 bg-gradient-to-br from-orange-500  rounded-xl flex items-center justify-center mr-4">
                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
@@ -573,9 +573,9 @@ const Support = () => {
                     </a>
                   </p>
                   <p className="flex items-center text-gray-600">
-                    <span className="w-16 text-gray-500">WhatsApp:</span>
-                    <a href="https://wa.me/9999971796" className="text-orange-600 hover:text-orange-700 font-medium transition-colors">
-                      9999971796
+                    <span className="w-16 text-gray-500">WhatsApp:</span>   
+                    <a href="https://wa.me/9999971796" className="text-orange-600 hover:text-orange-700 font-medium transition-colors cursor-pointer">
+                       99999 71796
                     </a>
                   </p>
                 </div>
