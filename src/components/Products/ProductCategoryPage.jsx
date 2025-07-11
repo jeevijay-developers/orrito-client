@@ -1,12 +1,15 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getAllProductsByCategory } from '@/server/categoryServer';
+import { useBreadcrumb } from '@/context/BreadcrumbContext';
 
 const ProductCategoryPage = ({ category }) => {
   const router = useRouter();  
+  const pathname = usePathname();
+  const { setBreadcrumb } = useBreadcrumb();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -16,6 +19,15 @@ const ProductCategoryPage = ({ category }) => {
       fetchProducts(category);
     }
   }, [category]);
+
+  // Separate useEffect for breadcrumb to avoid dependency issues
+  useEffect(() => {
+    if (category) {
+      setBreadcrumb(pathname, {
+        name: formatCategoryName(category)
+      });
+    }
+  }, [category, pathname]); // Only depend on category and pathname
 
   const fetchProducts = async (categoryName) => {
     try {
@@ -43,7 +55,7 @@ const ProductCategoryPage = ({ category }) => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 pt-[170px]">
         <div className="container mx-auto px-4 py-8">
           <div className="animate-pulse">
             <div className="h-8 bg-gray-300 rounded w-1/4 mb-8"></div>
@@ -67,7 +79,7 @@ const ProductCategoryPage = ({ category }) => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 pt-[170px] flex items-center justify-center">
         <div className="text-center">
           <div className="text-red-500 text-xl mb-4">⚠️ Error</div>
           <p className="text-gray-600 mb-4">{error}</p>
@@ -83,7 +95,7 @@ const ProductCategoryPage = ({ category }) => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 pt-[170px]">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">

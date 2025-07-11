@@ -2,10 +2,12 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import TopBar from "@/components/Header/TopBar";
 import Navbar from "@/components/Header/Navbar";
+import DynamicBreadcrumb from "@/components/Header/DynamicBreadcrumb";
 import Footer from "@/components/Footer";
 import SiteMap from "@/components/Sitemap";
 import { Toaster } from "react-hot-toast";
 import { QueryProvider } from "@/context/QueryContext";
+import { BreadcrumbProvider } from "@/context/BreadcrumbContext";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -30,10 +32,13 @@ export default function RootLayout({ children }) {
       >
         <TopBar />
         <QueryProvider>
+        <BreadcrumbProvider>
         <Navbar />
+        <DynamicBreadcrumb />
         {children}
         {/* <SiteMap /> */}
         <Footer />
+        </BreadcrumbProvider>
         </QueryProvider>
         <Toaster />
       </body>

@@ -1,10 +1,14 @@
 'use client';
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getAllSolutionsByCategory } from '@/server/solutionServer';
+import { useBreadcrumb } from '@/context/BreadcrumbContext';
 
 const SolutionCategoryPage = ({ category }) => {
+  const pathname = usePathname();
+  const { setBreadcrumb } = useBreadcrumb();
   const [solutions, setSolutions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -14,6 +18,15 @@ const SolutionCategoryPage = ({ category }) => {
       fetchSolutions(category);
     }
   }, [category]);
+
+  // Separate useEffect for breadcrumb
+  useEffect(() => {
+    if (category) {
+      setBreadcrumb(pathname, {
+        name: formatCategoryName(category)
+      });
+    }
+  }, [category, pathname]);
 
   const fetchSolutions = async (categoryName) => {
     try {
@@ -32,7 +45,7 @@ const SolutionCategoryPage = ({ category }) => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 pt-[170px]">
         <div className="container mx-auto px-4 py-8">
           <div className="animate-pulse">
             <div className="h-8 bg-gray-300 rounded w-1/4 mb-8"></div>
@@ -56,7 +69,7 @@ const SolutionCategoryPage = ({ category }) => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 pt-[170px] flex items-center justify-center">
         <div className="text-center">
           <div className="text-red-500 text-xl mb-4">⚠️ Error</div>
           <p className="text-gray-600 mb-4">{error}</p>
@@ -72,7 +85,7 @@ const SolutionCategoryPage = ({ category }) => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 pt-[170px]">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">
