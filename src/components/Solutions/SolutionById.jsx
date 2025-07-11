@@ -140,58 +140,62 @@ export default function SolutionPage({id}) {
           </div>
         </div>
 
-        {/* Features Section */}
-        <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-200">
-          <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
-            <CheckCircle className="text-gray-600" size={24} />
-            FEATURES:
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {features.map((feature, index) => (
-              <div
-                key={index}
-                className="flex items-start gap-3 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
-              >
-                <div className="w-2 h-2 bg-gray-500 rounded-full mt-2 flex-shrink-0"></div>
-                <span className="text-gray-700 text-sm leading-relaxed">
-                  {feature}
-                </span>
-              </div>
-            ))}
+        <div className="flex flex-col lg:flex-row gap-8">
+          {/* Features Section */}
+          <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-200 w-full lg:w-1/2">
+            <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+              <CheckCircle className="text-gray-600" size={24} />
+              FEATURES:
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {features.map((feature, index) => (
+                <div
+                  key={index}
+                  className="flex items-start gap-3 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
+                >
+                  <div className="w-2 h-2 bg-gray-500 rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-700 text-sm leading-relaxed">
+                    {feature}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-        {/* Mechanical Features */}
-        <div className="mt-8 bg-gray-50 rounded-xl shadow-lg p-8">
-          <h3 className="text-2xl font-bold mb-6 text-gray-800">
-            MECHANICAL FEATURES
-          </h3>
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse border border-gray-300 text-sm">
-              <thead>
-                <tr className="bg-gray-50 bg-opacity-20">
-                  <th className="border border-gray-300 p-3 text-left font-semibold">
-                    Product Code
-                  </th>
-                  <th className="border border-gray-300 p-3 text-center font-semibold">
-                    Size (mm)
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {mechanicalFeatures.map((feature, index) => (
-                  <tr key={index} className="transition-colors">
-                    <td className="border border-gray-300 p-3 font-medium">
-                      {feature.code}
-                    </td>
-                    <td className="border border-gray-300 p-3 text-center">
-                      {feature.size}
-                    </td>
+
+          {/* Mechanical Features */}
+          <div className="border border-gray-200  rounded-xl shadow-lg p-8 w-full lg:w-1/2">
+            <h3 className="text-2xl font-bold mb-6 text-gray-800">
+              MECHANICAL FEATURES
+            </h3>
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse border border-gray-300 text-sm">
+                <thead>
+                  <tr className="bg-gray-50 bg-opacity-20">
+                    <th className="border border-gray-300 p-3 text-left font-semibold">
+                      Product Code
+                    </th>
+                    <th className="border border-gray-300 p-3 text-center font-semibold">
+                      Size (mm)
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {mechanicalFeatures.map((feature, index) => (
+                    <tr key={index} className="transition-colors">
+                      <td className="border border-gray-300 p-3 font-medium">
+                        {feature.code}
+                      </td>
+                      <td className="border border-gray-300 p-3 text-center">
+                        {feature.size}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
+
         {/* Technical Features */}
         {/* <div className="mt-8 bg-gray-50 rounded-xl shadow-lg p-8 text-black">
           <h3 className="text-xl font-bold mb-4">Technical Features</h3>
