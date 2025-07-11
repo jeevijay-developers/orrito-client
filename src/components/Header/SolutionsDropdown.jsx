@@ -16,7 +16,7 @@ const SolutionsDropdown = ({ dropdownRef, handleSolutionHover, handleSolutionLea
     return (
         <div
             ref={dropdownRef}
-            className="absolute top-full mt-1 left-1/2 transform -translate-x-1/4 w-screen max-w-5xl bg-white border border-gray-200 rounded-lg shadow-2xl z-50"
+            className="absolute top-full left-1/2 transform -translate-x-1/4 w-screen max-w-5xl bg-white border border-gray-200 rounded-lg shadow-2xl z-50"
             onMouseEnter={handleSolutionHover}
             onMouseLeave={handleSolutionLeave}
         >
