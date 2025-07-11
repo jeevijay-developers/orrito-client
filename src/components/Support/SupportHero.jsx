@@ -8,13 +8,15 @@ const SupportHero = () => {
         src="/img/corporate/supporthero.jpg"
         alt="Support Hero"
         fill
-        className="object-center"
+        className=" object-cover object-center"
         sizes="100vw"
         priority
       />
-      <div className="absolute inset- bg-opacity-40 flex items-center justify-center">
-        <div className="text-center text-white">
-          
+      <div className="absolute inset- bg-opacity-40 top-40 left-2 md:top-70 md:left-20 flex items-center justify-center">
+        <div className="text-center text-white text-2xl md:text-6xl ">
+         <b> How we can
+          <br />
+         Help You ?</b>
         </div>
       </div>
     </div>
