@@ -69,7 +69,7 @@ const ProductHome = () => {
 					{categories.map((cat) => (
 						<SwiperSlide key={cat.name}>
 							<div className="flex flex-col items-center">
-								<div className="w-28 h-28 rounded-full bg-orange-50 flex items-center justify-center mb-3 shadow-sm overflow-hidden">
+								<div className="w-28 h-28 lg:w-36 lg:h-36 rounded-full bg-orange-50 flex items-center justify-center mb-3 shadow-sm overflow-hidden">
 									<img
 										src={cat.img}
 										alt={cat.name}

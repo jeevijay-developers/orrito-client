@@ -23,9 +23,9 @@ const TopBar = () => {
           </div>
         </div>
       </div>
-      {isModalOpen && (
+      {/* {isModalOpen && (
         <EnquiryForm open={isModalOpen} onClose={() => setIsModalOpen(false)} />
-      )}
+      )} */}
     </nav>
   );
 };
