@@ -170,18 +170,19 @@ const OurClients = () => {
               style={carouselTrackStyle}
             >
               {infiniteLogos.map((client, index) => (
-                <div 
+                <div
+                className='py-2' 
                   key={`${client.id}-${index}`}
                   style={clientCardStyle}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.transform = 'translateY(-5px) scale(1.05)'
-                    e.currentTarget.style.boxShadow = '0 15px 40px rgba(242, 109, 49, 0.25)'
-                    e.currentTarget.style.borderColor = '#F26D31'
+                    // e.currentTarget.style.boxShadow = '0 15px 40px rgba(242, 109, 49, 0.25)'
+                    // e.currentTarget.style.borderColor = '#F26D31'
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.transform = 'translateY(0) scale(1)'
-                    e.currentTarget.style.boxShadow = '0 10px 30px rgba(242, 109, 49, 0.15)'
-                    e.currentTarget.style.borderColor = 'rgba(242, 109, 49, 0.1)'
+                    // e.currentTarget.style.boxShadow = '0 10px 30px rgba(242, 109, 49, 0.15)'
+                    // e.currentTarget.style.borderColor = 'rgba(242, 109, 49, 0.1)'
                   }}
                 >
                   <img 

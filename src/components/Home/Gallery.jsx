@@ -119,22 +119,22 @@ const Gallery = () => {
                 <div className="absolute inset-0 bg-gradient-to-br from-transparent via-black/10 to-black/60 opacity-70 group-hover:opacity-90 transition-all duration-500"></div>
                 
                 {/* Animated Border */}
-                <div className="absolute inset-0 border-2 border-transparent group-hover:border-orange-400/60 rounded-2xl transition-all duration-500"></div>
+                <div className="absolute inset-0 border-2 border-transparent  rounded-2xl transition-all duration-500"></div>
                 
                 {/* Content with Modern Typography */}
                 <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
                   <div className="transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                    <span className="inline-block px-3 py-1 bg-orange-500/90 backdrop-blur-sm text-xs font-bold rounded-full mb-2 shadow-lg">
+                    <span className="inline-block px-3 py-1 backdrop-blur-sm text-xs font-bold rounded-full mb-2 shadow-lg">
                       {item.category}
                     </span>
-                    <h3 className="text-sm md:text-lg font-bold mb-1 group-hover:text-orange-300 transition-colors duration-300 leading-tight">
+                    <h3 className="text-sm md:text-lg font-bold mb-1 transition-colors duration-300 leading-tight">
                       {item.name}
                     </h3>
                   </div>
                 </div>
 
                 {/* Hover Glow Effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-yellow-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-2xl"></div>
+                <div className="absolute inset-0  group-hover:opacity-100 duration-700 rounded-2xl"></div>
               </div>
             ))}
           </div>
