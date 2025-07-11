@@ -1,9 +1,9 @@
 import Link from 'next/link'
 import React, { useState } from 'react'
-import {solutionCategories} from '@/service/Data'
+import {solarCategories} from '@/service/Data'
 import Image from 'next/image'
 
-const SolutionsDropdown = ({ dropdownRef, handleSolutionHover, handleSolutionLeave, setIsSolutionDropdownOpen }) => {
+const SolarDropdown = ({ dropdownRef, handleSolutionHover, handleSolutionLeave, setIsSolutionDropdownOpen }) => {
     const [hoveredProduct, setHoveredProduct] = useState(null);
     
     const handleProductItemHover = (product) => {
@@ -16,7 +16,7 @@ const SolutionsDropdown = ({ dropdownRef, handleSolutionHover, handleSolutionLea
     return (
         <div
             ref={dropdownRef}
-            className="absolute top-full mt-1 left-1/2 transform -translate-x-1/4 w-screen max-w-5xl bg-white border border-gray-200 rounded-lg shadow-2xl z-50"
+            className="absolute top-full mt-1 left-1/2 transform -translate-x-1/2 w-screen max-w-5xl bg-white border border-gray-200 rounded-lg shadow-2xl z-50"
             onMouseEnter={handleSolutionHover}
             onMouseLeave={handleSolutionLeave}
         >
@@ -24,7 +24,7 @@ const SolutionsDropdown = ({ dropdownRef, handleSolutionHover, handleSolutionLea
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <div className="md:col-span-2">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {solutionCategories.map((cat, i) => (
+                            {solarCategories.map((cat, i) => (
                                 <Link 
                                     key={i} 
                                     href={cat.href} 
@@ -42,7 +42,7 @@ const SolutionsDropdown = ({ dropdownRef, handleSolutionHover, handleSolutionLea
                     <div className="hidden lg:block">
                         <div className="sticky top-0">
                             <h4 className="text-lg font-semibold text-gray-700 mb-3 border-b border-gray-200 pb-2">
-                                Solution Preview
+                                Solar Preview
                             </h4>
                             <div className="bg-gray-50 rounded-lg p-4 transition-all duration-300">
                                 {hoveredProduct && (
@@ -52,7 +52,7 @@ const SolutionsDropdown = ({ dropdownRef, handleSolutionHover, handleSolutionLea
                                             alt={hoveredProduct.name}
                                             width={300}
                                             height={200}
-                                            className="w-full h-50 object-cover rounded-md shadow-sm transition-opacity duration-300"
+                                            className="w-full h-40 object-cover rounded-md shadow-sm transition-opacity duration-300"
                                         />
                                     </div>
                                 )}
@@ -65,4 +65,4 @@ const SolutionsDropdown = ({ dropdownRef, handleSolutionHover, handleSolutionLea
     )
 }
 
-export default SolutionsDropdown
+export default SolarDropdown

@@ -4,6 +4,7 @@ import TopBar from "@/components/Header/TopBar";
 import Navbar from "@/components/Header/Navbar";
 import Footer from "@/components/Footer";
 import SiteMap from "@/components/Sitemap";
+import { Toaster } from "react-hot-toast";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,6 +33,7 @@ export default function RootLayout({ children }) {
         {children}
         {/* <SiteMap /> */}
         <Footer />
+        <Toaster />
       </body>
     </html>
   );
