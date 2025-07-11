@@ -2,13 +2,15 @@
 import React, { useEffect, useState } from "react";
 import { Download, ArrowRight, CheckCircle, ShoppingCart, Star } from "lucide-react";
 import Image from "next/image";
-import { getProductBySlug } from "@/server/categoryServer";
+import { getProductBySlug, getAllProductsByCategory } from "@/server/categoryServer";
+import Link from "next/link";
 
-export default function ProductByID({ slug }) {
+export default function ProductBySlug({ slug }) {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedImage, setSelectedImage] = useState("");
+  const [categoryProducts, setCategoryProducts] = useState([]);
 
   useEffect(() => {
     if (slug) {
@@ -16,9 +18,18 @@ export default function ProductByID({ slug }) {
     }
   }, [slug]);
 
+  useEffect(() => {
+    if (product && product.categoryName && product.categoryName.length > 0) {
+      // Fetch products for the first category
+      fetchCategoryProducts(product.categoryName[0]);
+    }
+  }, [product]);
+
   const fetchProduct = async (productSlug) => {
     try {
       const productData = await getProductBySlug(productSlug);
+      console.log('Product data received:', productData);
+    //   console.log('Attributes:', productData?.attributes);
       setProduct(productData);
       if (productData?.images && productData.images.length > 0) {
         setSelectedImage(productData.images[0].url);
@@ -27,6 +38,15 @@ export default function ProductByID({ slug }) {
       setError('Failed to load product. Please try again.');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchCategoryProducts = async (categoryName) => {
+    try {
+      const products = await getAllProductsByCategory(categoryName);
+      setCategoryProducts(products);
+    } catch (error) {
+      // Optionally handle error
     }
   };
 
@@ -123,26 +143,17 @@ export default function ProductByID({ slug }) {
           {/* Left Sidebar - Product List */}
           <div className="col-span-3">
             <div className="bg-white rounded-lg border border-gray-200 p-4">
-              <h3 className="text-sm font-medium text-gray-700 mb-3">List</h3>
+              <h3 className="text-sm font-medium text-gray-700 mb-3">Products</h3>
               <div className="space-y-2">
-                {/* Generate sample list items based on categories or related products */}
-                {product.categoryName && product.categoryName.map((cat, index) => (
-                  <div key={index} className="text-sm text-gray-600 py-2 px-3 hover:bg-gray-50 rounded border-b border-gray-100">
-                    {formatCategoryName(cat)}
-                  </div>
+                {categoryProducts.map((p) => (
+                  <Link key={p._id} href={`/products/product/${p.slug}`}>
+                    <span
+                      className={`block cursor-pointer text-sm py-2 px-3 rounded border-b border-gray-100 hover:bg-gray-50 ${p.slug === slug ? 'bg-blue-50 text-blue-700 font-semibold' : 'text-gray-600'}`}
+                    >
+                      {formatCategoryName(p.name)}
+                    </span>
+                  </Link>
                 ))}
-                {product.relatedProducts && product.relatedProducts.slice(0, 8).map((relatedProduct, index) => (
-                  <div key={index} className="text-sm text-gray-600 py-2 px-3 hover:bg-gray-50 rounded border-b border-gray-100">
-                    {relatedProduct.name}
-                  </div>
-                ))}
-                {/* Add some default items to match wireframe */}
-                <div className="text-sm text-gray-600 py-2 px-3 hover:bg-gray-50 rounded border-b border-gray-100">xyz</div>
-                <div className="text-sm text-gray-600 py-2 px-3 hover:bg-gray-50 rounded border-b border-gray-100">1</div>
-                <div className="text-sm text-gray-600 py-2 px-3 hover:bg-gray-50 rounded border-b border-gray-100">2</div>
-                <div className="text-sm text-gray-600 py-2 px-3 hover:bg-gray-50 rounded border-b border-gray-100">3</div>
-                <div className="text-sm text-gray-600 py-2 px-3 hover:bg-gray-50 rounded border-b border-gray-100">4</div>
-                <div className="text-sm text-gray-600 py-2 px-3 hover:bg-gray-50 rounded border-b border-gray-100">5</div>
               </div>
             </div>
           </div>
@@ -206,11 +217,11 @@ export default function ProductByID({ slug }) {
             <div className="bg-white rounded-lg border border-gray-200 p-6">
               <h2 className="text-lg font-bold text-gray-900 mb-4">FEATURES:</h2>
               <div className="space-y-3">
-                {product.features && product.features.length > 0 ? (
-                  product.features.map((feature, index) => (
+                {product.highlights && product.highlights.length > 0 ? (
+                  product.highlights.map((highlight, index) => (
                     <div key={index} className="flex items-start gap-3">
                       <div className="text-blue-500 mt-1">▷</div>
-                      <span className="text-gray-700 text-sm">{feature}</span>
+                      <span className="text-gray-700 text-sm">{highlight}</span>
                     </div>
                   ))
                 ) : (
@@ -284,23 +295,48 @@ export default function ProductByID({ slug }) {
           </div>
         </div>
 
-        {/* Specifications Section */}
-        {product.specifications && (
-          <div className="bg-white rounded-lg border border-gray-200 p-6 mt-6">
-            <h2 className="text-lg font-bold text-gray-900 mb-4">SPECIFICATIONS</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {Object.entries(product.specifications).map(([key, value], index) => (
-                <div
-                  key={index}
-                  className="flex justify-between items-center py-2 border-b border-gray-100"
-                >
-                  <span className="font-medium text-gray-700 text-sm capitalize">
-                    {key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}
-                  </span>
-                  <span className="text-gray-600 font-semibold text-sm">{value}</span>
-                </div>
-              ))}
-            </div>
+        {/* Attributes Section as Table */}
+        {product.attributes && Array.isArray(product.attributes) && product.attributes.length > 0 && (
+          <div className="max-w-full overflow-x-auto bg-white rounded-lg border border-gray-200 p-6 mt-6">
+            <h2 className="text-lg font-bold text-gray-900 mb-4">SPECIFICATION</h2>
+            <table className="min-w-max w-full border-collapse">
+              <thead>
+                <tr>
+                  {product.attributes.map((attribute, idx) => (
+                    <th key={attribute._id || idx} className="px-4 py-2 border-b border-gray-200 text-left font-semibold text-gray-800 capitalize bg-gray-50">
+                      {attribute.name}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {/* Find max number of variants among all attributes */}
+                {(() => {
+                  const maxVariants = Math.max(...product.attributes.map(attr => attr.varients?.length || 0));
+                  return Array.from({ length: maxVariants }).map((_, rowIdx) => (
+                    <tr key={rowIdx}>
+                      {product.attributes.map((attribute, colIdx) => {
+                        const variant = attribute.varients && attribute.varients[rowIdx];
+                        return (
+                          <td key={colIdx} className="px-4 py-2 border-b border-gray-100 text-sm text-gray-700">
+                            {variant ? (
+                              <div className="flex flex-row gap-5">
+                                <span>{variant.name || `Variant ${rowIdx + 1}`}</span>
+                                <span className={`text-[10px] px-2 py-1 rounded-full font-medium w-fit ${variant.enabled ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                                  {variant.enabled ? 'Available' : 'Unavailable'}
+                                </span>
+                              </div>
+                            ) : (
+                              <span className="text-gray-400 italic">-</span>
+                            )}
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  ));
+                })()}
+              </tbody>
+            </table>
           </div>
         )}
 

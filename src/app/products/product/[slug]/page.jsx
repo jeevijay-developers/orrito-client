@@ -1,11 +1,11 @@
-import ProductByID from '@/components/Products/ProductByID'
+import ProductBySlug from '@/components/Products/ProductBySlug';
 import React from 'react'
 
 const page = async ({ params }) => {
   const { slug } = await params;
 
   return (
-    <ProductByID slug={slug} />
+    <ProductBySlug slug={slug} />
   )
 }
 
