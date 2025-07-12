@@ -78,4 +78,4 @@ const SolutionsDropdown = ({ dropdownRef, handleSolutionHover, handleSolutionLea
     )
 }
 
-export default SolutionsDropdown
+export default SolutionsDropdown;

@@ -573,9 +573,9 @@ const Support = () => {
                     </a>
                   </p>
                   <p className="flex items-center text-gray-600">
-                    <span className="w-16 text-gray-500">WhatsApp:</span>   
+                    <span className="w-18 text-gray-500">WhatsApp:</span>   
                     <a href="https://wa.me/9999971796" className="text-orange-600 hover:text-orange-700 font-medium transition-colors cursor-pointer">
-                       99999 71796
+                       9999971796
                     </a>
                   </p>
                 </div>
