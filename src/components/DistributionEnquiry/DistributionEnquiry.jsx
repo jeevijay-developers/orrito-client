@@ -308,7 +308,7 @@ const DistributionEnquiry = () => {
 						<div className="pt-6">
 							<button
 								type="submit"
-								className="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold py-4 px-6 rounded-lg hover:from-orange-600 hover:to-red-600 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
+								className="cursor-pointer w-full bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold py-4 px-6 rounded-lg hover:from-orange-600 hover:to-red-600 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
 							>
 								Submit Enquiry
 							</button>

@@ -17,13 +17,13 @@ const Hero = () => {
       {/* Navigation Buttons */}
       <button
         ref={prevRef}
-        className="absolute z-10 left-4 top-4/6 md:top-5/9 transform -translate-y-1/2 bg-black/60 text-white rounded-full w-10 h-10 flex items-center justify-center shadow-lg"
+        className=" cursor-pointer absolute z-10 left-4 top-4/6 md:top-5/9 transform -translate-y-1/2 bg-black/60 text-white rounded-full w-10 h-10 flex items-center justify-center shadow-lg"
       >
         <FaChevronLeft size={18} />
       </button>
       <button
         ref={nextRef}
-        className="absolute z-10 right-4 top-4/6 md:top-5/9 transform -translate-y-1/2 bg-black/60 text-white rounded-full w-10 h-10 flex items-center justify-center shadow-lg"
+        className="cursor-pointer  absolute z-10 right-4 top-4/6 md:top-5/9 transform -translate-y-1/2 bg-black/60 text-white rounded-full w-10 h-10 flex items-center justify-center shadow-lg"
       >
         <FaChevronRight size={18} />
       </button>
