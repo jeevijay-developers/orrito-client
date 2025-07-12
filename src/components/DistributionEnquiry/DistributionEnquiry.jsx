@@ -36,11 +36,11 @@ const DistributionEnquiry = () => {
 	};
 
 	return (
-		<div className="min-h-screen bg-gradient-to-br from-orange-50 to-red-100 py-12 pt-[170px] px-4 sm:px-6 lg:px-8">
+		<div className="min-h-screen bg-white py-12 pt-[170px] px-4 sm:px-6 lg:px-8">
 			<div className="max-w-4xl mx-auto">
 				<div className="bg-white rounded-2xl shadow-xl overflow-hidden">
 					{/* Header */}
-					<div className="bg-gradient-to-r from-orange-500 to-red-500 px-8 py-10">
+					<div className="bg-orange-600 px-8 py-10">
 						<h1 className="text-3xl font-bold text-white text-center">
 							Distributor Enquiry
 						</h1>
@@ -308,7 +308,7 @@ const DistributionEnquiry = () => {
 						<div className="pt-6">
 							<button
 								type="submit"
-								className="cursor-pointer w-full bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold py-4 px-6 rounded-lg hover:from-orange-600 hover:to-red-600 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
+								className="cursor-pointer w-full bg-orange-600 text-white font-semibold py-4 px-6 rounded-lg hover:bg-orange-600 transform transition-all duration-200 shadow-lg hover:shadow-xl"
 							>
 								Submit Enquiry
 							</button>

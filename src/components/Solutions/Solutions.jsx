@@ -1,12 +1,71 @@
 'use client'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { solutionCategories } from '@/service/Data'
+import { solutionCategories as fetchSolutionCategories } from '@/service/Data'
 import SolutionsHero from './SolutionsHero'
 import SolutionHome from '../Home/SolutionHome'
 
 const Solutions = () => {
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    async function getCategories() {
+      try {
+        // If fetchSolutionCategories is async, await it; otherwise, use as is
+        const data = typeof fetchSolutionCategories === 'function' ? await fetchSolutionCategories() : fetchSolutionCategories;
+        setCategories(Array.isArray(data) ? data : []);
+      } catch (err) {
+        setError('Failed to load solution categories.');
+      } finally {
+        setLoading(false);
+      }
+    }
+    getCategories();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-pulse">
+            <div className="h-8 bg-gray-300 rounded w-1/4 mb-8 mx-auto"></div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[...Array(6)].map((_, i) => (
+                <div key={i} className="bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100">
+                  <div className="h-48 bg-gray-300"></div>
+                  <div className="p-6">
+                    <div className="h-4 bg-gray-300 rounded mb-2"></div>
+                    <div className="h-4 bg-gray-300 rounded w-3/4 mb-4"></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-red-500 text-xl mb-4">⚠️ Error</div>
+          <p className="text-gray-600 mb-4">{error}</p>
+          <button
+            onClick={() => getCategories()}
+            className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-md transition-colors"
+          >
+            Try Again
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
@@ -32,14 +91,14 @@ const Solutions = () => {
 
           {/* Categories Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {solutionCategories.map((category, index) => (
-              <div key={index} className="group">
-                <Link href={category.href} className="block">
+            {categories.map((category, index) => (
+              <div key={category.id || index} className="group">
+                <Link href={`/solutions/${category.name}`} className="block">
                   <div className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-100 group-hover:border-orange-200">
                     {/* Image */}
                     <div className="relative h-48 bg-gradient-to-br from-gray-100 to-gray-200">
                       <Image
-                        src={category.src}
+                        src={category.image?.url || category.src || '/img/corporate/placeholder.png'}
                         alt={category.name}
                         fill
                         className="object-cover transition-transform duration-300 group-hover:scale-105"
@@ -47,14 +106,13 @@ const Solutions = () => {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
-                    
                     {/* Content */}
                     <div className="p-6">
                       <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-orange-600 transition-colors duration-200">
                         {category.name}
                       </h3>
                       <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-                        Specialized solutions for {category.name.toLowerCase()} with cutting-edge technology and energy efficiency.
+                        Specialized solutions for {category.name?.toLowerCase()} with cutting-edge technology and energy efficiency.
                       </p>
                       <div className="flex items-center text-orange-500 text-sm font-medium group-hover:text-orange-600 transition-colors duration-200">
                         <span>Learn More</span>

@@ -22,12 +22,10 @@ export default function ProductBySlug({ slug }) {
 
   useEffect(() => {
     if (product && product.categoryName && product.categoryName.length > 0) {
-      // Fetch products for the first category
       fetchCategoryProducts(product.categoryName[0]);
     }
   }, [product]);
 
-  // Set breadcrumb with product name and category
   useEffect(() => {
     if (product && product.name && product.categoryName && product.categoryName.length > 0) {
       // Set breadcrumb with category and product info
@@ -104,7 +102,7 @@ export default function ProductBySlug({ slug }) {
           <p className="text-gray-600 mb-4 text-sm sm:text-base">{error}</p>
           <button
             onClick={() => slug && fetchProduct(slug)}
-            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition-colors text-sm sm:text-base"
+            className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-md transition-colors text-sm sm:text-base"
           >
             Try Again
           </button>
@@ -136,7 +134,7 @@ export default function ProductBySlug({ slug }) {
               {product.categoryName && product.categoryName.map((cat, index) => (
                 <span
                   key={index}
-                  className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full font-medium"
+                  className="inline-block bg-orange-100 text-white-800 text-xs px-2 py-1 rounded-full font-medium"
                 >
                   {formatCategoryName(cat)}
                 </span>
