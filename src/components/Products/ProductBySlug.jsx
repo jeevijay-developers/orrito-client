@@ -155,7 +155,7 @@ export default function ProductBySlug({ slug }) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6">
           {/* Left Sidebar - Product List - Hidden on mobile, collapsible */}
           <div className="lg:col-span-3 order-2 lg:order-1">
-            <div className="bg-white rounded-lg border border-gray-200 p-4 lg:sticky lg:top-24">
+            <div className="bg-white rounded-lg border border-gray-200 p-4 lg:sticky lg:top-32">
               <h3 className="text-sm font-medium text-gray-700 mb-3">Products</h3>
               <div className="space-y-2 max-h-96 lg:max-h-screen overflow-y-auto">
                 {categoryProducts.map((p) => (
