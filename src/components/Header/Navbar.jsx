@@ -370,7 +370,9 @@ const Navbar = () => {
                   </Link>
                   <button
                     onClick={() =>
-                      setIsMobileProductDropdownOpen(!isMobileProductDropdownOpen)
+                      setIsMobileProductDropdownOpen(
+                        !isMobileProductDropdownOpen
+                      )
                     }
                     className="text-gray-700 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 border border-l-0 border-gray-300 rounded-r-md text-base font-medium transition-colors duration-200 flex items-center"
                   >
@@ -505,7 +507,7 @@ const Navbar = () => {
               <div className="pt-2 px-3">
                 <Link
                   href="/distribution-enquiry"
-                  className="w-full bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 block text-center"
+                  className="text-gray-700 hover:text-orange-500 hover:bg-orange-50 block px-3 py-2 border border-gray-300 rounded-md text-base font-medium transition-colors duration-200 mx-3"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Distribution Enquiry
