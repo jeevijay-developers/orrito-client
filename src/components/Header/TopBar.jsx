@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import EnquiryForm from './EnquiryForm';
+import Link from 'next/link';
 
 const TopBar = () => {
 
@@ -17,9 +18,9 @@ const TopBar = () => {
             className=" cursor-pointer bg-white border border-[#f54900] text-[#f54900] hover:bg-orange-50 px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200">
               Enquiry
             </button>
-            <button className="cursor-pointer  bg-[#f54900] hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200">
+            <Link href="https://wa.me/9999971796" target="_blank" className="cursor-pointer  bg-[#f54900] hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200">
               Chat with us
-            </button>
+            </Link>
           </div>
         </div>
       </div>
