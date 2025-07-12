@@ -1,10 +1,10 @@
 import SolutionCategoryPage from "@/components/Solutions/SolutionCategoryPage";
 
 export default async function Page({ params }) {
-  const { category } = await params;
+  const { solution } = await params;
   return (
     <div>
-      <SolutionCategoryPage category={category} />
+      <SolutionCategoryPage solution={solution} />
     </div>
   );
 }
