@@ -1,9 +1,7 @@
-"use client";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
-// import { solutionCategories } from "@/service/Data";
+import React, { useState } from "react";
+import { solutionCategories } from "@/service/Data";
 import Image from "next/image";
-import { getAllSolutions } from "@/service/product_service";
 
 const SolutionsDropdown = ({
   dropdownRef,
@@ -12,27 +10,8 @@ const SolutionsDropdown = ({
   setIsSolutionDropdownOpen,
 }) => {
   const [hoveredProduct, setHoveredProduct] = useState(null);
-  const [solutions, setSolutions] = useState([]);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchSolutions = async () => {
-      try {
-        const res = await getAllSolutions();
-        console.log("solutions ", res);
-
-        setSolutions(res);
-      } catch (error) {
-        console.error("Error fetching solutions:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchSolutions();
-  }, []);
   const handleProductItemHover = (product) => {
-    console.log("product ->",product)
     setHoveredProduct(product);
   };
 
@@ -50,16 +29,16 @@ const SolutionsDropdown = ({
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="md:col-span-2">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {solutions.map((value, index) => (
+              {solutionCategories.map((cat, i) => (
                 <Link
-                  key={index}
-                  href={`/solutions/${value.name}`}
+                  key={i}
+                  href={cat.href}
                   className="text-gray-600 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 rounded-md text-sm transition-colors duration-200 block"
                   onClick={() => setIsSolutionDropdownOpen(false)}
-                  onMouseEnter={() => handleProductItemHover(value)}
+                  onMouseEnter={() => handleProductItemHover(cat)}
                   onMouseLeave={handleProductItemLeave}
                 >
-                  {value?.description}
+                  {cat.name}
                 </Link>
               ))}
             </div>
@@ -74,8 +53,8 @@ const SolutionsDropdown = ({
                 {hoveredProduct && (
                   <div className="space-y-3">
                     <Image
-                      src={hoveredProduct?.image?.url}
-                      alt='solution image'
+                      src={hoveredProduct.src}
+                      alt={hoveredProduct.name}
                       width={300}
                       height={200}
                       className="w-full h-50 object-cover rounded-md shadow-sm transition-opacity duration-300"
