@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useQuery } from "@/context/QueryContext";
 import { submitProductQuery } from "@/service/product_service";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const Cart = () => {
   const { queryItems, updateQuantity, deleteQuery, deleteAllQuery } =
@@ -15,7 +16,7 @@ const Cart = () => {
     phone: "",
     message: "",
   });
-
+  const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
 
   const handleChange = (field) => (e) =>
@@ -49,7 +50,8 @@ const Cart = () => {
 
       toast.success("Your query has been submitted successfully.");
       setFormData({ name: "", email: "", phone: "", message: "" });
-      deleteAllQuery()
+      deleteAllQuery();
+      router.push('/')
     } catch (err) {
       console.error(err);
       toast.error("There was an error submitting your query.");
