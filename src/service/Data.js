@@ -104,11 +104,7 @@ export const productCategories = [
     href: '/products/designer-poles-furniture', 
     src: '/img/corporate/placeholder.png' 
   },
-  { 
-    name: 'Footer', 
-    href: '/products/footer', 
-    src: '/img/corporate/placeholder.png' 
-  },
+ 
 ];
 export const solarCategories = [
     { name: 'Solar Street Lights', href: '/solar/street-lights', src: '/img/corporate/placeholder.png' },

@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 const SupportHero = () => {
   return (
-    <div className="relative w-full h-[60vh] md:h-[85vh] md:w-full overflow-hidden mt-30">
+    <div className="relative w-full h-[60vh] md:h-[80vh] md:w-full overflow-hidden mt-30">
       <Image
         src="/img/corporate/supporthero.jpg"
         alt="Support Hero"
