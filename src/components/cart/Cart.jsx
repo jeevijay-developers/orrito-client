@@ -6,8 +6,9 @@ import { submitProductQuery } from "@/service/product_service";
 import toast from "react-hot-toast";
 
 const Cart = () => {
-  const { queryItems, updateQuantity, deleteQuery } = useQuery();
-
+  const { queryItems, updateQuantity, deleteQuery, deleteAllQuery } =
+    useQuery();
+  console.log("query items", queryItems);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -40,14 +41,15 @@ const Cart = () => {
     try {
       await submitProductQuery({
         ...formData,
-        products: queryItems.map(({ id, name }) => ({
-          productId: id,
+        products: queryItems.map(({ quantity, name }) => ({
+          quantity,
           productName: name,
         })),
       });
 
       toast.success("Your query has been submitted successfully.");
       setFormData({ name: "", email: "", phone: "", message: "" });
+      deleteAllQuery()
     } catch (err) {
       console.error(err);
       toast.error("There was an error submitting your query.");

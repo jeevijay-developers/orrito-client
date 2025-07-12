@@ -22,7 +22,7 @@ export const QueryProvider = ({ children }) => {
   };
 
   const addToQuery = (item) => {
-    console.log("item",item)
+    console.log("item", item);
     setQueryItems((prev) => {
       const existingItemIndex = prev.findIndex((i) => i.id === item.id);
       let updatedItems;
@@ -54,10 +54,19 @@ export const QueryProvider = ({ children }) => {
       return updatedItems;
     });
   };
-
+const deleteAllQuery = () => {
+  setQueryItems([]);
+  syncToLocalStorage([]);
+};
   return (
     <QueryContext.Provider
-      value={{ queryItems, addToQuery, updateQuantity, deleteQuery }}
+      value={{
+        queryItems,
+        addToQuery,
+        updateQuantity,
+        deleteQuery,
+        deleteAllQuery,
+      }}
     >
       {children}
     </QueryContext.Provider>
