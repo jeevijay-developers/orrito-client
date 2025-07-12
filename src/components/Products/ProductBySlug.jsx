@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useState } from "react";
-import { Download, ArrowRight, CheckCircle, ShoppingCart, Star } from "lucide-react";
+import { Download, ShoppingCart, Star } from "lucide-react";
 import Image from "next/image";
 import { getProductBySlug, getAllProductsByCategory } from "@/server/categoryServer";
 import Link from "next/link";
