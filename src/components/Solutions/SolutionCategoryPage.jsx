@@ -32,7 +32,7 @@ const SolutionCategoryPage = ({ solution }) => {
   const fetchSolutions = async (categoryName) => {
     try {
       const solutions = await getAllSolutionsByCategory(categoryName);
-      console.log('Solutions fetched:', solutions);
+      // console.log('Solutions fetched:', solutions);
       localStorage.setItem('solutionsByCategory', JSON.stringify(solutions));
       setSolutions(solutions.products || []);
     } catch (error) {
