@@ -5,8 +5,10 @@ const page = ({ params }) => {
   const id = params.id;
 
   return (
-    <SolarCategoryPage id={id} />
-  )
+    <div className='mt-48'>
+      <SolarCategoryPage id={id} />
+    </div>
+  );
 }
 
 export default page
