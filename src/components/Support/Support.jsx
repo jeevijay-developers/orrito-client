@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react'
+import { FaQuestionCircle } from "react-icons/fa";
 
 const Support = () => {
   const [activeTab, setActiveTab] = useState('sales')
@@ -76,10 +77,8 @@ const Support = () => {
         <div className="lg:col-span-2">
           <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-10">
             <div className="flex items-center mb-8">
-              <div className="w-12 h-12 bg-orange-500 rounded-xl flex items-center justify-center mr-4">
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+              <div className="w-10 h-10 bg-orange-600 rounded-xl flex items-center justify-center mr-4">
+                <FaQuestionCircle className="w-5 h-5 text-white" />
               </div>
               <h2 className="text-4xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
                 How can we help?
@@ -91,7 +90,7 @@ const Support = () => {
               <button
                 className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 cursor-pointer ${
                   activeTab === 'sales' 
-                    ? 'bg-orange-500 text-white shadow-lg scale-105' 
+                    ? 'bg-orange-600 text-white shadow-lg scale-105' 
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:shadow-md'
                 }`}
                 onClick={() => setActiveTab('sales')}
@@ -101,7 +100,7 @@ const Support = () => {
               <button
                 className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 cursor-pointer ${
                   activeTab === 'service' 
-                    ? 'bg-orange-500 text-white shadow-lg  scale-105' 
+                    ? 'bg-orange-600 text-white shadow-lg  scale-105' 
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:shadow-md'
                 }`}
                 onClick={() => setActiveTab('service')}
@@ -111,7 +110,7 @@ const Support = () => {
               <button
                 className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 cursor-pointer ${
                   activeTab === 'track' 
-                    ? 'bg-orange-500 text-white shadow-lg scale-105' 
+                    ? 'bg-orange-600 text-white shadow-lg scale-105' 
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:shadow-md'
                 }`}
                 onClick={() => setActiveTab('track')}
@@ -121,7 +120,7 @@ const Support = () => {
               <button
                 className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 cursor-pointer ${
                   activeTab === 'downloads' 
-                    ? 'bg-orange-500 text-white shadow-lg scale-105' 
+                    ? 'bg-orange-600 text-white shadow-lg scale-105' 
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:shadow-md'
                 }`}
                 onClick={() => setActiveTab('downloads')}
@@ -331,7 +330,7 @@ const Support = () => {
               {activeTab === 'track' && (
                 <>
                   <div className="text-center mb-8">
-                    <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-orange-600 to-orange-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
                       <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                       </svg>
@@ -386,7 +385,7 @@ const Support = () => {
               {activeTab === 'downloads' && (
                 <div className="space-y-8">
                   <div className="text-center mb-8">
-                    <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-orange-600 to-orange-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
                       <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                       </svg>
@@ -414,7 +413,7 @@ const Support = () => {
                             </svg>
                             <span className="text-sm font-medium text-gray-700">Consumer Luminaries</span>
                           </div>
-                          <svg className="w-4 h-4 text-gray-400 group-hover:text-orange-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-4 h-4 text-gray-400 group-hover:text-orange-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                           </svg>
                         </a>
@@ -425,7 +424,7 @@ const Support = () => {
                             </svg>
                             <span className="text-sm font-medium text-gray-700">Professional Luminaries</span>
                           </div>
-                          <svg className="w-4 h-4 text-gray-400 group-hover:text-orange-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-4 h-4 text-gray-400 group-hover:text-orange-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                           </svg>
                         </a>
@@ -436,7 +435,7 @@ const Support = () => {
                             </svg>
                             <span className="text-sm font-medium text-gray-700">Architectural</span>
                           </div>
-                          <svg className="w-4 h-4 text-gray-400 group-hover:text-orange-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-4 h-4 text-gray-400 group-hover:text-orange-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                           </svg>
                         </a>
@@ -447,7 +446,7 @@ const Support = () => {
                             </svg>
                             <span className="text-sm font-medium text-gray-700">Solar</span>
                           </div>
-                          <svg className="w-4 h-4 text-gray-400 group-hover:text-orange-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-4 h-4 text-gray-400 group-hover:text-orange-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                           </svg>
                         </a>
@@ -458,7 +457,7 @@ const Support = () => {
                             </svg>
                             <span className="text-sm font-medium text-gray-700">Landscape</span>
                           </div>
-                          <svg className="w-4 h-4 text-gray-400 group-hover:text-orange-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-4 h-4 text-gray-400 group-hover:text-orange-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                           </svg>
                         </a>
@@ -483,7 +482,7 @@ const Support = () => {
                             </svg>
                             <span className="text-sm font-medium text-gray-700">Warranty Policy</span>
                           </div>
-                          <svg className="w-4 h-4 text-gray-400 group-hover:text-orange-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-4 h-4 text-gray-400 group-hover:text-orange-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                           </svg>
                         </a>
@@ -494,7 +493,7 @@ const Support = () => {
                             </svg>
                             <span className="text-sm font-medium text-gray-700">Return and Replacement Policy</span>
                           </div>
-                          <svg className="w-4 h-4 text-gray-400 group-hover:text-orange-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-4 h-4 text-gray-400 group-hover:text-orange-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                           </svg>
                         </a>
@@ -507,7 +506,7 @@ const Support = () => {
               {activeTab !== 'downloads' && (
                 <button
                   type="submit"
-                  className="w-full bg-orange-500 text-white py-4 px-8 rounded-2xl font-semibold cursor-pointer transform hover:scale-105 transition-all duration-300 shadow-lg "
+                  className="w-full bg-orange-600 text-white py-4 px-8 rounded-2xl font-semibold cursor-pointer transition-all duration-300 shadow-lg "
                 >
                   Submit Request
                 </button>
@@ -521,7 +520,7 @@ const Support = () => {
         <div className="lg:col-span-1">
           <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl shadow-xl border border-gray-100 p-8 sticky top-6">
             <div className="flex items-center mb-6">
-              <div className="w-12 h-12 bg-gradient-to-br from-orange-500  rounded-xl flex items-center justify-center mr-4">
+              <div className="w-12 h-12 bg-orange-600  rounded-xl flex items-center justify-center mr-4">
                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
@@ -620,7 +619,7 @@ const Support = () => {
 
               <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl p-6 border border-orange-200">
                 <div className="flex items-center mb-4">
-                  <div className="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center mr-3">
+                  <div className="w-8 h-8 bg-orange-600 rounded-lg flex items-center justify-center mr-3">
                     <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z" />
                     </svg>

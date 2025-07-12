@@ -6,9 +6,9 @@ import ProductDropdown from "./ProductDropdown";
 import SolutionsDropdown from "./SolutionsDropdown";
 import SolarDropdown from "./SolarDropdown";
 import {
-  productCategories,
-  solutionCategories,
-  solarCategories,
+  productCategories as fetchProductCategories,
+  solutionCategories as fetchSolutionCategories,
+  solarCategories as fetchSolarCategories,
 } from "@/service/Data";
 import { useQuery } from "@/context/QueryContext";
 const Navbar = () => {
@@ -22,6 +22,9 @@ const Navbar = () => {
     useState(false);
   const [isMobileSolarDropdownOpen, setIsMobileSolarDropdownOpen] =
     useState(false);
+  const [productCategories, setProductCategories] = useState([]);
+  const [solutionCategories, setSolutionCategories] = useState([]);
+  const [solarCategories, setSolarCategories] = useState([]);
   const dropdownRef = useRef(null);
   const productLinkRef = useRef(null);
   const solutionDropdownRef = useRef(null);
@@ -31,6 +34,36 @@ const Navbar = () => {
   const { queryItems } = useQuery();
   const cartQuantity =
     queryItems?.reduce((acc, item) => acc + item.quantity, 0) || 0;
+
+  useEffect(() => {
+    async function fetchCategories() {
+      try {
+        const prod = await fetchProductCategories();
+        setProductCategories(Array.isArray(prod) ? prod : []);
+      } catch {
+        setProductCategories([]);
+      }
+      try {
+        const sol =
+          typeof fetchSolutionCategories === "function"
+            ? await fetchSolutionCategories()
+            : fetchSolutionCategories;
+        setSolutionCategories(Array.isArray(sol) ? sol : []);
+      } catch {
+        setSolutionCategories([]);
+      }
+      try {
+        const solar =
+          typeof fetchSolarCategories === "function"
+            ? await fetchSolarCategories()
+            : fetchSolarCategories;
+        setSolarCategories(Array.isArray(solar) ? solar : []);
+      } catch {
+        setSolarCategories([]);
+      }
+    }
+    fetchCategories();
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -388,7 +421,7 @@ const Navbar = () => {
                     {productCategories.map((category, index) => (
                       <Link
                         key={index}
-                        href={category.href}
+                        href={`/products/${category.name}`}
                         className="text-gray-600 hover:text-orange-500 hover:bg-orange-50 block px-3 py-2 rounded-md text-sm transition-colors duration-200"
                         onClick={() => {
                           setIsMenuOpen(false);
@@ -432,7 +465,7 @@ const Navbar = () => {
                     {solutionCategories.map((category, index) => (
                       <Link
                         key={index}
-                        href={category.href}
+                        href={`/solutions/${category.name}`}
                         className="text-gray-600 hover:text-orange-500 hover:bg-orange-50 block px-3 py-2 rounded-md text-sm transition-colors duration-200"
                         onClick={() => {
                           setIsMenuOpen(false);
@@ -474,7 +507,7 @@ const Navbar = () => {
                     {solarCategories.map((category, index) => (
                       <Link
                         key={index}
-                        href={category.href}
+                        href={`/products/${category.name}`}
                         className="text-gray-600 hover:text-orange-500 hover:bg-orange-50 block px-3 py-2 rounded-md text-sm transition-colors duration-200"
                         onClick={() => {
                           setIsMenuOpen(false);
