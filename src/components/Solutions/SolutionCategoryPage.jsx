@@ -6,31 +6,34 @@ import Link from 'next/link';
 import { getAllSolutionsByCategory } from '@/server/solutionServer';
 import { useBreadcrumb } from '@/context/BreadcrumbContext';
 
-const SolutionCategoryPage = ({ category }) => {
+const SolutionCategoryPage = ({ solution }) => {
   const pathname = usePathname();
   const { setBreadcrumb } = useBreadcrumb();
   const [solutions, setSolutions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  // console.log('solution:', solution);
+  
   useEffect(() => {
-    if (category) {
-      fetchSolutions(category);
+    if (solution) {
+      fetchSolutions(solution);
     }
-  }, [category]);
+  }, [solution]);
 
   // Separate useEffect for breadcrumb
   useEffect(() => {
-    if (category) {
+    if (solution) {
       setBreadcrumb(pathname, {
-        name: formatCategoryName(category)
+        name: formatCategoryName(solution)
       });
     }
-  }, [category, pathname]);
+  }, [solution, pathname]);
 
   const fetchSolutions = async (categoryName) => {
     try {
       const solutions = await getAllSolutionsByCategory(categoryName);
+      console.log('Solutions fetched:', solutions);
+      localStorage.setItem('solutionsByCategory', JSON.stringify(solutions));
       setSolutions(solutions.products || []);
     } catch (error) {
       setError('Failed to load solutions. Please try again.');
@@ -74,7 +77,7 @@ const SolutionCategoryPage = ({ category }) => {
           <div className="text-red-500 text-xl mb-4">⚠️ Error</div>
           <p className="text-gray-600 mb-4">{error}</p>
           <button
-            onClick={() => category && fetchSolutions(category)}
+            onClick={() => solution && fetchSolutions(solution)}
             className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition-colors"
           >
             Try Again
@@ -90,7 +93,7 @@ const SolutionCategoryPage = ({ category }) => {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            {formatCategoryName(category)} Solutions
+            {formatCategoryName(solution)} Solutions
           </h1>
           <p className="text-gray-600">
             {solutions.length} {solutions.length === 1 ? 'solution' : 'solutions'} found
@@ -105,17 +108,17 @@ const SolutionCategoryPage = ({ category }) => {
               No solutions found
             </h3>
             <p className="text-gray-500">
-              No solutions available in the "{formatCategoryName(category)}" category.
+              No solutions available in the "{formatCategoryName(solution)}" solution.
             </p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {solutions.map((solution) => (
+            {solutions.map((solution, index) => (
               <div
-                key={solution._id}
+                key={index}
                 className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 group"
               >
-                <Link href={`/solutions/${solution.slug}`}>
+                <Link href={`/solutions/product/${solution._id}`}>
                   <div className="cursor-pointer">
                     {/* Solution Image */}
                     <div className="relative h-48 bg-gray-100 overflow-hidden">
@@ -136,7 +139,7 @@ const SolutionCategoryPage = ({ category }) => {
 
                     {/* Solution Details */}
                     <div className="p-4">
-                      {/* Category Badge */}
+                      {/* solution Badge */}
                       <div className="flex flex-wrap gap-1 mb-2">
                         {solution.categoryName && solution.categoryName.map((cat, index) => (
                           <span

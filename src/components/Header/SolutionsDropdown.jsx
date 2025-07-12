@@ -1,13 +1,26 @@
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {solutionCategories} from '@/service/Data'
 import Image from 'next/image'
 
 const SolutionsDropdown = ({ dropdownRef, handleSolutionHover, handleSolutionLeave, setIsSolutionDropdownOpen }) => {
     const [hoveredProduct, setHoveredProduct] = useState(null);
-    
+    const [categories, setCategories] = useState([]);
+
+    useEffect(() => {
+            async function getCategories() {
+                try {
+                    const data = await solutionCategories();
+                    setCategories(Array.isArray(data) ? data : []);
+                } catch (err) {
+                    setCategories([]);
+                }
+            }
+            getCategories();
+        }, []);
+
     const handleProductItemHover = (product) => {
-        setHoveredProduct(product);
+        setHoveredProduct(product);        
     };
 
     const handleProductItemLeave = () => {
@@ -24,10 +37,10 @@ const SolutionsDropdown = ({ dropdownRef, handleSolutionHover, handleSolutionLea
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <div className="md:col-span-2">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {solutionCategories.map((cat, i) => (
+                            {categories.map((cat, i) => (
                                 <Link 
                                     key={i} 
-                                    href={cat.href} 
+                                    href={`/solutions/${cat.name}`} 
                                     className="text-gray-600 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 rounded-md text-sm transition-colors duration-200 block" 
                                     onClick={() => setIsSolutionDropdownOpen(false)}
                                     onMouseEnter={() => handleProductItemHover(cat)}
@@ -48,7 +61,7 @@ const SolutionsDropdown = ({ dropdownRef, handleSolutionHover, handleSolutionLea
                                 {hoveredProduct && (
                                     <div className="space-y-3">
                                         <Image 
-                                            src={hoveredProduct.src} 
+                                            src={`${hoveredProduct.image.url}`} 
                                             alt={hoveredProduct.name}
                                             width={300}
                                             height={200}
@@ -65,4 +78,4 @@ const SolutionsDropdown = ({ dropdownRef, handleSolutionHover, handleSolutionLea
     )
 }
 
-export default SolutionsDropdown
+export default SolutionsDropdown;

@@ -9,3 +9,13 @@ export async function getAllSolutionsByCategory(categoryName) {
     throw error;
   }
 }
+
+// Fetch solution by ID from API or database
+export async function getSolutionById(solutionId) {
+  try {
+    const res = await apiClient.get(`/api/v1/products/product/by-id/${solutionId}`);
+    return res.data || null;
+  } catch (error) {
+    throw error;
+  }
+}

@@ -1,20 +1,27 @@
 "use client";
-import React, { useState, useRef, useEffect } from 'react';
-import Link from 'next/link';
+import React, { useState, useRef, useEffect } from "react";
+import Link from "next/link";
 import { FiShoppingCart, FiChevronDown } from "react-icons/fi";
-import ProductDropdown from './ProductDropdown';
-import SolutionsDropdown from './SolutionsDropdown';
-import SolarDropdown from './SolarDropdown';
-import {productCategories, solutionCategories, solarCategories} from '@/service/Data';
+import ProductDropdown from "./ProductDropdown";
+import SolutionsDropdown from "./SolutionsDropdown";
+import SolarDropdown from "./SolarDropdown";
+import {
+  productCategories,
+  solutionCategories,
+  solarCategories,
+} from "@/service/Data";
 import { useQuery } from "@/context/QueryContext";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProductDropdownOpen, setIsProductDropdownOpen] = useState(false);
   const [isSolutionDropdownOpen, setIsSolutionDropdownOpen] = useState(false);
   const [isSolarDropdownOpen, setIsSolarDropdownOpen] = useState(false);
-  const [isMobileProductDropdownOpen, setIsMobileProductDropdownOpen] = useState(false);
-  const [isMobileSolutionDropdownOpen, setIsMobileSolutionDropdownOpen] = useState(false);
-  const [isMobileSolarDropdownOpen, setIsMobileSolarDropdownOpen] = useState(false);
+  const [isMobileProductDropdownOpen, setIsMobileProductDropdownOpen] =
+    useState(false);
+  const [isMobileSolutionDropdownOpen, setIsMobileSolutionDropdownOpen] =
+    useState(false);
+  const [isMobileSolarDropdownOpen, setIsMobileSolarDropdownOpen] =
+    useState(false);
   const dropdownRef = useRef(null);
   const productLinkRef = useRef(null);
   const solutionDropdownRef = useRef(null);
@@ -22,8 +29,9 @@ const Navbar = () => {
   const solarDropdownRef = useRef(null);
   const solarLinkRef = useRef(null);
   const { queryItems } = useQuery();
-  const cartQuantity = queryItems?.length || 0;
-  
+  const cartQuantity =
+    queryItems?.reduce((acc, item) => acc + item.quantity, 0) || 0;
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -47,15 +55,19 @@ const Navbar = () => {
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target) && 
-          productLinkRef.current && !productLinkRef.current.contains(event.target)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target) &&
+        productLinkRef.current &&
+        !productLinkRef.current.contains(event.target)
+      ) {
         setIsProductDropdownOpen(false);
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
@@ -63,28 +75,32 @@ const Navbar = () => {
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
-        solutionDropdownRef.current && !solutionDropdownRef.current.contains(event.target) &&
-        solutionLinkRef.current && !solutionLinkRef.current.contains(event.target)
+        solutionDropdownRef.current &&
+        !solutionDropdownRef.current.contains(event.target) &&
+        solutionLinkRef.current &&
+        !solutionLinkRef.current.contains(event.target)
       ) {
         setIsSolutionDropdownOpen(false);
       }
     };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   // Close solar dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
-        solarDropdownRef.current && !solarDropdownRef.current.contains(event.target) &&
-        solarLinkRef.current && !solarLinkRef.current.contains(event.target)
+        solarDropdownRef.current &&
+        !solarDropdownRef.current.contains(event.target) &&
+        solarLinkRef.current &&
+        !solarLinkRef.current.contains(event.target)
       ) {
         setIsSolarDropdownOpen(false);
       }
     };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
@@ -120,11 +136,10 @@ const Navbar = () => {
               onMouseEnter={handleProductHover}
               onMouseLeave={handleProductLeave}
             >
-              <button
+              <Link
+                href="/products"
                 ref={productLinkRef}
                 className="cursor-pointer  text-gray-700 hover:bg-orange-500 hover:text-white px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200 flex items-center mr-2"
-                onClick={handleProductClick}
-                type="button"
               >
                 <span>Product</span>
                 <FiChevronDown
@@ -132,7 +147,7 @@ const Navbar = () => {
                     isProductDropdownOpen ? "rotate-180" : ""
                   }`}
                 />
-              </button>
+              </Link>
 
               {/* Mega Menu Dropdown */}
               {isProductDropdownOpen && (
@@ -151,11 +166,10 @@ const Navbar = () => {
               onMouseEnter={handleSolutionHover}
               onMouseLeave={handleSolutionLeave}
             >
-              <button
+              <Link
+                href="/solutions"
                 ref={solutionLinkRef}
                 className="cursor-pointer  text-gray-700 hover:bg-orange-500 hover:text-white px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200 flex items-center space-x-1 mr-2"
-                onClick={handleSolutionClick}
-                type="button"
               >
                 <span>Solution</span>
                 <FiChevronDown
@@ -163,7 +177,7 @@ const Navbar = () => {
                     isSolutionDropdownOpen ? "rotate-180" : ""
                   }`}
                 />
-              </button>
+              </Link>
               {isSolutionDropdownOpen && (
                 <SolutionsDropdown
                   dropdownRef={solutionDropdownRef}
@@ -180,11 +194,10 @@ const Navbar = () => {
               onMouseEnter={handleSolarHover}
               onMouseLeave={handleSolarLeave}
             >
-              <button
+              <Link
+                href="/solar"
                 ref={solarLinkRef}
                 className=" cursor-pointer text-gray-700 hover:bg-orange-500 hover:text-white px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200 flex items-center space-x-1 mr-2"
-                onClick={handleSolarClick}
-                type="button"
               >
                 <span>Solar</span>
                 <FiChevronDown
@@ -192,7 +205,7 @@ const Navbar = () => {
                     isSolarDropdownOpen ? "rotate-180" : ""
                   }`}
                 />
-              </button>
+              </Link>
               {isSolarDropdownOpen && (
                 <SolarDropdown
                   dropdownRef={solarDropdownRef}
@@ -347,19 +360,29 @@ const Navbar = () => {
 
               {/* Mobile Product Menu */}
               <div className="mx-3">
-                <button
-                  onClick={() =>
-                    setIsMobileProductDropdownOpen(!isMobileProductDropdownOpen)
-                  }
-                  className="w-full text-gray-700 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 border border-gray-300 rounded-md text-base font-medium transition-colors duration-200 flex items-center justify-between"
-                >
-                  <span>Product</span>
-                  <FiChevronDown
-                    className={`w-4 h-4 transition-transform duration-200 ${
-                      isMobileProductDropdownOpen ? "rotate-180" : ""
-                    }`}
-                  />
-                </button>
+                <div className="flex items-center">
+                  <Link
+                    href="/products"
+                    className="flex-1 text-gray-700 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 border border-gray-300 rounded-l-md text-base font-medium transition-colors duration-200"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Product
+                  </Link>
+                  <button
+                    onClick={() =>
+                      setIsMobileProductDropdownOpen(
+                        !isMobileProductDropdownOpen
+                      )
+                    }
+                    className="text-gray-700 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 border border-l-0 border-gray-300 rounded-r-md text-base font-medium transition-colors duration-200 flex items-center"
+                  >
+                    <FiChevronDown
+                      className={`w-4 h-4 transition-transform duration-200 ${
+                        isMobileProductDropdownOpen ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+                </div>
                 {isMobileProductDropdownOpen && (
                   <div className="mt-2 ml-4 space-y-1 max-h-60 overflow-y-auto">
                     {productCategories.map((category, index) => (
@@ -381,21 +404,29 @@ const Navbar = () => {
 
               {/* Mobile Solution Menu */}
               <div className="mx-3">
-                <button
-                  onClick={() =>
-                    setIsMobileSolutionDropdownOpen(
-                      !isMobileSolutionDropdownOpen
-                    )
-                  }
-                  className="w-full text-gray-700 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 border border-gray-300 rounded-md text-base font-medium transition-colors duration-200 flex items-center justify-between"
-                >
-                  <span>Solution</span>
-                  <FiChevronDown
-                    className={`w-4 h-4 transition-transform duration-200 ${
-                      isMobileSolutionDropdownOpen ? "rotate-180" : ""
-                    }`}
-                  />
-                </button>
+                <div className="flex items-center">
+                  <Link
+                    href="/solutions"
+                    className="flex-1 text-gray-700 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 border border-gray-300 rounded-l-md text-base font-medium transition-colors duration-200"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Solution
+                  </Link>
+                  <button
+                    onClick={() =>
+                      setIsMobileSolutionDropdownOpen(
+                        !isMobileSolutionDropdownOpen
+                      )
+                    }
+                    className="text-gray-700 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 border border-l-0 border-gray-300 rounded-r-md text-base font-medium transition-colors duration-200 flex items-center"
+                  >
+                    <FiChevronDown
+                      className={`w-4 h-4 transition-transform duration-200 ${
+                        isMobileSolutionDropdownOpen ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+                </div>
                 {isMobileSolutionDropdownOpen && (
                   <div className="mt-2 ml-4 space-y-1 max-h-60 overflow-y-auto">
                     {solutionCategories.map((category, index) => (
@@ -417,19 +448,27 @@ const Navbar = () => {
 
               {/* Mobile Solar Menu */}
               <div className="mx-3">
-                <button
-                  onClick={() =>
-                    setIsMobileSolarDropdownOpen(!isMobileSolarDropdownOpen)
-                  }
-                  className="w-full text-gray-700 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 border border-gray-300 rounded-md text-base font-medium transition-colors duration-200 flex items-center justify-between"
-                >
-                  <span>Solar</span>
-                  <FiChevronDown
-                    className={`w-4 h-4 transition-transform duration-200 ${
-                      isMobileSolarDropdownOpen ? "rotate-180" : ""
-                    }`}
-                  />
-                </button>
+                <div className="flex items-center">
+                  <Link
+                    href="/solar"
+                    className="flex-1 text-gray-700 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 border border-gray-300 rounded-l-md text-base font-medium transition-colors duration-200"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Solar
+                  </Link>
+                  <button
+                    onClick={() =>
+                      setIsMobileSolarDropdownOpen(!isMobileSolarDropdownOpen)
+                    }
+                    className="text-gray-700 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 border border-l-0 border-gray-300 rounded-r-md text-base font-medium transition-colors duration-200 flex items-center"
+                  >
+                    <FiChevronDown
+                      className={`w-4 h-4 transition-transform duration-200 ${
+                        isMobileSolarDropdownOpen ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+                </div>
                 {isMobileSolarDropdownOpen && (
                   <div className="mt-2 ml-4 space-y-1 max-h-60 overflow-y-auto">
                     {solarCategories.map((category, index) => (
@@ -468,7 +507,7 @@ const Navbar = () => {
               <div className="pt-2 px-3">
                 <Link
                   href="/distribution-enquiry"
-                  className="w-full bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 block text-center"
+                  className="text-gray-700 hover:text-orange-500 hover:bg-orange-50 block px-3 py-2 border border-gray-300 rounded-md text-base font-medium transition-colors duration-200 mx-3"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Distribution Enquiry

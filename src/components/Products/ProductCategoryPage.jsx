@@ -1,13 +1,12 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { useRouter, usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getAllProductsByCategory } from '@/server/categoryServer';
 import { useBreadcrumb } from '@/context/BreadcrumbContext';
 
 const ProductCategoryPage = ({ category }) => {
-  const router = useRouter();  
   const pathname = usePathname();
   const { setBreadcrumb } = useBreadcrumb();
   const [products, setProducts] = useState([]);
@@ -55,8 +54,8 @@ const ProductCategoryPage = ({ category }) => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 pt-[170px]">
-        <div className="container mx-auto px-4 py-8">
+      <div className="min-h-screen bg-gray-50 pt-[170px] py-[44px]">
+        <div className="container mx-auto px-8 py-8">
           <div className="animate-pulse">
             <div className="h-8 bg-gray-300 rounded w-1/4 mb-8"></div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
