@@ -32,18 +32,18 @@ export default function Footer() {
             <p className="text-gray-700">WhatsApp No: 9993971796</p>
           </div>
         </div>
-          {/* Categories */}
+        {/* Categories */}
         <div className="flex-1 min-w-[220px]">
           <h3 className="text-base font-semibold mb-3 text-gray-900">CATEGORIES</h3>
           <ul className="space-y-2 text-gray-600">
             {[
-              { name: "Fans", href: "/categories/fans" },
-              { name: "Lighting", href: "/categories/lighting" },
-              { name: "Switches", href: "/categories/switches" },
-              { name: "Home Appliances", href: "/categories/home-appliances" },
-              { name: "Smart Home", href: "/categories/smart-home" },
-              { name: "Personal Grooming", href: "/categories/personal-grooming" },
-              { name: "Switchgears", href: "/categories/switchgears" },
+              { name: "LED Bulbs", href: "/categories/led-bulbs" },
+              { name: "LED Tube Lights", href: "/categories/led-tube-lights" },
+              { name: "Panel Lights", href: "/categories/panel-lights" },
+              { name: "Downlights", href: "/categories/downlights" },
+              { name: "Ceiling Lights", href: "/categories/ceiling-lights" },
+              { name: "Outdoor LED Lights", href: "/categories/outdoor-lights" },
+              { name: "Smart LED Lights", href: "/categories/smart-led-lights" }
             ].map((item, idx) => (
               <li key={idx}>
                 <Link
@@ -106,14 +106,14 @@ export default function Footer() {
           </ul>
         </div>
 
-      
+
 
         {/* Contact & Emails */}
         <div className="flex-1 min-w-[220px]">
           <h3 className="text-base font-semibold mb-3 text-gray-900">EMAIL ADDRESS</h3>
           <p className="text-gray-700 mb-2">
             Service Request, Quality & Product complaints:{" "}
-            <a href="mailto:support@polycab.com" className="text-gray-500 hover:underline">support@polycab.com</a>
+            <a href="mailto:support@polycab.com" className="text-gray-500 hover:underline">support@oritto.com</a>
           </p>
           <p className="text-gray-700 mb-1">
             Sales Enquiry:{" "}
@@ -123,7 +123,7 @@ export default function Footer() {
             Distributor/Dealership <br /> & Investor Relations  Enquiry:{" "}
             <a href="mailto:info@oritto.com" className="text-gray-500 hover:underline">info@oritto.com</a>
           </p>
-         
+
           <p className="text-gray-700 mb-4">
             Exports Enquiry:{" "}
             <a href="mailto:exports@oritto.com" className="text-gray-500 hover:underline">exports@oritto.com</a>
@@ -147,7 +147,7 @@ export default function Footer() {
         <p>&copy; {new Date().getFullYear()} ORITTO. All rights reserved. </p>
         <br />
         <p>All trademarks used herein are property of their respective owners.
-Any use of third party trademarks is for identification purposes only and does not imply endorsement.</p>
+          Any use of third party trademarks is for identification purposes only and does not imply endorsement.</p>
       </div>
     </footer>
   );
