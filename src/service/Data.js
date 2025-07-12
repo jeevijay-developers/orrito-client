@@ -107,10 +107,16 @@ export const productCategories = [
  
 ];
 export const solarCategories = [
-    { name: 'Solar Street Lights', href: '/solar/street-lights', src: '/img/corporate/placeholder.png' },
-    { name: 'Semi-Integrated', href: '/solar/semi-integrated', src: '/img/corporate/placeholder.png' },
-    { name: 'All-in-One', href: '/solar/all-in-one', src: '/img/corporate/placeholder.png' },
-    { name: 'Hybrid', href: '/solar/hybrid', src: '/img/corporate/placeholder.png' },
+    { 
+        name: 'Solar Street Lights', 
+        href: '/solar/street-lights', 
+        src: '/img/corporate/placeholder.png',
+        subCategories: [
+            { name: 'Semi-Integrated', href: '/solar/semi-integrated', src: '/img/corporate/placeholder.png' },
+            { name: 'All-in-One', href: '/solar/all-in-one', src: '/img/corporate/placeholder.png' },
+            { name: 'Hybrid', href: '/solar/hybrid', src: '/img/corporate/placeholder.png' },
+        ]
+    },
     { name: 'Solar Mini Mast', href: '/solar/mini-mast', src: '/img/corporate/placeholder.png' },
     { name: 'Solar High mast', href: '/solar/high-mast', src: '/img/corporate/placeholder.png' },
     { name: 'Solar CCTV Cameras', href: '/solar/cctv-cameras', src: '/img/corporate/placeholder.png' },
