@@ -2,22 +2,22 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getAllSolarByCategory } from '@/server/solarServer';
+import { getAllSolarByID } from '@/server/solarServer';
 
-const SolarCategoryPage = ({ category }) => {
+const SolarCategoryPage = ({ id }) => {
   const [solarProducts, setSolarProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (category) {
-      fetchSolarProducts(category);
+    if (id) {
+      fetchSolarProducts(id);
     }
-  }, [category]);
+  }, [id]);
 
-  const fetchSolarProducts = async (categoryName) => {
+  const fetchSolarProducts = async (id) => {
     try {
-      const products = await getAllSolarByCategory(categoryName);
+      const products = await getAllSolarByID(id);
       setSolarProducts(Array.isArray(products) ? products : []);
     } catch (error) {
       setError('Failed to load solar products. Please try again.');

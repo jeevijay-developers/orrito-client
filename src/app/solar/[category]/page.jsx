@@ -2,10 +2,10 @@ import SolarCategoryPage from '@/components/Solar/SolarCategoryPage'
 import React from 'react'
 
 const page = ({ params }) => {
-  const category = params.category;
+  const id = params.id;
 
   return (
-    <SolarCategoryPage category={category} />
+    <SolarCategoryPage id={id} />
   )
 }
 

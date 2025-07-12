@@ -1,11 +1,25 @@
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {solarCategories} from '@/service/Data'
 import Image from 'next/image'
 
 const SolarDropdown = ({ dropdownRef, handleSolutionHover, handleSolutionLeave, setIsSolutionDropdownOpen }) => {
+const[categories,setCategories] = useState()
+
+   
     const [hoveredProduct, setHoveredProduct] = useState(null);
-    
+        useEffect(() => {
+                async function getCategories() {
+                    try {
+                        const data = await solarCategories();
+                        console.log("solar data ",data)
+                        setCategories(Array.isArray(data) ? data : []);
+                    } catch (err) {
+                        setCategories([]);
+                    }
+                }
+                getCategories();
+            }, []);
     const handleProductItemHover = (product) => {
         setHoveredProduct(product);
     };
@@ -24,10 +38,10 @@ const SolarDropdown = ({ dropdownRef, handleSolutionHover, handleSolutionLeave, 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <div className="md:col-span-2">
                         <div className="space-y-1">
-                            {solarCategories.map((cat, i) => (
+                            {categories?.map((cat, i) => (
                                 <div key={i}>
                                     <Link 
-                                        href={cat.href} 
+                                        href={`/solar/${cat._id}`} 
                                         className="text-gray-500 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 block border-b border-gray-100" 
                                         onClick={() => setIsSolutionDropdownOpen(false)}
                                         onMouseEnter={() => handleProductItemHover(cat)}
@@ -36,7 +50,7 @@ const SolarDropdown = ({ dropdownRef, handleSolutionHover, handleSolutionLeave, 
                                         {cat.name}
                                     </Link>
                                     {/* Sub-categories for Solar Street Lights */}
-                                    {cat.subCategories && (
+                                    {/* {cat.subCategories && (
                                         <div className="ml-4 space-y-1">
                                             {cat.subCategories.map((subCat, j) => (
                                                 <Link
@@ -51,7 +65,7 @@ const SolarDropdown = ({ dropdownRef, handleSolutionHover, handleSolutionLeave, 
                                                 </Link>
                                             ))}
                                         </div>
-                                    )}
+                                    )} */}
                                 </div>
                             ))}
                         </div>
@@ -66,7 +80,7 @@ const SolarDropdown = ({ dropdownRef, handleSolutionHover, handleSolutionLeave, 
                                 {hoveredProduct && (
                                     <div className="space-y-3">
                                         <Image 
-                                            src={hoveredProduct.src} 
+                                            src={hoveredProduct.image.url} 
                                             alt={hoveredProduct.name}
                                             width={300}
                                             height={200}
