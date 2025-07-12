@@ -12,7 +12,7 @@ const SolutionCategoryPage = ({ solution }) => {
   const [solutions, setSolutions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  console.log('solution:', solution);
+  // console.log('solution:', solution);
   
   useEffect(() => {
     if (solution) {

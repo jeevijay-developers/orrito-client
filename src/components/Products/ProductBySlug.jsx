@@ -41,7 +41,7 @@ export default function ProductBySlug({ slug }) {
   const fetchProduct = async (productSlug) => {
     try {
       const productData = await getProductBySlug(productSlug);
-      console.log('Product data received:', productData);
+      // console.log('Product data received:', productData);
     //   console.log('Attributes:', productData?.attributes);
       setProduct(productData);
       if (productData?.images && productData.images.length > 0) {

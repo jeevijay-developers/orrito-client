@@ -1,11 +1,24 @@
 import Link from 'next/link'
-import React, { useState } from 'react'
-import {productCategories} from '../../service/Data'
+import React, { useState, useEffect } from 'react'
+import {productCategories as fetchProductCategories} from '../../service/Data'
 import Image from 'next/image';
 
 const ProductDropdown = ({dropdownRef, handleProductHover, handleProductLeave, setIsProductDropdownOpen}) => {
     const [hoveredProduct, setHoveredProduct] = useState(null);
-    
+    const [categories, setCategories] = useState([]);
+
+    useEffect(() => {
+        async function getCategories() {
+            try {
+                const data = await fetchProductCategories();
+                setCategories(Array.isArray(data) ? data : []);
+            } catch (err) {
+                setCategories([]);
+            }
+        }
+        getCategories();
+    }, []);
+
     const handleProductItemHover = (product) => {
         setHoveredProduct(product);
     };
@@ -24,13 +37,10 @@ const ProductDropdown = ({dropdownRef, handleProductHover, handleProductLeave, s
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6">
                     {/* Column 1 */}
                     <div className="space-y-3">
-                        <h4 className="text-lg font-semibold text-orange-500 mb-3 border-b border-orange-200 pb-2">
-                            Indoor Lighting
-                        </h4>
-                        {productCategories.slice(0,6).map((cat, i) => (
+                        {categories.slice(0,6).map((cat, i) => (
                             <Link 
-                                key={i} 
-                                href={cat.href} 
+                                key={cat.id || i} 
+                                href={`/products/${cat.name}` || '#'} 
                                 className="text-gray-600 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 rounded-md text-sm transition-colors duration-200 block" 
                                 onClick={() => setIsProductDropdownOpen(false)}
                                 onMouseEnter={() => handleProductItemHover(cat)}
@@ -42,13 +52,10 @@ const ProductDropdown = ({dropdownRef, handleProductHover, handleProductLeave, s
                     </div>
                     {/* Column 2 */}
                     <div className="space-y-3">
-                        <h4 className="text-lg font-semibold text-orange-500 mb-3 border-b border-orange-200 pb-2">
-                            Specialized Lighting
-                        </h4>
-                        {productCategories.slice(6,12).map((cat, i) => (
+                        {categories.slice(6,12).map((cat, i) => (
                             <Link 
-                                key={i} 
-                                href={cat.href} 
+                                key={cat.id || i} 
+                                href={cat.href || '#'} 
                                 className="text-gray-600 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 rounded-md text-sm transition-colors duration-200 block" 
                                 onClick={() => setIsProductDropdownOpen(false)}
                                 onMouseEnter={() => handleProductItemHover(cat)}
@@ -60,13 +67,10 @@ const ProductDropdown = ({dropdownRef, handleProductHover, handleProductLeave, s
                     </div>
                     {/* Column 3 */}
                     <div className="space-y-3">
-                        <h4 className="text-lg font-semibold text-orange-500 mb-3 border-b border-orange-200 pb-2">
-                            Outdoor Lighting
-                        </h4>
-                        {productCategories.slice(12,18).map((cat, i) => (
+                        {categories.slice(12,18).map((cat, i) => (
                             <Link 
-                                key={i} 
-                                href={cat.href} 
+                                key={cat.id || i} 
+                                href={cat.name || '#'} 
                                 className="text-gray-600 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 rounded-md text-sm transition-colors duration-200 block" 
                                 onClick={() => setIsProductDropdownOpen(false)}
                                 onMouseEnter={() => handleProductItemHover(cat)}
@@ -78,13 +82,10 @@ const ProductDropdown = ({dropdownRef, handleProductHover, handleProductLeave, s
                     </div>
                     {/* Column 4 */}
                     <div className="space-y-3">
-                        <h4 className="text-lg font-semibold text-orange-500 mb-3 border-b border-orange-200 pb-2">
-                            Decorative & Special
-                        </h4>
-                        {productCategories.slice(18).map((cat, i) => (
+                        {categories.slice(18).map((cat, i) => (
                             <Link 
-                                key={i} 
-                                href={cat.href} 
+                                key={cat.id || i} 
+                                href={cat.href || '#'} 
                                 className="text-gray-600 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 rounded-md text-sm transition-colors duration-200 block" 
                                 onClick={() => setIsProductDropdownOpen(false)}
                                 onMouseEnter={() => handleProductItemHover(cat)}
@@ -97,14 +98,11 @@ const ProductDropdown = ({dropdownRef, handleProductHover, handleProductLeave, s
                     {/* Column 5 - Image Preview */}
                     <div className="hidden xl:block">
                         <div className="sticky top-0">
-                            <h4 className="text-lg font-semibold text-gray-700 mb-3 border-b border-gray-200 pb-2">
-                                Product Preview
-                            </h4>
                             <div className="bg-gray-50 rounded-lg p-4 transition-all duration-300">
                                 {hoveredProduct && (
                                     <div className="space-y-3">
                                         <Image 
-                                            src={hoveredProduct.src} 
+                                            src={hoveredProduct.image?.url || hoveredProduct.src || '/img/corporate/placeholder.png'} 
                                             alt={hoveredProduct.name}
                                             width={300}
                                             height={200}

@@ -28,7 +28,7 @@ export default function SolutionById({ id }) {
   const fetchSolution = async (solutionId) => {
     try {
       const solutionData = await getSolutionById(solutionId);
-      console.log('Solution data received:', solutionData);
+      // console.log('Solution data received:', solutionData);
       setSolution(solutionData);
       if (solutionData?.images && solutionData.images.length > 0) {
         setSelectedImage(solutionData.images[0].url);
@@ -43,7 +43,7 @@ export default function SolutionById({ id }) {
   const fetchCategorySolutions = async () => {
     try {
       const solutions = localStorage.getItem('solutionsByCategory');
-      console.log('Products from localStorage:', JSON.parse(solutions).products);
+      // console.log('Products from localStorage:', JSON.parse(solutions).products);
 
       setCategorySolutions(JSON.parse(solutions).products);
     } catch (error) {
