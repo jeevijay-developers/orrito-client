@@ -23,18 +23,36 @@ const SolarDropdown = ({ dropdownRef, handleSolutionHover, handleSolutionLeave, 
             <div className="p-8 w-full">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <div className="md:col-span-2">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="space-y-1">
                             {solarCategories.map((cat, i) => (
-                                <Link 
-                                    key={i} 
-                                    href={cat.href} 
-                                    className="text-gray-600 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 rounded-md text-sm transition-colors duration-200 block" 
-                                    onClick={() => setIsSolutionDropdownOpen(false)}
-                                    onMouseEnter={() => handleProductItemHover(cat)}
-                                    onMouseLeave={handleProductItemLeave}
-                                >
-                                    {cat.name}
-                                </Link>
+                                <div key={i}>
+                                    <Link 
+                                        href={cat.href} 
+                                        className="text-gray-500 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 block border-b border-gray-100" 
+                                        onClick={() => setIsSolutionDropdownOpen(false)}
+                                        onMouseEnter={() => handleProductItemHover(cat)}
+                                        onMouseLeave={handleProductItemLeave}
+                                    >
+                                        {cat.name}
+                                    </Link>
+                                    {/* Sub-categories for Solar Street Lights */}
+                                    {cat.subCategories && (
+                                        <div className="ml-4 space-y-1">
+                                            {cat.subCategories.map((subCat, j) => (
+                                                <Link
+                                                    key={j}
+                                                    href={subCat.href}
+                                                    className="text-gray-500 hover:text-orange-500 hover:bg-orange-50 px-3 py-1.5 rounded-md text-xs transition-colors duration-200 block"
+                                                    onClick={() => setIsSolutionDropdownOpen(false)}
+                                                    onMouseEnter={() => handleProductItemHover(subCat)}
+                                                    onMouseLeave={handleProductItemLeave}
+                                                >
+                                                    • {subCat.name}
+                                                </Link>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
                             ))}
                         </div>
                     </div>
