@@ -38,7 +38,7 @@ export default function SolutionById({ id }) {
   const fetchSolution = async (solutionId) => {
     try {
       const solutionData = await getSolutionById(solutionId);
-      // console.log('Solution data received:', solutionData);
+      console.log('Solution data received:', solutionData);
       setSolution(solutionData);
       if (solutionData?.images && solutionData.images.length > 0) {
         setSelectedImage(solutionData.images[0].url);
@@ -141,14 +141,14 @@ export default function SolutionById({ id }) {
                 solution.categoryName.map((cat, index) => (
                   <span
                     key={index}
-                    className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full font-medium"
+                    className="inline-block bg-blue-100 text-orange-800 text-xs px-2 py-1 rounded-full font-medium"
                   >
                     {formatCategoryName(cat)}
                   </span>
                 ))}
             </div>
           </div>
-          <button className="flex items-center justify-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors text-sm w-full sm:w-auto">
+          <button className="flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-md  transition-colors text-sm w-full sm:w-auto cursor-pointer">
             <Download size={16} />
             <span className="sm:inline">Download pdf</span>
           </button>
@@ -170,7 +170,7 @@ export default function SolutionById({ id }) {
                     <span
                       className={`block cursor-pointer text-sm py-2 px-3 rounded border-b border-gray-100 hover:bg-gray-50 transition-colors ${
                         s._id === id
-                          ? "bg-blue-50 text-blue-700 font-semibold"
+                          ? "bg-blue-50 text-orange-700 font-semibold"
                           : "text-gray-600"
                       }`}
                     >
@@ -255,7 +255,9 @@ export default function SolutionById({ id }) {
                 {solution.highlights && solution.highlights.length > 0 ? (
                   solution.highlights.map((highlight, index) => (
                     <div key={index} className="flex items-start gap-3">
-                      <div className="text-blue-500 mt-1 flex-shrink-0">▷</div>
+                      <div className="text-orange-500 mt-1 flex-shrink-0">
+                        ▷
+                      </div>
                       <span className="text-gray-700 text-sm leading-relaxed">
                         {highlight}
                       </span>
@@ -265,25 +267,33 @@ export default function SolutionById({ id }) {
                   // Default features
                   <>
                     <div className="flex items-start gap-3">
-                      <div className="text-blue-500 mt-1 flex-shrink-0">▷</div>
+                      <div className="text-orange-500 mt-1 flex-shrink-0">
+                        ▷
+                      </div>
                       <span className="text-gray-700 text-sm leading-relaxed">
                         Comprehensive solution design
                       </span>
                     </div>
                     <div className="flex items-start gap-3">
-                      <div className="text-blue-500 mt-1 flex-shrink-0">▷</div>
+                      <div className="text-orange-500 mt-1 flex-shrink-0">
+                        ▷
+                      </div>
                       <span className="text-gray-700 text-sm leading-relaxed">
                         Professional installation and support
                       </span>
                     </div>
                     <div className="flex items-start gap-3">
-                      <div className="text-blue-500 mt-1 flex-shrink-0">▷</div>
+                      <div className="text-orange-500 mt-1 flex-shrink-0">
+                        ▷
+                      </div>
                       <span className="text-gray-700 text-sm leading-relaxed">
                         High-quality materials and components
                       </span>
                     </div>
                     <div className="flex items-start gap-3">
-                      <div className="text-blue-500 mt-1 flex-shrink-0">▷</div>
+                      <div className="text-orange-500 mt-1 flex-shrink-0">
+                        ▷
+                      </div>
                       <span className="text-gray-700 text-sm leading-relaxed">
                         Customizable to meet specific requirements
                       </span>
@@ -302,7 +312,7 @@ export default function SolutionById({ id }) {
 
               {/* Solution Info */}
               <div className="mt-6 pt-6 border-t border-gray-200">
-                {solution.price && (
+                {solution.stock > 0 && (
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
                     <div className="text-2xl font-bold text-gray-900">
                       {formatPrice(solution.price)}
@@ -315,22 +325,31 @@ export default function SolutionById({ id }) {
                   </div>
                 )}
 
-                <div className="flex flex-col sm:flex-row gap-4 mb-4">
-                  <button
-                    className="flex-1 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2 cursor-pointer"
-                    onClick={() => {
-                      addToQuery({
-                        id: solution._id,
-                        name: solution.name,
-                        price: solution.price,
-                        quantity: 1,
-                      });
-                    }}
-                  >
-                    <ShoppingCart size={20} />
-                    Add to Cart
-                  </button>
-                </div>
+                {solution.stock > 0 ? (
+                  <div className="flex flex-col sm:flex-row gap-4 mb-4">
+                    <button
+                      className="flex-1 cursor-pointer bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg  transition-colors flex items-center justify-center gap-2"
+                      onClick={() => {
+                        addToQuery({
+                          id: solution._id,
+                          name: solution.name,
+                          price: solution.price,
+                          quantity: 1,
+                        });
+                      }}
+                    >
+                      <ShoppingCart size={20} />
+                      Add to Cart
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex flex-col sm:flex-row gap-4 mb-4">
+                    <button className="flex-1 cursor-not-allowed bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-lg  transition-colors flex items-center justify-center gap-2">
+                      <ShoppingCart size={20} />
+                      Out Of Stock
+                    </button>
+                  </div>
+                )}
 
                 {solution.description && (
                   <div className="mt-4">

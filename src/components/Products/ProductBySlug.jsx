@@ -157,7 +157,7 @@ export default function ProductBySlug({ slug }) {
                 ))}
             </div>
           </div>
-          <button className="flex items-center justify-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors text-sm w-full sm:w-auto">
+          <button className="flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-md  transition-colors text-sm w-full sm:w-auto cursor-pointer">
             <Download size={16} />
             <span className="sm:inline">Download pdf</span>
           </button>
@@ -179,7 +179,7 @@ export default function ProductBySlug({ slug }) {
                     <span
                       className={`block cursor-pointer text-sm py-2 px-3 rounded border-b border-gray-100 hover:bg-gray-50 transition-colors ${
                         p.slug === slug
-                          ? "bg-blue-50 text-blue-700 font-semibold"
+                          ? "bg-blue-50 text-orange-700 font-semibold"
                           : "text-gray-600"
                       }`}
                     >
@@ -264,7 +264,9 @@ export default function ProductBySlug({ slug }) {
                 {product.highlights && product.highlights.length > 0 ? (
                   product.highlights.map((highlight, index) => (
                     <div key={index} className="flex items-start gap-3">
-                      <div className="text-blue-500 mt-1 flex-shrink-0">▷</div>
+                      <div className="text-orange-500 mt-1 flex-shrink-0">
+                        ▷
+                      </div>
                       <span className="text-gray-700 text-sm leading-relaxed">
                         {highlight}
                       </span>
@@ -274,37 +276,49 @@ export default function ProductBySlug({ slug }) {
                   // Default features from wireframe
                   <>
                     <div className="flex items-start gap-3">
-                      <div className="text-blue-500 mt-1 flex-shrink-0">▷</div>
+                      <div className="text-orange-500 mt-1 flex-shrink-0">
+                        ▷
+                      </div>
                       <span className="text-gray-700 text-sm leading-relaxed">
                         Mounting : Suspended
                       </span>
                     </div>
                     <div className="flex items-start gap-3">
-                      <div className="text-blue-500 mt-1 flex-shrink-0">▷</div>
+                      <div className="text-orange-500 mt-1 flex-shrink-0">
+                        ▷
+                      </div>
                       <span className="text-gray-700 text-sm leading-relaxed">
                         Housing : Pressure die cast aluminium
                       </span>
                     </div>
                     <div className="flex items-start gap-3">
-                      <div className="text-blue-500 mt-1 flex-shrink-0">▷</div>
+                      <div className="text-orange-500 mt-1 flex-shrink-0">
+                        ▷
+                      </div>
                       <span className="text-gray-700 text-sm leading-relaxed">
                         Finishes : Anodized Aluminium
                       </span>
                     </div>
                     <div className="flex items-start gap-3">
-                      <div className="text-blue-500 mt-1 flex-shrink-0">▷</div>
+                      <div className="text-orange-500 mt-1 flex-shrink-0">
+                        ▷
+                      </div>
                       <span className="text-gray-700 text-sm leading-relaxed">
                         Installation Holder : Stainless Steel
                       </span>
                     </div>
                     <div className="flex items-start gap-3">
-                      <div className="text-blue-500 mt-1 flex-shrink-0">▷</div>
+                      <div className="text-orange-500 mt-1 flex-shrink-0">
+                        ▷
+                      </div>
                       <span className="text-gray-700 text-sm leading-relaxed">
                         Best in class power LEDs
                       </span>
                     </div>
                     <div className="flex items-start gap-3">
-                      <div className="text-blue-500 mt-1 flex-shrink-0">▷</div>
+                      <div className="text-orange-500 mt-1 flex-shrink-0">
+                        ▷
+                      </div>
                       <span className="text-gray-700 text-sm leading-relaxed">
                         Standard Body Colour : White & Other option available
                       </span>
@@ -332,23 +346,31 @@ export default function ProductBySlug({ slug }) {
                   </div>
                 </div>
 
-                <div className="flex flex-col sm:flex-row gap-4 mb-4">
-                  <button
-                    className="flex-1 cursor-pointer bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
-                    onClick={() => {
+                {product.stock ? (
+                  <div className="flex flex-col sm:flex-row gap-4 mb-4">
+                    <button
+                      className="flex-1 cursor-pointer bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg  transition-colors flex items-center justify-center gap-2"
+                      onClick={() => {
                         addToQuery({
                           id: product._id,
                           name: product.name,
                           price: product.price,
                           quantity: 1,
                         });
-                   
-                    }}
-                  >
-                    <ShoppingCart size={20} />
-                    Add to Cart
-                  </button>
-                </div>
+                      }}
+                    >
+                      <ShoppingCart size={20} />
+                      Add to Cart
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex flex-col sm:flex-row gap-4 mb-4">
+                    <button className="flex-1 cursor-not-allowed bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-lg  transition-colors flex items-center justify-center gap-2">
+                      <ShoppingCart size={20} />
+                      Out Of Stock
+                    </button>
+                  </div>
+                )}
 
                 {product.description && (
                   <div className="mt-4">

@@ -69,7 +69,7 @@ const SolarCategoryPage = ({ id }) => {
           <p className="text-gray-600 mb-4">{error}</p>
           <button
             onClick={() => id && fetchSolarProducts(id)}
-            className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md transition-colors"
+            className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md transition-colors"
           >
             Try Again
           </button>
@@ -138,7 +138,7 @@ const SolarCategoryPage = ({ id }) => {
                           product.categoryName.map((cat, index) => (
                             <span
                               key={index}
-                              className="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full font-medium"
+                              className="inline-block bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full font-medium"
                             >
                               {formatCategoryName(cat)}
                             </span>
@@ -146,7 +146,7 @@ const SolarCategoryPage = ({ id }) => {
                       </div>
 
                       {/* Product Name */}
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-yellow-600 transition-colors">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-gray-950 transition-colors">
                         {formatCategoryName(product.name)}
                       </h3>
 
