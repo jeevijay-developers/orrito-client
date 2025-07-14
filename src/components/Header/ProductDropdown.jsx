@@ -11,6 +11,8 @@ const ProductDropdown = ({dropdownRef, handleProductHover, handleProductLeave, s
         async function getCategories() {
             try {
                 const data = await fetchProductCategories();
+                console.log("Fetched product categories:", data);
+                
                 setCategories(Array.isArray(data) ? data : []);
             } catch (err) {
                 setCategories([]);
@@ -55,7 +57,7 @@ const ProductDropdown = ({dropdownRef, handleProductHover, handleProductLeave, s
                         {categories.slice(6,12).map((cat, i) => (
                             <Link 
                                 key={cat.id || i} 
-                                href={cat.href || '#'} 
+                                href={`/products/${cat.name}` || '#'} 
                                 className="text-gray-600 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 rounded-md text-sm transition-colors duration-200 block" 
                                 onClick={() => setIsProductDropdownOpen(false)}
                                 onMouseEnter={() => handleProductItemHover(cat)}
@@ -70,7 +72,7 @@ const ProductDropdown = ({dropdownRef, handleProductHover, handleProductLeave, s
                         {categories.slice(12,18).map((cat, i) => (
                             <Link 
                                 key={cat.id || i} 
-                                href={cat.name || '#'} 
+                                href={`/products/${cat.name}` || '#'} 
                                 className="text-gray-600 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 rounded-md text-sm transition-colors duration-200 block" 
                                 onClick={() => setIsProductDropdownOpen(false)}
                                 onMouseEnter={() => handleProductItemHover(cat)}
@@ -85,7 +87,7 @@ const ProductDropdown = ({dropdownRef, handleProductHover, handleProductLeave, s
                         {categories.slice(18).map((cat, i) => (
                             <Link 
                                 key={cat.id || i} 
-                                href={cat.href || '#'} 
+                                href={`/products/${cat.name}` || '#'} 
                                 className="text-gray-600 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 rounded-md text-sm transition-colors duration-200 block" 
                                 onClick={() => setIsProductDropdownOpen(false)}
                                 onMouseEnter={() => handleProductItemHover(cat)}
