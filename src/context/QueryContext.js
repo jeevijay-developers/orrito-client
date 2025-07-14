@@ -16,48 +16,40 @@ export const QueryProvider = ({ children }) => {
     }
   }, []);
 
-  // Helper to update localStorage
-  const syncToLocalStorage = (items) => {
-    localStorage.setItem("queryItems", JSON.stringify(items));
-  };
+  // Automatically sync to localStorage whenever queryItems changes
+  useEffect(() => {
+    localStorage.setItem("queryItems", JSON.stringify(queryItems));
+  }, [queryItems]);
 
   const addToQuery = (item) => {
-    console.log("item", item);
     setQueryItems((prev) => {
       const existingItemIndex = prev.findIndex((i) => i.id === item.id);
-      let updatedItems;
-      if (existingItemIndex !== -1) {
-        updatedItems = [...prev];
-        updatedItems[existingItemIndex].quantity += item.quantity;
+      if (existingItemIndex != -1) {
+        const updatedItems = [...prev];
+        updatedItems[existingItemIndex].quantity += 1;
+        return updatedItems;
       } else {
-        updatedItems = [...prev, item];
+        return [...prev, item];
       }
-      syncToLocalStorage(updatedItems);
-      return updatedItems;
     });
   };
 
   const updateQuantity = (id, newQuantity) => {
-    setQueryItems((prev) => {
-      const updatedItems = prev.map((item) =>
+    setQueryItems((prev) =>
+      prev.map((item) =>
         item.id === id ? { ...item, quantity: newQuantity } : item
-      );
-      syncToLocalStorage(updatedItems);
-      return updatedItems;
-    });
+      )
+    );
   };
 
   const deleteQuery = (id) => {
-    setQueryItems((prev) => {
-      const updatedItems = prev.filter((item) => item.id !== id);
-      syncToLocalStorage(updatedItems);
-      return updatedItems;
-    });
+    setQueryItems((prev) => prev.filter((item) => item.id !== id));
   };
-const deleteAllQuery = () => {
-  setQueryItems([]);
-  syncToLocalStorage([]);
-};
+
+  const deleteAllQuery = () => {
+    setQueryItems([]);
+  };
+
   return (
     <QueryContext.Provider
       value={{

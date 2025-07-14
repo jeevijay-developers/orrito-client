@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 const Cart = () => {
   const { queryItems, updateQuantity, deleteQuery, deleteAllQuery } =
     useQuery();
-  console.log("query items", queryItems);
+  // console.log("query items", queryItems);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -76,10 +76,17 @@ const Cart = () => {
               >
                 <div>
                   <p className="font-semibold">{item.name}</p>
-                  <p className="text-sm text-gray-500">
-                    ₹{item.offerPrice} × {item.quantity} = ₹
-                    {item.offerPrice * item.quantity}
-                  </p>
+                  {item.offerPrice ? (
+                    <p className="text-sm text-gray-500">
+                      ₹{item.offerPrice} × {item.quantity} = ₹
+                      {item.offerPrice * item.quantity}
+                    </p>
+                  ) : (
+                    <p className="text-sm text-gray-500">
+                      ₹{item.price} × {item.quantity} = ₹
+                      {item.price * item.quantity}
+                    </p>
+                  )}
                 </div>
 
                 <div className="flex items-center gap-2">

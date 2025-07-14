@@ -237,7 +237,7 @@ const Offers = () => {
                         }
                         onClick={() => addToQuery({ ...offer, quantity: 1 })}
                       >
-                        Add to Query
+                        Add to Cart
                       </button>
 
                       {/* <button 
