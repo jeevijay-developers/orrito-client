@@ -7,7 +7,7 @@ import { getAllSolarByID } from "@/server/solarServer";
 const SolarCategoryPage = ({ id }) => {
   const [solarProducts, setSolarProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     if (id) {
@@ -18,10 +18,11 @@ const SolarCategoryPage = ({ id }) => {
   const fetchSolarProducts = async (id) => {
     try {
       const products = await getAllSolarByID(id);
-      localStorage.setItem("solarData", JSON.stringify(solutions));
-      // console.log("🚀 ~ fetchSolarProducts ~ products:", products)
+      localStorage.setItem("solarData", JSON.stringify(products));
+      console.log("🚀 ~ fetchSolarProducts ~ products:", products);
       setSolarProducts(Array.isArray(products) ? products : []);
     } catch (error) {
+      console.error("Error fetching solar products:", error);
       setError("Failed to load solar products. Please try again.");
     } finally {
       setLoading(false);
@@ -109,7 +110,7 @@ const SolarCategoryPage = ({ id }) => {
                 key={product._id}
                 className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 group"
               >
-                <Link href={`/solar/${product.slug}`}>
+                <Link href={`/solar/product/${product.slug}`}>
                   <div className="cursor-pointer">
                     {/* Solar Product Image */}
                     <div className="relative h-48 bg-gray-100 overflow-hidden">
@@ -148,13 +149,16 @@ const SolarCategoryPage = ({ id }) => {
                         {formatCategoryName(product.name)}
                       </h3>
 
-                      {/* Description */}
-                      <div className="text-gray-700 text-sm mb-2 line-clamp-2">
-                        {product.description}
-                      </div>
+                      {/* Overview */}
+                      {/* <div
+                        className="text-gray-700 text-sm mb-2 line-clamp-2"
+                        dangerouslySetInnerHTML={{
+                          __html: product.productOverview,
+                        }}
+                      ></div> */}
 
                       {/* Power & Status */}
-                      <div className="flex items-center justify-between">
+                      {/* <div className="flex items-center justify-between">
                         <div className="flex flex-col">
                           {product.power && (
                             <span className="text-yellow-600 text-sm font-medium">
@@ -170,7 +174,7 @@ const SolarCategoryPage = ({ id }) => {
                             ? new Date(product.updatedAt).toLocaleDateString()
                             : ""}
                         </span>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </Link>

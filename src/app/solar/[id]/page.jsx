@@ -1,14 +1,14 @@
-import SolarCategoryPage from '@/components/Solar/SolarCategoryPage'
-import React from 'react'
+import SolarCategoryPage from "@/components/Solar/SolarCategoryPage";
+import React from "react";
 
-const page = ({ params }) => {
-  const id = params.id;
+const page = async ({ params }) => {
+  const { id } = await params;
 
   return (
-    <div className='mt-48'>
+    <div className="mt-48">
       <SolarCategoryPage id={id} />
     </div>
   );
-}
+};
 
-export default page
+export default page;

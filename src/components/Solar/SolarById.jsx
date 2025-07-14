@@ -4,7 +4,7 @@ import { Download, ArrowRight, CheckCircle, ShoppingCart, Star } from "lucide-re
 import Image from "next/image";
 import Link from "next/link";
 
-export default function SolarById({ id }) {
+export default function SolarById({ slug }) {
   const [solution, setSolution] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -12,10 +12,10 @@ export default function SolarById({ id }) {
   const [categorySolutions, setCategorySolutions] = useState([]);
 
   useEffect(() => {
-    if (id) {
-      fetchSolution(id);
+    if (slug) {
+      fetchSolution(slug);
     }
-  }, [id]);
+  }, [slug]);
 
   useEffect(() => {
     if (solution && solution.categoryName && solution.categoryName.length > 0) {
@@ -33,7 +33,7 @@ export default function SolarById({ id }) {
         setSelectedImage(solutionData.images[0].url);
       }
     } catch (error) {
-      setError('Failed to load solution. Please try again.');
+      setError("Failed to load solution. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -51,9 +51,9 @@ export default function SolarById({ id }) {
   };
 
   const formatPrice = (price) => {
-    return new Intl.NumberFormat('en-IN', {
-      style: 'currency',
-      currency: 'INR',
+    return new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }).format(price);
@@ -105,8 +105,12 @@ export default function SolarById({ id }) {
       <div className="min-h-screen mt-32 p-4 sm:p-6 flex items-center justify-center">
         <div className="text-center">
           <div className="text-gray-400 text-4xl sm:text-6xl mb-4">📦</div>
-          <h3 className="text-lg sm:text-xl font-semibold text-gray-700 mb-2">Solution not found</h3>
-          <p className="text-gray-500 text-sm sm:text-base">The solution you're looking for doesn't exist.</p>
+          <h3 className="text-lg sm:text-xl font-semibold text-gray-700 mb-2">
+            Solution not found
+          </h3>
+          <p className="text-gray-500 text-sm sm:text-base">
+            The solution you're looking for doesn't exist.
+          </p>
         </div>
       </div>
     );
@@ -118,16 +122,19 @@ export default function SolarById({ id }) {
       <div className="bg-white border-b border-gray-200 px-4 sm:px-6 py-4 mt-32 sm:mt-40">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
           <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
-            <h1 className="text-xl sm:text-2xl font-bold text-gray-900">{solution.name}</h1>
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900">
+              {solution.name}
+            </h1>
             <div className="flex items-center gap-2 flex-wrap">
-              {solution.categoryName && solution.categoryName.map((cat, index) => (
-                <span
-                  key={index}
-                  className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full font-medium"
-                >
-                  {formatCategoryName(cat)}
-                </span>
-              ))}
+              {solution.categoryName &&
+                solution.categoryName.map((cat, index) => (
+                  <span
+                    key={index}
+                    className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full font-medium"
+                  >
+                    {formatCategoryName(cat)}
+                  </span>
+                ))}
             </div>
           </div>
           <button className="flex items-center justify-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors text-sm w-full sm:w-auto">
@@ -143,12 +150,18 @@ export default function SolarById({ id }) {
           {/* Left Sidebar - Solution List */}
           <div className="lg:col-span-3 order-2 lg:order-1">
             <div className="bg-white rounded-lg border border-gray-200 p-4 lg:sticky lg:top-32">
-              <h3 className="text-sm font-medium text-gray-700 mb-3">Solutions</h3>
+              <h3 className="text-sm font-medium text-gray-700 mb-3">
+                Solutions
+              </h3>
               <div className="space-y-2 max-h-96 lg:max-h-screen overflow-y-auto">
                 {categorySolutions.map((s) => (
                   <Link key={s._id} href={`/solutions/product/${s._id}`}>
                     <span
-                      className={`block cursor-pointer text-sm py-2 px-3 rounded border-b border-gray-100 hover:bg-gray-50 transition-colors ${s._id === id ? 'bg-blue-50 text-blue-700 font-semibold' : 'text-gray-600'}`}
+                      className={`block cursor-pointer text-sm py-2 px-3 rounded border-b border-gray-100 hover:bg-gray-50 transition-colors ${
+                        s._id === id
+                          ? "bg-blue-50 text-blue-700 font-semibold"
+                          : "text-gray-600"
+                      }`}
                     >
                       {formatCategoryName(s.name)}
                     </span>
@@ -172,8 +185,12 @@ export default function SolarById({ id }) {
                   />
                 ) : (
                   <div className="text-center">
-                    <div className="text-gray-400 text-lg mb-2">{solution.name} Image</div>
-                    <div className="text-gray-300 text-sm">No image available</div>
+                    <div className="text-gray-400 text-lg mb-2">
+                      {solution.name} Image
+                    </div>
+                    <div className="text-gray-300 text-sm">
+                      No image available
+                    </div>
                   </div>
                 )}
               </div>
@@ -198,12 +215,16 @@ export default function SolarById({ id }) {
                     </div>
                   ))}
                   {/* Fill remaining slots if less than 4 images */}
-                  {[...Array(Math.max(0, 4 - (solution.images?.length || 0)))].map((_, index) => (
+                  {[
+                    ...Array(Math.max(0, 4 - (solution.images?.length || 0))),
+                  ].map((_, index) => (
                     <div
                       key={`empty-${index}`}
                       className="h-16 sm:h-20 bg-gray-100 rounded border border-gray-200 flex items-center justify-center"
                     >
-                      <span className="text-gray-400 text-xs">img{(solution.images?.length || 0) + index + 1}</span>
+                      <span className="text-gray-400 text-xs">
+                        img{(solution.images?.length || 0) + index + 1}
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -212,13 +233,17 @@ export default function SolarById({ id }) {
 
             {/* Features Section */}
             <div className="bg-white rounded-lg border border-gray-200 p-4 sm:p-6">
-              <h2 className="text-lg font-bold text-gray-900 mb-4">FEATURES:</h2>
+              <h2 className="text-lg font-bold text-gray-900 mb-4">
+                FEATURES:
+              </h2>
               <div className="space-y-3">
                 {solution.highlights && solution.highlights.length > 0 ? (
                   solution.highlights.map((highlight, index) => (
                     <div key={index} className="flex items-start gap-3">
                       <div className="text-blue-500 mt-1 flex-shrink-0">▷</div>
-                      <span className="text-gray-700 text-sm leading-relaxed">{highlight}</span>
+                      <span className="text-gray-700 text-sm leading-relaxed">
+                        {highlight}
+                      </span>
                     </div>
                   ))
                 ) : (
@@ -226,23 +251,35 @@ export default function SolarById({ id }) {
                   <>
                     <div className="flex items-start gap-3">
                       <div className="text-blue-500 mt-1 flex-shrink-0">▷</div>
-                      <span className="text-gray-700 text-sm leading-relaxed">Comprehensive solution design</span>
+                      <span className="text-gray-700 text-sm leading-relaxed">
+                        Comprehensive solution design
+                      </span>
                     </div>
                     <div className="flex items-start gap-3">
                       <div className="text-blue-500 mt-1 flex-shrink-0">▷</div>
-                      <span className="text-gray-700 text-sm leading-relaxed">Professional installation and support</span>
+                      <span className="text-gray-700 text-sm leading-relaxed">
+                        Professional installation and support
+                      </span>
                     </div>
                     <div className="flex items-start gap-3">
                       <div className="text-blue-500 mt-1 flex-shrink-0">▷</div>
-                      <span className="text-gray-700 text-sm leading-relaxed">High-quality materials and components</span>
+                      <span className="text-gray-700 text-sm leading-relaxed">
+                        High-quality materials and components
+                      </span>
                     </div>
                     <div className="flex items-start gap-3">
                       <div className="text-blue-500 mt-1 flex-shrink-0">▷</div>
-                      <span className="text-gray-700 text-sm leading-relaxed">Customizable to meet specific requirements</span>
+                      <span className="text-gray-700 text-sm leading-relaxed">
+                        Customizable to meet specific requirements
+                      </span>
                     </div>
                     <div className="flex items-start gap-3">
-                      <div className="text-orange-500 mt-1 flex-shrink-0">▷</div>
-                      <span className="text-gray-700 text-sm leading-relaxed">Long-term warranty and maintenance</span>
+                      <div className="text-orange-500 mt-1 flex-shrink-0">
+                        ▷
+                      </div>
+                      <span className="text-gray-700 text-sm leading-relaxed">
+                        Long-term warranty and maintenance
+                      </span>
                     </div>
                   </>
                 )}
@@ -262,7 +299,7 @@ export default function SolarById({ id }) {
                     </div>
                   </div>
                 )}
-                
+
                 <div className="flex flex-col sm:flex-row gap-4 mb-4">
                   <button className="flex-1 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2">
                     <ShoppingCart size={20} />
@@ -275,8 +312,12 @@ export default function SolarById({ id }) {
 
                 {solution.description && (
                   <div className="mt-4">
-                    <h3 className="text-sm font-semibold text-gray-800 mb-2">Description</h3>
-                    <p className="text-gray-600 text-sm leading-relaxed">{solution.description}</p>
+                    <h3 className="text-sm font-semibold text-gray-800 mb-2">
+                      Description
+                    </h3>
+                    <p className="text-gray-600 text-sm leading-relaxed">
+                      {solution.description}
+                    </p>
                   </div>
                 )}
               </div>
@@ -285,56 +326,89 @@ export default function SolarById({ id }) {
         </div>
 
         {/* Attributes Section as Table */}
-        {solution.attributes && Array.isArray(solution.attributes) && solution.attributes.length > 0 && (
-          <div className="w-full overflow-x-auto bg-white rounded-lg border border-gray-200 p-4 sm:p-6 mt-4 sm:mt-6">
-            <h2 className="text-lg font-bold text-gray-900 mb-4">SPECIFICATION</h2>
-            <div className="overflow-x-auto">
-              <table className="min-w-full border-collapse">
-                <thead>
-                  <tr>
-                    {solution.attributes.map((attribute, idx) => (
-                      <th key={attribute._id || idx} className="px-2 sm:px-4 py-2 border-b border-gray-200 text-left font-semibold text-gray-800 capitalize bg-gray-50 text-sm">
-                        {attribute.name}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {/* Find max number of variants among all attributes */}
-                  {(() => {
-                    const maxVariants = Math.max(...solution.attributes.map(attr => attr.varients?.length || 0));
-                    return Array.from({ length: maxVariants }).map((_, rowIdx) => (
-                      <tr key={rowIdx}>
-                        {solution.attributes.map((attribute, colIdx) => {
-                          const variant = attribute.varients && attribute.varients[rowIdx];
-                          return (
-                            <td key={colIdx} className="px-2 sm:px-4 py-2 border-b border-gray-100 text-sm text-gray-700">
-                              {variant ? (
-                                <div className="flex flex-col sm:flex-row gap-1 sm:gap-3">
-                                  <span className="text-xs sm:text-sm">{variant.name || `Variant ${rowIdx + 1}`}</span>
-                                  <span className={`text-[8px] sm:text-[10px] px-1 sm:px-2 py-1 rounded-full font-medium w-fit ${variant.enabled ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-                                    {variant.enabled ? 'Available' : 'Unavailable'}
-                                  </span>
-                                </div>
-                              ) : (
-                                <span className="text-gray-400 italic">-</span>
-                              )}
-                            </td>
-                          );
-                        })}
-                      </tr>
-                    ));
-                  })()}
-                </tbody>
-              </table>
+        {solution.attributes &&
+          Array.isArray(solution.attributes) &&
+          solution.attributes.length > 0 && (
+            <div className="w-full overflow-x-auto bg-white rounded-lg border border-gray-200 p-4 sm:p-6 mt-4 sm:mt-6">
+              <h2 className="text-lg font-bold text-gray-900 mb-4">
+                SPECIFICATION
+              </h2>
+              <div className="overflow-x-auto">
+                <table className="min-w-full border-collapse">
+                  <thead>
+                    <tr>
+                      {solution.attributes.map((attribute, idx) => (
+                        <th
+                          key={attribute._id || idx}
+                          className="px-2 sm:px-4 py-2 border-b border-gray-200 text-left font-semibold text-gray-800 capitalize bg-gray-50 text-sm"
+                        >
+                          {attribute.name}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {/* Find max number of variants among all attributes */}
+                    {(() => {
+                      const maxVariants = Math.max(
+                        ...solution.attributes.map(
+                          (attr) => attr.varients?.length || 0
+                        )
+                      );
+                      return Array.from({ length: maxVariants }).map(
+                        (_, rowIdx) => (
+                          <tr key={rowIdx}>
+                            {solution.attributes.map((attribute, colIdx) => {
+                              const variant =
+                                attribute.varients &&
+                                attribute.varients[rowIdx];
+                              return (
+                                <td
+                                  key={colIdx}
+                                  className="px-2 sm:px-4 py-2 border-b border-gray-100 text-sm text-gray-700"
+                                >
+                                  {variant ? (
+                                    <div className="flex flex-col sm:flex-row gap-1 sm:gap-3">
+                                      <span className="text-xs sm:text-sm">
+                                        {variant.name ||
+                                          `Variant ${rowIdx + 1}`}
+                                      </span>
+                                      <span
+                                        className={`text-[8px] sm:text-[10px] px-1 sm:px-2 py-1 rounded-full font-medium w-fit ${
+                                          variant.enabled
+                                            ? "bg-green-100 text-green-800"
+                                            : "bg-red-100 text-red-800"
+                                        }`}
+                                      >
+                                        {variant.enabled
+                                          ? "Available"
+                                          : "Unavailable"}
+                                      </span>
+                                    </div>
+                                  ) : (
+                                    <span className="text-gray-400 italic">
+                                      -
+                                    </span>
+                                  )}
+                                </td>
+                              );
+                            })}
+                          </tr>
+                        )
+                      );
+                    })()}
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
         {/* Related Solutions */}
         {solution.relatedSolutions && solution.relatedSolutions.length > 0 && (
           <div className="bg-white rounded-lg border border-gray-200 p-4 sm:p-6 mt-4 sm:mt-6">
-            <h2 className="text-lg font-bold text-gray-900 mb-4">RELATED SOLUTIONS</h2>
+            <h2 className="text-lg font-bold text-gray-900 mb-4">
+              RELATED SOLUTIONS
+            </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {solution.relatedSolutions.map((relatedSolution, index) => (
                 <div
@@ -355,9 +429,13 @@ export default function SolarById({ id }) {
                       </div>
                     )}
                   </div>
-                  <h4 className="font-medium text-gray-800 mb-1 text-sm">{relatedSolution.name}</h4>
+                  <h4 className="font-medium text-gray-800 mb-1 text-sm">
+                    {relatedSolution.name}
+                  </h4>
                   {relatedSolution.price && (
-                    <p className="text-orange-600 font-bold text-sm">{formatPrice(relatedSolution.price)}</p>
+                    <p className="text-orange-600 font-bold text-sm">
+                      {formatPrice(relatedSolution.price)}
+                    </p>
                   )}
                 </div>
               ))}
