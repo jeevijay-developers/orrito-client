@@ -110,7 +110,7 @@ const SolarCategoryPage = ({ id }) => {
                 key={product._id}
                 className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 group"
               >
-                <Link href={`/solar/product/${product.slug}`}>
+                <Link href={`/solar/product/${product._id}`}>
                   <div className="cursor-pointer">
                     {/* Solar Product Image */}
                     <div className="relative h-48 bg-gray-100 overflow-hidden">
