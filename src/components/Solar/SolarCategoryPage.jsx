@@ -1,26 +1,28 @@
-'use client';
-import { useState, useEffect } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { getAllSolarByCategory } from '@/server/solarServer';
+"use client";
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { getAllSolarByID } from "@/server/solarServer";
 
-const SolarCategoryPage = ({ category }) => {
+const SolarCategoryPage = ({ id }) => {
   const [solarProducts, setSolarProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (category) {
-      fetchSolarProducts(category);
+    if (id) {
+      fetchSolarProducts(id);
     }
-  }, [category]);
+  }, [id]);
 
-  const fetchSolarProducts = async (categoryName) => {
+  const fetchSolarProducts = async (id) => {
     try {
-      const products = await getAllSolarByCategory(categoryName);
+      const products = await getAllSolarByID(id);
+      localStorage.setItem("solarData", JSON.stringify(solutions));
+      // console.log("🚀 ~ fetchSolarProducts ~ products:", products)
       setSolarProducts(Array.isArray(products) ? products : []);
     } catch (error) {
-      setError('Failed to load solar products. Please try again.');
+      setError("Failed to load solar products. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -38,7 +40,10 @@ const SolarCategoryPage = ({ category }) => {
             <div className="h-8 bg-gray-300 rounded w-1/4 mb-8"></div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {[...Array(8)].map((_, i) => (
-                <div key={i} className="bg-white rounded-lg shadow-md overflow-hidden">
+                <div
+                  key={i}
+                  className="bg-white rounded-lg shadow-md overflow-hidden"
+                >
                   <div className="h-48 bg-gray-300"></div>
                   <div className="p-4">
                     <div className="h-4 bg-gray-300 rounded mb-2"></div>
@@ -61,7 +66,7 @@ const SolarCategoryPage = ({ category }) => {
           <div className="text-red-500 text-xl mb-4">⚠️ Error</div>
           <p className="text-gray-600 mb-4">{error}</p>
           <button
-            onClick={() => category && fetchSolarProducts(category)}
+            onClick={() => id && fetchSolarProducts(id)}
             className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md transition-colors"
           >
             Try Again
@@ -77,10 +82,11 @@ const SolarCategoryPage = ({ category }) => {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            {formatCategoryName(category)} Solar Products
+            Solar Products
           </h1>
           <p className="text-gray-600">
-            {solarProducts.length} {solarProducts.length === 1 ? 'product' : 'products'} found
+            {solarProducts.length}{" "}
+            {solarProducts.length === 1 ? "product" : "products"} found
           </p>
         </div>
 
@@ -92,7 +98,8 @@ const SolarCategoryPage = ({ category }) => {
               No solar products found
             </h3>
             <p className="text-gray-500">
-              No solar products available in the "{formatCategoryName(category)}" category.
+              No solar products available in the "{formatCategoryName(category)}
+              " category.
             </p>
           </div>
         ) : (
@@ -125,14 +132,15 @@ const SolarCategoryPage = ({ category }) => {
                     <div className="p-4">
                       {/* Category Badge */}
                       <div className="flex flex-wrap gap-1 mb-2">
-                        {product.categoryName && product.categoryName.map((cat, index) => (
-                          <span
-                            key={index}
-                            className="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full font-medium"
-                          >
-                            {formatCategoryName(cat)}
-                          </span>
-                        ))}
+                        {product.categoryName &&
+                          product.categoryName.map((cat, index) => (
+                            <span
+                              key={index}
+                              className="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full font-medium"
+                            >
+                              {formatCategoryName(cat)}
+                            </span>
+                          ))}
                       </div>
 
                       {/* Product Name */}
@@ -154,11 +162,13 @@ const SolarCategoryPage = ({ category }) => {
                             </span>
                           )}
                           <span className="text-yellow-600 text-sm font-medium">
-                            {product.status || 'Available'}
+                            {product.status || "Available"}
                           </span>
                         </div>
                         <span className="text-gray-500 text-xs">
-                          {product.updatedAt ? new Date(product.updatedAt).toLocaleDateString() : ''}
+                          {product.updatedAt
+                            ? new Date(product.updatedAt).toLocaleDateString()
+                            : ""}
                         </span>
                       </div>
                     </div>

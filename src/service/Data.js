@@ -23,24 +23,35 @@ export const solutionCategories = async() => {
   }
 }
 
-export const solarCategories = [
-    { 
-        name: 'Solar Street Lights', 
-        href: '/solar/street-lights', 
-        src: '/img/corporate/placeholder.png',
-        subCategories: [
-            { name: 'Semi-Integrated', href: '/solar/semi-integrated', src: '/img/corporate/placeholder.png' },
-            { name: 'All-in-One', href: '/solar/all-in-one', src: '/img/corporate/placeholder.png' },
-            { name: 'Hybrid', href: '/solar/hybrid', src: '/img/corporate/placeholder.png' },
-        ]
-    },
-    { name: 'Solar Mini Mast', href: '/solar/mini-mast', src: '/img/corporate/placeholder.png' },
-    { name: 'Solar High mast', href: '/solar/high-mast', src: '/img/corporate/placeholder.png' },
-    { name: 'Solar CCTV Cameras', href: '/solar/cctv-cameras', src: '/img/corporate/placeholder.png' },
-    { name: 'Solar Traffic Blinkers', href: '/solar/traffic-blinkers', src: '/img/corporate/placeholder.png' },
-    { name: 'Solar Mobile Lighting Towers', href: '/solar/mobile-lighting-towers', src: '/img/corporate/placeholder.png' },
-];
+// export const solarCategories = [
+//     { 
+//         name: 'Solar Street Lights', 
+//         href: '/solar/street-lights', 
+//         src: '/img/corporate/placeholder.png',
+//         subCategories: [
+//             { name: 'Semi-Integrated', href: '/solar/semi-integrated', src: '/img/corporate/placeholder.png' },
+//             { name: 'All-in-One', href: '/solar/all-in-one', src: '/img/corporate/placeholder.png' },
+//             { name: 'Hybrid', href: '/solar/hybrid', src: '/img/corporate/placeholder.png' },
+//         ]
+//     },
+//     { name: 'Solar Mini Mast', href: '/solar/mini-mast', src: '/img/corporate/placeholder.png' },
+//     { name: 'Solar High mast', href: '/solar/high-mast', src: '/img/corporate/placeholder.png' },
+//     { name: 'Solar CCTV Cameras', href: '/solar/cctv-cameras', src: '/img/corporate/placeholder.png' },
+//     { name: 'Solar Traffic Blinkers', href: '/solar/traffic-blinkers', src: '/img/corporate/placeholder.png' },
+//     { name: 'Solar Mobile Lighting Towers', href: '/solar/mobile-lighting-towers', src: '/img/corporate/placeholder.png' },
+// ];
 
+export const solarCategories = async () => {
+  try {
+    const response = await apiClient.get("/api/v1/solar/get-all-solar");
+    console.log("Response from solarCategories:", response.data);
+
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching solar categories:", error);
+    throw error;
+  }
+};
 export const siteMapData = [
   {
     title: 'For Consumer',

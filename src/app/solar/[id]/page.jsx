@@ -2,11 +2,13 @@ import SolarCategoryPage from '@/components/Solar/SolarCategoryPage'
 import React from 'react'
 
 const page = ({ params }) => {
-  const category = params.category;
+  const id = params.id;
 
   return (
-    <SolarCategoryPage category={category} />
-  )
+    <div className='mt-48'>
+      <SolarCategoryPage id={id} />
+    </div>
+  );
 }
 
 export default page
