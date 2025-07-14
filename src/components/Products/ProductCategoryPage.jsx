@@ -5,14 +5,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { getAllProductsByCategory } from '@/server/categoryServer';
 import { useBreadcrumb } from '@/context/BreadcrumbContext';
-
+import { useQuery } from "@/context/QueryContext";
 const ProductCategoryPage = ({ category }) => {
   const pathname = usePathname();
   const { setBreadcrumb } = useBreadcrumb();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+ const { addToQuery } = useQuery();
   useEffect(() => {
     if (category) {
       fetchProducts(category);
@@ -104,7 +104,8 @@ const ProductCategoryPage = ({ category }) => {
             {formatCategoryName(category)} Products
           </h1>
           <p className="text-gray-600">
-            {products.length} {products.length === 1 ? 'product' : 'products'} found
+            {products.length} {products.length === 1 ? "product" : "products"}{" "}
+            found
           </p>
         </div>
 
@@ -116,86 +117,99 @@ const ProductCategoryPage = ({ category }) => {
               No products found
             </h3>
             <p className="text-gray-500">
-              No products available in the "{formatCategoryName(category)}" category.
+              No products available in the "{formatCategoryName(category)}"
+              category.
             </p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {products.filter(product => product.view).map((product) => (
-              <div
-                key={product._id}
-                className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 group"
-              >
-                <Link href={`/products/product/${product.slug}`}>
+            {products
+              .filter((product) => product.view)
+              .map((product) => (
+                <div
+                  key={product._id}
+                  className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 group"
+                >
                   <div className="cursor-pointer">
-                    {/* Product Image */}
-                    <div className="relative h-48 bg-gray-100 overflow-hidden">
-                      {product.images && product.images.length > 0 ? (
-                        <Image
-                          src={product.images[0].url}
-                          alt={product.name}
-                          fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-300"
-                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                        />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center bg-gray-200">
-                          <span className="text-gray-400 text-4xl">📷</span>
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Product Details */}
-                    <div className="p-4">
-                      {/* Category Badge */}
-                      <div className="flex flex-wrap gap-1 mb-2">
-                        {product.categoryName && product.categoryName.map((cat, index) => (
-                          <span
-                            key={index}
-                            className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full font-medium"
-                          >
-                            {formatCategoryName(cat)}
-                          </span>
-                        ))}
-                      </div>
-
-                      {/* Product Name */}
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
-                        {formatCategoryName(product.name)}
-                      </h3>
-
-                      {/* Product description */}
-                      <p className="text-sm text-gray-600 mb-2 line-clamp-2 ellipsis">
-                        {product.productOverview}
-                      </p>
-
-                      {/* Price */}
-                      <div className="flex items-center justify-between mb-3">
-                        <span className="text-xl font-bold text-gray-900">
-                          {formatPrice(product.price)}
-                        </span>
-                      </div>
-                      
-                      {/* Add to Cart Button */}
-                      <div className="w-full">
-                        {product.stock > 0 ? (
-                          <button className="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-md text-sm font-medium transition-colors duration-200">
-                            Add to Cart
-                          </button>
+                    <Link href={`/products/product/${product.slug}`}>
+                      {/* Product Image */}
+                      <div className="relative h-48 bg-gray-100 overflow-hidden">
+                        {product.images && product.images.length > 0 ? (
+                          <Image
+                            src={product.images[0].url}
+                            alt={product.name}
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform duration-300"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                          />
                         ) : (
-                          <button 
-                            disabled 
-                            className="w-full bg-gray-300 text-gray-500 py-2 px-4 rounded-md text-sm font-medium cursor-not-allowed"
-                          >
-                            Out of Stock
-                          </button>
+                          <div className="w-full h-full flex items-center justify-center bg-gray-200">
+                            <span className="text-gray-400 text-4xl">📷</span>
+                          </div>
                         )}
                       </div>
+
+                      {/* Product Details */}
+                      <div className="p-4">
+                        {/* Category Badge */}
+                        <div className="flex flex-wrap gap-1 mb-2">
+                          {product.categoryName &&
+                            product.categoryName.map((cat, index) => (
+                              <span
+                                key={index}
+                                className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full font-medium"
+                              >
+                                {formatCategoryName(cat)}
+                              </span>
+                            ))}
+                        </div>
+
+                        {/* Product Name */}
+                        <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
+                          {formatCategoryName(product.name)}
+                        </h3>
+
+                        {/* Product description */}
+                        <p className="text-sm text-gray-600 mb-2 line-clamp-2 ellipsis">
+                          {product.productOverview}
+                        </p>
+
+                        {/* Price */}
+                        <div className="flex items-center justify-between mb-3">
+                          <span className="text-xl font-bold text-gray-900">
+                            {formatPrice(product.price)}
+                          </span>
+                        </div>
+                      </div>
+                    </Link>
+                    {/* Add to Cart Button */}
+                    <div className="w-full">
+                      {product.stock > 0 ? (
+                        <button
+                          className="w-full cursor-pointer bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-md text-sm font-medium transition-colors duration-200 z-50"
+                          onClick={() => {
+                            addToQuery({
+                              id: product._id,
+                              name: product.name,
+                              price: product.price,
+                              quantity: 1,
+                            });
+                          }}
+                        >
+                          Add to Cart
+                        </button>
+                      ) : (
+                        <button
+                          disabled
+                          className="w-full bg-gray-300 text-gray-500 py-2 px-4 rounded-md text-sm font-medium cursor-not-allowed"
+                        >
+                          Out of Stock
+                        </button>
+                      )}
                     </div>
                   </div>
-                </Link>
-              </div>
-            ))}
+                </div>
+              ))}
           </div>
         )}
       </div>

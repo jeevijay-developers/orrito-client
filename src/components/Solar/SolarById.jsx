@@ -3,14 +3,14 @@ import React, { useEffect, useState } from "react";
 import { Download, ShoppingCart, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-
+import { useQuery } from "@/context/QueryContext";
 export default function SolarById({ id }) {
+  const { addToQuery } = useQuery();
   const [solar, setSolar] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedImage, setSelectedImage] = useState("");
   const [categorySolars, setCategorySolars] = useState([]);
-
   useEffect(() => {
     if (id) {
       fetchSolar(id);
@@ -248,9 +248,19 @@ export default function SolarById({ id }) {
                 )}
 
                 <div className="flex flex-col sm:flex-row gap-4 mb-4">
-                  <button className="flex-1 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2">
+                  <button
+                    className="flex-1 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2 cursor-pointer"
+                    onClick={() => {
+                      addToQuery({
+                        id: solar._id,
+                        name: solar.name,
+                        price: solar.price,
+                        quantity: 1,
+                      });
+                    }}
+                  >
                     <ShoppingCart size={20} />
-                    Request Quote
+                    Add To Cart
                   </button>
                   <button className="bg-gray-200 text-gray-800 px-6 py-3 rounded-lg hover:bg-gray-300 transition-colors flex items-center justify-center sm:w-auto">
                     <Star size={20} />

@@ -1,11 +1,11 @@
-'use client';
-import { useState, useEffect } from 'react';
-import { usePathname } from 'next/navigation';
-import Image from 'next/image';
-import Link from 'next/link';
-import { getAllSolutionsByCategory } from '@/server/solutionServer';
-import { useBreadcrumb } from '@/context/BreadcrumbContext';
-
+"use client";
+import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
+import Image from "next/image";
+import Link from "next/link";
+import { getAllSolutionsByCategory } from "@/server/solutionServer";
+import { useBreadcrumb } from "@/context/BreadcrumbContext";
+import { useQuery } from "@/context/QueryContext";
 const SolutionCategoryPage = ({ solution }) => {
   const pathname = usePathname();
   const { setBreadcrumb } = useBreadcrumb();
@@ -13,7 +13,7 @@ const SolutionCategoryPage = ({ solution }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   // console.log('solution:', solution);
-  
+ const { addToQuery } = useQuery();
   useEffect(() => {
     if (solution) {
       fetchSolutions(solution);
@@ -24,7 +24,7 @@ const SolutionCategoryPage = ({ solution }) => {
   useEffect(() => {
     if (solution) {
       setBreadcrumb(pathname, {
-        name: formatCategoryName(solution)
+        name: formatCategoryName(solution),
       });
     }
   }, [solution, pathname]);
@@ -33,12 +33,11 @@ const SolutionCategoryPage = ({ solution }) => {
     try {
       const solutions = await getAllSolutionsByCategory(categoryName);
       // console.log('Solutions fetched:', solutions);
-      localStorage.setItem('solutionsByCategory', JSON.stringify(solutions));
+      localStorage.setItem("solutionsByCategory", JSON.stringify(solutions));
       setSolutions(solutions.products || []);
-      console.log('Solutions fetched:', solutions.products);
-      
+      console.log("Solutions fetched:", solutions.products);
     } catch (error) {
-      setError('Failed to load solutions. Please try again.');
+      setError("Failed to load solutions. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -56,7 +55,10 @@ const SolutionCategoryPage = ({ solution }) => {
             <div className="h-8 bg-gray-300 rounded w-1/4 mb-8"></div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {[...Array(8)].map((_, i) => (
-                <div key={i} className="bg-white rounded-lg shadow-md overflow-hidden">
+                <div
+                  key={i}
+                  className="bg-white rounded-lg shadow-md overflow-hidden"
+                >
                   <div className="h-48 bg-gray-300"></div>
                   <div className="p-4">
                     <div className="h-4 bg-gray-300 rounded mb-2"></div>
@@ -98,7 +100,8 @@ const SolutionCategoryPage = ({ solution }) => {
             {formatCategoryName(solution)} Solutions
           </h1>
           <p className="text-gray-600">
-            {solutions.length} {solutions.length === 1 ? 'solution' : 'solutions'} found
+            {solutions.length}{" "}
+            {solutions.length === 1 ? "solution" : "solutions"} found
           </p>
         </div>
 
@@ -110,7 +113,8 @@ const SolutionCategoryPage = ({ solution }) => {
               No solutions found
             </h3>
             <p className="text-gray-500">
-              No solutions available in the "{formatCategoryName(solution)}" solution.
+              No solutions available in the "{formatCategoryName(solution)}"
+              solution.
             </p>
           </div>
         ) : (
@@ -119,9 +123,12 @@ const SolutionCategoryPage = ({ solution }) => {
               <div
                 key={index}
                 className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 group flex flex-col"
-                style={{ minHeight: '100%' }}
+                style={{ minHeight: "100%" }}
               >
-                <Link href={`/solutions/product/${solution._id}`} className="flex-1 flex flex-col">
+                <Link
+                  href={`/solutions/product/${solution._id}`}
+                  className="flex-1 flex flex-col"
+                >
                   <div className="cursor-pointer flex-1 flex flex-col">
                     {/* Solution Image */}
                     <div className="relative h-48 bg-gray-100 overflow-hidden">
@@ -144,14 +151,15 @@ const SolutionCategoryPage = ({ solution }) => {
                     <div className="p-4 flex-1 flex flex-col">
                       {/* solution Badge */}
                       <div className="flex flex-wrap gap-1 mb-2">
-                        {solution.categoryName && solution.categoryName.map((cat, index) => (
-                          <span
-                            key={index}
-                            className="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-medium"
-                          >
-                            {formatCategoryName(cat)}
-                          </span>
-                        ))}
+                        {solution.categoryName &&
+                          solution.categoryName.map((cat, index) => (
+                            <span
+                              key={index}
+                              className="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-medium"
+                            >
+                              {formatCategoryName(cat)}
+                            </span>
+                          ))}
                       </div>
 
                       {/* Solution Name */}
@@ -169,12 +177,22 @@ const SolutionCategoryPage = ({ solution }) => {
                 {/* Add to Cart Button at bottom */}
                 <div className="w-full px-4 pb-4 mt-auto">
                   {solution.stock > 0 ? (
-                    <button className="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-md text-sm font-medium transition-colors duration-200">
+                    <button
+                      className="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-md text-sm font-medium transition-colors duration-200 cursor-pointer"
+                      onClick={() => {
+                        addToQuery({
+                          id: solution._id,
+                          name: solution.name,
+                          price: solution.price,
+                          quantity: 1,
+                        });
+                      }}
+                    >
                       Add to Cart
                     </button>
                   ) : (
-                    <button 
-                      disabled 
+                    <button
+                      disabled
                       className="w-full bg-gray-300 text-gray-500 py-2 px-4 rounded-md text-sm font-medium cursor-not-allowed"
                     >
                       Out of Stock

@@ -3,8 +3,9 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { getAllSolarByID } from "@/server/solarServer";
-
+import { useQuery } from "@/context/QueryContext";
 const SolarCategoryPage = ({ id }) => {
+   const { addToQuery } = useQuery();
   const [solarProducts, setSolarProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -175,6 +176,31 @@ const SolarCategoryPage = ({ id }) => {
                             : ""}
                         </span>
                       </div> */}
+                    </div>
+                    {/* Add to Cart Button at bottom */}
+                    <div className="w-full px-4 pb-4 mt-auto">
+                      {product.stock > 0 ? (
+                        <button
+                          className="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-md text-sm font-medium transition-colors duration-200 cursor-pointer"
+                          onClick={() => {
+                            addToQuery({
+                              id: product._id,
+                              name: product.name,
+                              price: product.price,
+                              quantity: 1,
+                            });
+                          }}
+                        >
+                          Add to Cart
+                        </button>
+                      ) : (
+                        <button
+                          disabled
+                          className="w-full bg-gray-300 text-gray-500 py-2 px-4 rounded-md text-sm font-medium cursor-not-allowed"
+                        >
+                          Out of Stock
+                        </button>
+                      )}
                     </div>
                   </div>
                 </Link>
