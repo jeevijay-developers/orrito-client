@@ -89,32 +89,54 @@ const Cart = () => {
                   )}
                 </div>
 
-                <div className="flex items-center gap-2">
-                  <input
-                    type="number"
-                    value={item.quantity}
-                    onChange={(e) => {
-                      const val = e.target.value;
-                      if (val === "") {
-                        updateQuantity(item.id, "");
-                      } else {
-                        const num = parseInt(val);
-                        if (!isNaN(num) && num >= 0) {
-                          updateQuantity(item.id, num);
+                <div className="flex items-center gap-3">
+                  <div className="flex items-center border rounded-lg overflow-hidden">
+                    <button
+                      onClick={() => {
+                        if (item.quantity > 0) {
+                          updateQuantity(item.id, item.quantity - 1);
                         }
-                      }
-                    }}
-                    onBlur={(e) => {
-                      if (e.target.value === "") {
-                        updateQuantity(item.id, 1);
-                      }
-                    }}
-                    className="w-16 border rounded px-2 py-1 text-center"
-                  />
+                      }}
+                      className="w-8 h-8 flex items-center justify-center bg-gray-100 hover:bg-gray-200 transition-colors text-gray-600 font-semibold cursor-pointer"
+                      disabled={item.quantity <= 0}
+                    >
+                      −
+                    </button>
+                    
+                    <input
+                      type="number"
+                      value={item.quantity}
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        if (val === "") {
+                          updateQuantity(item.id, "");
+                        } else {
+                          const num = parseInt(val);
+                          if (!isNaN(num) && num >= 0) {
+                            updateQuantity(item.id, num);
+                          }
+                        }
+                      }}
+                      onBlur={(e) => {
+                        if (e.target.value === "" || parseInt(e.target.value) < 0 || isNaN(parseInt(e.target.value))) {
+                          updateQuantity(item.id, 0);
+                        }
+                      }}
+                      min="0"
+                      className="w-12 h-8 text-center border-0 focus:outline-none focus:ring-0"
+                    />
+                    
+                    <button
+                      onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                      className="w-8 h-8 flex items-center justify-center bg-gray-100 hover:bg-gray-200 transition-colors text-gray-600 font-semibold cursor-pointer"
+                    >
+                      +
+                    </button>
+                  </div>
 
                   <button
                     onClick={() => deleteQuery(item.id)}
-                    className="text-red-500 hover:text-red-700"
+                    className="px-3 py-1 text-sm text-red-600 hover:text-red-800 hover:bg-red-50 rounded transition-colors cursor-pointer"
                   >
                     Delete
                   </button>
