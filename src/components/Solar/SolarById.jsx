@@ -99,7 +99,7 @@ export default function SolarById({ id }) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen mt-48  bg-gray-50">
       <div className="bg-white border-b border-gray-200 px-4 sm:px-6 py-4 mt-32 sm:mt-40">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
           <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
@@ -196,6 +196,21 @@ export default function SolarById({ id }) {
                 </div>
               </div>
             )}
+            {/* Product Overview */}
+            <div className="bg-white rounded-lg border border-gray-200 p-4 sm:p-6 mb-4 sm:mb-6">
+              <h2 className="text-lg font-bold text-gray-900 mb-4">
+                PRODUCT OVERVIEW
+              </h2>
+
+              {solar.productOverview && (
+                <div>
+                  <div
+                    className="text-gray-600 text-sm"
+                    dangerouslySetInnerHTML={{ __html: solar.productOverview }}
+                  />
+                </div>
+              )}
+            </div>
 
             {/* Features */}
             <div className="bg-white rounded-lg border border-gray-200 p-4 sm:p-6">
