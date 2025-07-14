@@ -44,7 +44,7 @@ export const solutionCategories = async() => {
 export const solarCategories = async () => {
   try {
     const response = await apiClient.get("/api/v1/solar/get-all-solar");
-    console.log("Response from solarCategories:", response.data);
+    // console.log("Response from solarCategories:", response.data);
 
     return response.data;
   } catch (error) {
