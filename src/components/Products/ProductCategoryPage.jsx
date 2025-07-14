@@ -49,7 +49,9 @@ const ProductCategoryPage = ({ category }) => {
   };
 
   const formatCategoryName = (categoryName) => {
-    return categoryName.charAt(0).toUpperCase() + categoryName.slice(1);
+    if (!categoryName) return '';
+    const decoded = decodeURIComponent(categoryName);
+    return decoded.charAt(0).toUpperCase() + decoded.slice(1);
   };
 
   if (loading) {
@@ -119,7 +121,7 @@ const ProductCategoryPage = ({ category }) => {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {products.map((product) => (
+            {products.filter(product => product.view).map((product) => (
               <div
                 key={product._id}
                 className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 group"
@@ -162,21 +164,31 @@ const ProductCategoryPage = ({ category }) => {
                         {formatCategoryName(product.name)}
                       </h3>
 
+                      {/* Product description */}
+                      <p className="text-sm text-gray-600 mb-2 line-clamp-2 ellipsis">
+                        {product.productOverview}
+                      </p>
+
                       {/* Price */}
-                      <div className="flex items-center justify-between">
+                      <div className="flex items-center justify-between mb-3">
                         <span className="text-xl font-bold text-gray-900">
                           {formatPrice(product.price)}
                         </span>
-                        
-                        {/* Stock Status */}
+                      </div>
+                      
+                      {/* Add to Cart Button */}
+                      <div className="w-full">
                         {product.stock > 0 ? (
-                          <span className="text-green-600 text-sm font-medium">
-                            In Stock
-                          </span>
+                          <button className="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-md text-sm font-medium transition-colors duration-200">
+                            Add to Cart
+                          </button>
                         ) : (
-                          <span className="text-red-600 text-sm font-medium">
+                          <button 
+                            disabled 
+                            className="w-full bg-gray-300 text-gray-500 py-2 px-4 rounded-md text-sm font-medium cursor-not-allowed"
+                          >
                             Out of Stock
-                          </span>
+                          </button>
                         )}
                       </div>
                     </div>

@@ -35,6 +35,8 @@ const SolutionCategoryPage = ({ solution }) => {
       // console.log('Solutions fetched:', solutions);
       localStorage.setItem('solutionsByCategory', JSON.stringify(solutions));
       setSolutions(solutions.products || []);
+      console.log('Solutions fetched:', solutions.products);
+      
     } catch (error) {
       setError('Failed to load solutions. Please try again.');
     } finally {
@@ -116,10 +118,11 @@ const SolutionCategoryPage = ({ solution }) => {
             {solutions.map((solution, index) => (
               <div
                 key={index}
-                className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 group"
+                className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 group flex flex-col"
+                style={{ minHeight: '100%' }}
               >
-                <Link href={`/solutions/product/${solution._id}`}>
-                  <div className="cursor-pointer">
+                <Link href={`/solutions/product/${solution._id}`} className="flex-1 flex flex-col">
+                  <div className="cursor-pointer flex-1 flex flex-col">
                     {/* Solution Image */}
                     <div className="relative h-48 bg-gray-100 overflow-hidden">
                       {solution.images && solution.images.length > 0 ? (
@@ -138,7 +141,7 @@ const SolutionCategoryPage = ({ solution }) => {
                     </div>
 
                     {/* Solution Details */}
-                    <div className="p-4">
+                    <div className="p-4 flex-1 flex flex-col">
                       {/* solution Badge */}
                       <div className="flex flex-wrap gap-1 mb-2">
                         {solution.categoryName && solution.categoryName.map((cat, index) => (
@@ -158,21 +161,26 @@ const SolutionCategoryPage = ({ solution }) => {
 
                       {/* Description */}
                       <div className="text-gray-700 text-sm mb-2 line-clamp-2">
-                        {solution.description}
-                      </div>
-
-                      {/* Status */}
-                      <div className="flex items-center justify-between">
-                        <span className="text-green-600 text-sm font-medium">
-                          {solution.status || 'Active'}
-                        </span>
-                        <span className="text-gray-500 text-xs">
-                          {solution.updatedAt ? new Date(solution.updatedAt).toLocaleDateString() : ''}
-                        </span>
+                        {solution.productOverview}
                       </div>
                     </div>
                   </div>
                 </Link>
+                {/* Add to Cart Button at bottom */}
+                <div className="w-full px-4 pb-4 mt-auto">
+                  {solution.stock > 0 ? (
+                    <button className="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-md text-sm font-medium transition-colors duration-200">
+                      Add to Cart
+                    </button>
+                  ) : (
+                    <button 
+                      disabled 
+                      className="w-full bg-gray-300 text-gray-500 py-2 px-4 rounded-md text-sm font-medium cursor-not-allowed"
+                    >
+                      Out of Stock
+                    </button>
+                  )}
+                </div>
               </div>
             ))}
           </div>

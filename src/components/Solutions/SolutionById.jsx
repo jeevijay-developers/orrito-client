@@ -213,6 +213,9 @@ export default function SolutionById({ id }) {
 
             {/* Features Section */}
             <div className="bg-white rounded-lg border border-gray-200 p-4 sm:p-6">
+              <p className="text-gray-700 text-sm leading-relaxed mb-0 sm:mb-5">
+                {solution.productOverview || "No description available for this product."}
+              </p>
               <h2 className="text-lg font-bold text-gray-900 mb-4">FEATURES:</h2>
               <div className="space-y-3">
                 {solution.highlights && solution.highlights.length > 0 ? (
@@ -263,14 +266,11 @@ export default function SolutionById({ id }) {
                     </div>
                   </div>
                 )}
-                
+
                 <div className="flex flex-col sm:flex-row gap-4 mb-4">
                   <button className="flex-1 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2">
                     <ShoppingCart size={20} />
-                    Request Quote
-                  </button>
-                  <button className="bg-gray-200 text-gray-800 px-6 py-3 rounded-lg hover:bg-gray-300 transition-colors flex items-center justify-center sm:w-auto">
-                    <Star size={20} />
+                    Add to Cart
                   </button>
                 </div>
 
