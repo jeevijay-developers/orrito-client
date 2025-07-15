@@ -4,8 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { getAllSolarByID } from "@/server/solarServer";
 import { useQuery } from "@/context/QueryContext";
+import { Minus, Plus, Trash2 } from "lucide-react";
 const SolarCategoryPage = ({ id }) => {
-   const { addToQuery } = useQuery();
+  const { addToQuery, queryItems, updateQuantity, deleteQuery, checkQuery } =
+    useQuery();
   const [solarProducts, setSolarProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -111,9 +113,10 @@ const SolarCategoryPage = ({ id }) => {
                 key={product._id}
                 className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 group"
               >
-                <Link href={`/solar/product/${product._id}`}>
+      
                   <div className="cursor-pointer">
                     {/* Solar Product Image */}
+                    <Link href={`/solar/product/${product._id}`}>
                     <div className="relative h-48 bg-gray-100 overflow-hidden">
                       {product.images && product.images.length > 0 ? (
                         <Image
@@ -177,22 +180,89 @@ const SolarCategoryPage = ({ id }) => {
                         </span>
                       </div> */}
                     </div>
-                    {/* Add to Cart Button at bottom */}
-                    <div className="w-full px-4 pb-4 mt-auto">
+                    </Link>
+                    {/* Add to Cart Button */}
+                    <div className="w-full">
                       {product.stock > 0 ? (
-                        <button
-                          className="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-md text-sm font-medium transition-colors duration-200 cursor-pointer"
-                          onClick={() => {
-                            addToQuery({
-                              id: product._id,
-                              name: product.name,
-                              price: product.price,
-                              quantity: 1,
-                            });
-                          }}
-                        >
-                          Add to Cart
-                        </button>
+                        <div className="flex gap-2">
+                          {checkQuery(product._id) ? (
+                            <div className="flex-1 flex items-center justify-between border bg-gray-200  border-gray-200 rounded-lg">
+                              {/* Decrease Quantity */}
+                              <button
+                                className="px-3 py-2 text-gray-600 hover:text-orange-500 transition-colors"
+                                onClick={() => {
+                                  const item = queryItems.find(
+                                    (item) => item.id === product._id
+                                  );
+                                  if (item && item.quantity > 1) {
+                                    updateQuantity(
+                                      product._id,
+                                      item.quantity - 1
+                                    );
+                                  } else {
+                                    deleteQuery(product._id);
+                                  }
+                                }}
+                              >
+                                <Minus className="w-5 h-5" />
+                              </button>
+
+                              {/* Quantity Display */}
+                              <span className="text-gray-800 font-medium">
+                                {queryItems.find(
+                                  (item) => item.id === product._id
+                                )?.quantity || 0}
+                              </span>
+
+                              {/* Increase Quantity */}
+                              <button
+                                className="px-3 py-2 text-gray-600 hover:text-orange-500 transition-colors"
+                                onClick={() => {
+                                  const item = queryItems.find(
+                                    (item) => item.id === product._id
+                                  );
+                                  if (item) {
+                                    updateQuantity(
+                                      product._id,
+                                      item.quantity + 1
+                                    );
+                                  }
+                                }}
+                              >
+                                <Plus className="w-5 h-5" />
+                              </button>
+
+                              {/* Remove from Cart */}
+                              <button
+                                className="px-3 py-2 text-gray-600 hover:text-red-500 transition-colors"
+                                onClick={() => deleteQuery(product._id)}
+                              >
+                                <Trash2 className="w-5 h-5" />
+                              </button>
+                            </div>
+                          ) : (
+                            <button
+                              className="flex-1 cursor-pointer text-white py-2 px-4 rounded-lg font-semibold transition-colors duration-300 transform hover:scale-105"
+                              style={{ backgroundColor: "#313841" }}
+                              onMouseEnter={(e) =>
+                                (e.target.style.backgroundColor = "#2a3038")
+                              }
+                              onMouseLeave={(e) =>
+                                (e.target.style.backgroundColor = "#313841")
+                              }
+                              onClick={() => {
+                                addToQuery({
+                                  id: product._id,
+                                  name: product.name,
+                                  price: product.price,
+                                  quantity: 1,
+                                });
+                              }}
+                            >
+                              Add to Cart
+                            </button>
+                          )}
+                        </div>
                       ) : (
                         <button
                           disabled
@@ -203,7 +273,7 @@ const SolarCategoryPage = ({ id }) => {
                       )}
                     </div>
                   </div>
-                </Link>
+              
               </div>
             ))}
           </div>

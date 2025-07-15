@@ -7,6 +7,7 @@ import "swiper/css/pagination";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { useQuery } from "@/context/QueryContext";
 
+
 const Offers = () => {
   const { addToQuery, queryItems, updateQuantity, deleteQuery, checkQuery } = useQuery();
   const offers = [
