@@ -30,11 +30,9 @@ const Offers = () => {
           name: product.name,
           category: product.categoryName?.[0] || "LED Products",
           image: product.images?.[0]?.url || "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80",
-          originalPrice: product.price + Math.floor(product.price * 0.3), // Add 30% as original price
+  
           offerPrice: product.price,
-          discount: "30% OFF",
           features: product.highlights || ["Energy Efficient", "Long Lasting", "Warranty"],
-          badge: index === 0 ? "Best Seller" : index === 1 ? "Limited Time" : index === 2 ? "New Arrival" : "Hot Deal",
           slug: product.slug
         }));
 
@@ -124,19 +122,7 @@ const Offers = () => {
             {offers.map((offer, index) => (
               <SwiperSlide key={offer.id}>
                 <div className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 overflow-hidden border border-gray-100 h-full">
-                  {/* Badge */}
-                  <div
-                    className={`absolute top-4 left-4 ${getBadgeColor(
-                      offer.badge
-                    )} text-white px-3 py-1 rounded-full text-xs font-bold z-10`}
-                  >
-                    {offer.badge}
-                  </div>
-
-                  {/* Discount Badge */}
-                  <div className="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold z-10">
-                    {offer.discount}
-                  </div>
+                
 
                   {/* Product Image */}
                   <div className="relative h-48 overflow-hidden">
@@ -156,7 +142,7 @@ const Offers = () => {
                       </span>
                     </div>
 
-                    <h3 className="text-sm font-bold text-gray-800 mb-3 h-[2rem]  transition-colors duration-300">
+                    <h3 className="text-sm font-bold text-gray-800 mb-3  transition-colors duration-300">
                       {offer.name}
                     </h3>
 
@@ -186,9 +172,9 @@ const Offers = () => {
                           ₹{offer.originalPrice}
                         </span>
                       </div>
-                      <div className="text-sm text-green-600 font-semibold">
+                      {/* <div className="text-sm text-green-600 font-semibold">
                         Save ₹{offer.originalPrice - offer.offerPrice}
-                      </div>
+                      </div> */}
                     </div>
 
                     {/* Action Buttons */}

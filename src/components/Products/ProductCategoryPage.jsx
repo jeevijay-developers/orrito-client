@@ -167,7 +167,7 @@ const ProductCategoryPage = ({ category }) => {
                         </div>
 
                         {/* Product Name */}
-                        <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
+                        <h3 className="text-lg font-semibold text-gray-700 mb-2 line-clamp-2 hover:text-gray-00 transition-colors">
                           {formatCategoryName(product.name)}
                         </h3>
 
@@ -184,92 +184,91 @@ const ProductCategoryPage = ({ category }) => {
                         </div>
                       </div>
                     </Link>
-                    {/* Add to Cart Button */}
-                    <div className="w-full">
+                    
+                    {/* Add to Cart Section - Fixed Position */}
+                    <div className="p-4 pt-0">
                       {product.stock > 0 ? (
-                        <div className="flex gap-2">
-                          {checkQuery(product._id) ? (
-                            <div className="flex-1 flex items-center justify-between border bg-gray-200  border-gray-200 rounded-lg">
-                              {/* Decrease Quantity */}
-                              <button
-                                className="px-3 py-2 text-gray-600 hover:text-orange-500 transition-colors"
-                                onClick={() => {
-                                  const item = queryItems.find(
-                                    (item) => item.id === product._id
-                                  );
-                                  if (item && item.quantity > 1) {
-                                    updateQuantity(
-                                      product._id,
-                                      item.quantity - 1
-                                    );
-                                  } else {
-                                    deleteQuery(product._id);
-                                  }
-                                }}
-                              >
-                                <Minus className="w-5 h-5" />
-                              </button>
-
-                              {/* Quantity Display */}
-                              <span className="text-gray-800 font-medium">
-                                {queryItems.find(
-                                  (item) => item.id === product._id
-                                )?.quantity || 0}
-                              </span>
-
-                              {/* Increase Quantity */}
-                              <button
-                                className="px-3 py-2 text-gray-600 hover:text-orange-500 transition-colors"
-                                onClick={() => {
-                                  const item = queryItems.find(
-                                    (item) => item.id === product._id
-                                  );
-                                  if (item) {
-                                    updateQuantity(
-                                      product._id,
-                                      item.quantity + 1
-                                    );
-                                  }
-                                }}
-                              >
-                                <Plus className="w-5 h-5" />
-                              </button>
-
-                              {/* Remove from Cart */}
-                              <button
-                                className="px-3 py-2 text-gray-600 hover:text-red-500 transition-colors"
-                                onClick={() => deleteQuery(product._id)}
-                              >
-                                <Trash2 className="w-5 h-5" />
-                              </button>
-                            </div>
-                          ) : (
+                        checkQuery(product._id) ? (
+                          <div className="flex items-center justify-between border border-gray-200 rounded-lg bg-gray-100 p-1">
+                            {/* Decrease Quantity */}
                             <button
-                              className="flex-1 cursor-pointer text-white py-2 px-4 rounded-lg font-semibold transition-colors duration-300 transform hover:scale-105"
-                              style={{ backgroundColor: "#313841" }}
-                              onMouseEnter={(e) =>
-                                (e.target.style.backgroundColor = "#2a3038")
-                              }
-                              onMouseLeave={(e) =>
-                                (e.target.style.backgroundColor = "#313841")
-                              }
+                              className="w-8 h-8 flex items-center justify-center text-gray-600 hover:text-orange-500 hover:bg-white rounded transition-colors"
                               onClick={() => {
-                                addToQuery({
-                                  id: product._id,
-                                  name: product.name,
-                                  price: product.price,
-                                  quantity: 1,
-                                });
+                                const item = queryItems.find(
+                                  (item) => item.id === product._id
+                                );
+                                if (item && item.quantity > 1) {
+                                  updateQuantity(
+                                    product._id,
+                                    item.quantity - 1
+                                  );
+                                } else {
+                                  deleteQuery(product._id);
+                                }
                               }}
                             >
-                              Add to Cart
+                              <Minus className="w-4 h-4" />
                             </button>
-                          )}
-                        </div>
+
+                            {/* Quantity Display */}
+                            <span className="text-gray-800 font-medium px-3">
+                              {queryItems.find(
+                                (item) => item.id === product._id
+                              )?.quantity || 0}
+                            </span>
+
+                            {/* Increase Quantity */}
+                            <button
+                              className="w-8 h-8 flex items-center justify-center text-gray-600 hover:text-orange-500 hover:bg-white rounded transition-colors"
+                              onClick={() => {
+                                const item = queryItems.find(
+                                  (item) => item.id === product._id
+                                );
+                                if (item) {
+                                  updateQuantity(
+                                    product._id,
+                                    item.quantity + 1
+                                  );
+                                }
+                              }}
+                            >
+                              <Plus className="w-4 h-4" />
+                            </button>
+
+                            {/* Remove from Cart */}
+                            <button
+                              className="w-8 h-8 flex items-center justify-center text-gray-600 hover:text-red-500 hover:bg-red-50 rounded transition-colors ml-2"
+                              onClick={() => deleteQuery(product._id)}
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          </div>
+                        ) : (
+                          <button
+                            className="w-full cursor-pointer text-white py-2 px-4 rounded-lg font-semibold transition-colors duration-300 transform hover:scale-[1.02]"
+                            style={{ backgroundColor: "#313841" }}
+                            onMouseEnter={(e) =>
+                              (e.target.style.backgroundColor = "#2a3038")
+                            }
+                            onMouseLeave={(e) =>
+                              (e.target.style.backgroundColor = "#313841")
+                            }
+                            onClick={() => {
+                              addToQuery({
+                                id: product._id,
+                                name: product.name,
+                                price: product.price,
+                                quantity: 1,
+                              });
+                            }}
+                          >
+                            Add to Cart
+                          </button>
+                        )
                       ) : (
                         <button
                           disabled
-                          className="w-full bg-gray-300 text-gray-500 py-2 px-4 rounded-md text-sm font-medium cursor-not-allowed"
+                          className="w-full bg-gray-300 text-gray-500 py-2.5 px-4 rounded-lg text-sm  font-semibold cursor-not-allowed"
                         >
                           Out of Stock
                         </button>

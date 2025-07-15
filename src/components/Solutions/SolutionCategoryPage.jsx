@@ -166,7 +166,7 @@ const SolutionCategoryPage = ({ solution }) => {
                       </div>
 
                       {/* Solution Name */}
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-green-600 transition-colors">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-gray-600 transition-colors">
                         {formatCategoryName(solution.name)}
                       </h3>
 
@@ -238,7 +238,7 @@ const SolutionCategoryPage = ({ solution }) => {
                           </div>
                         ) : (
                           <button
-                            className="flex-1 cursor-pointer text-white py-2 px-4 rounded-lg font-semibold transition-colors duration-300 transform hover:scale-105"
+                            className="flex-1 cursor-pointer text-white py-2 px-4 rounded-lg font-semibold transition-colors duration-300 transform "
                             style={{ backgroundColor: "#313841" }}
                             onMouseEnter={(e) =>
                               (e.target.style.backgroundColor = "#2a3038")
@@ -262,7 +262,7 @@ const SolutionCategoryPage = ({ solution }) => {
                     ) : (
                       <button
                         disabled
-                        className="w-full bg-gray-300 text-gray-500 py-2 px-4 rounded-md text-sm font-medium cursor-not-allowed"
+                        className="w-full bg-gray-300 text-gray-500 py-2.5 px-4 rounded-md text-sm font-medium cursor-not-allowed"
                       >
                         Out of Stock
                       </button>
