@@ -6,14 +6,17 @@ import Link from "next/link";
 import { getAllSolutionsByCategory } from "@/server/solutionServer";
 import { useBreadcrumb } from "@/context/BreadcrumbContext";
 import { useQuery } from "@/context/QueryContext";
+import { Minus, Plus, Trash2 } from "lucide-react";
 const SolutionCategoryPage = ({ solution }) => {
+  
   const pathname = usePathname();
   const { setBreadcrumb } = useBreadcrumb();
   const [solutions, setSolutions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   // console.log('solution:', solution);
- const { addToQuery } = useQuery();
+  const { addToQuery, queryItems, updateQuantity, deleteQuery, checkQuery } =
+    useQuery();
   useEffect(() => {
     if (solution) {
       fetchSolutions(solution);
@@ -175,30 +178,97 @@ const SolutionCategoryPage = ({ solution }) => {
                   </div>
                 </Link>
                 {/* Add to Cart Button at bottom */}
-                <div className="w-full px-4 pb-4 mt-auto">
-                  {solution.stock > 0 ? (
-                    <button
-                      className="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-md text-sm font-medium transition-colors duration-200 cursor-pointer"
-                      onClick={() => {
-                        addToQuery({
-                          id: solution._id,
-                          name: solution.name,
-                          price: solution.price,
-                          quantity: 1,
-                        });
-                      }}
-                    >
-                      Add to Cart
-                    </button>
-                  ) : (
-                    <button
-                      disabled
-                      className="w-full bg-gray-300 text-gray-500 py-2 px-4 rounded-md text-sm font-medium cursor-not-allowed"
-                    >
-                      Out of Stock
-                    </button>
-                  )}
-                </div>
+                  <div className="w-full px-4 pb-4 mt-auto">
+                    {solution.stock > 0 ? (
+                      <div className="flex gap-2">
+                        {checkQuery(solution._id) ? (
+                          <div className="flex-1 flex items-center justify-between border bg-gray-200  border-gray-200 rounded-lg">
+                            {/* Decrease Quantity */}
+                            <button
+                              className="px-3 py-2 text-gray-600 hover:text-orange-500 transition-colors"
+                              onClick={() => {
+                                const item = queryItems.find(
+                                  (item) => item.id === solution._id
+                                );
+                                if (item && item.quantity > 1) {
+                                  updateQuantity(
+                                    solution._id,
+                                    item.quantity - 1
+                                  );
+                                } else {
+                                  deleteQuery(solution._id);
+                                }
+                              }}
+                            >
+                              <Minus className="w-5 h-5" />
+                            </button>
+
+                            {/* Quantity Display */}
+                            <span className="text-gray-800 font-medium">
+                              {queryItems.find(
+                                (item) => item.id === solution._id
+                              )?.quantity || 0}
+                            </span>
+
+                            {/* Increase Quantity */}
+                            <button
+                              className="px-3 py-2 text-gray-600 hover:text-orange-500 transition-colors"
+                              onClick={() => {
+                                const item = queryItems.find(
+                                  (item) => item.id === solution._id
+                                );
+                                if (item) {
+                                  updateQuantity(
+                                    solution._id,
+                                    item.quantity + 1
+                                  );
+                                }
+                              }}
+                            >
+                              <Plus className="w-5 h-5" />
+                            </button>
+
+                            {/* Remove from Cart */}
+                            <button
+                              className="px-3 py-2 text-gray-600 hover:text-red-500 transition-colors"
+                              onClick={() => deleteQuery(solution._id)}
+                            >
+                              <Trash2 className="w-5 h-5" />
+                            </button>
+                          </div>
+                        ) : (
+                          <button
+                            className="flex-1 cursor-pointer text-white py-2 px-4 rounded-lg font-semibold transition-colors duration-300 transform hover:scale-105"
+                            style={{ backgroundColor: "#313841" }}
+                            onMouseEnter={(e) =>
+                              (e.target.style.backgroundColor = "#2a3038")
+                            }
+                            onMouseLeave={(e) =>
+                              (e.target.style.backgroundColor = "#313841")
+                            }
+                            onClick={() => {
+                              addToQuery({
+                                id: solution._id,
+                                name: solution.name,
+                                price: solution.price,
+                                quantity: 1,
+                              });
+                            }}
+                          >
+                            Add to Cart
+                          </button>
+                        )}
+                      </div>
+                    ) : (
+                      <button
+                        disabled
+                        className="w-full bg-gray-300 text-gray-500 py-2 px-4 rounded-md text-sm font-medium cursor-not-allowed"
+                      >
+                        Out of Stock
+                      </button>
+                    )}
+                  </div>
+                
               </div>
             ))}
           </div>
