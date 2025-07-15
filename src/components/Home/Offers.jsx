@@ -1,88 +1,50 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { useQuery } from "@/context/QueryContext";
+import { getAllProducts } from "@/service/Data";
 
 const Offers = () => {
   const { addToQuery } = useQuery();
-  const offers = [
-    {
-      id: 1,
-      name: "LED Bulb 9W",
-      category: "Bulbs",
-      image:
-        "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80",
-      originalPrice: 299,
-      offerPrice: 199,
-      discount: "33% OFF",
-      features: ["Energy Efficient", "Long Lasting", "2 Year Warranty"],
-      badge: "Best Seller",
-    },
-    {
-      id: 2,
-      name: "LED Tube Light 18W",
-      category: "Tube Lights",
-      image:
-        "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80",
-      originalPrice: 599,
-      offerPrice: 399,
-      discount: "33% OFF",
-      features: ["Cool White", "Flicker Free", "3 Year Warranty"],
-      badge: "Limited Time",
-    },
-    {
-      id: 3,
-      name: "LED Panel Light 24W",
-      category: "Panel Lights",
-      image:
-        "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80",
-      originalPrice: 899,
-      offerPrice: 649,
-      discount: "28% OFF",
-      features: ["Slim Design", "Even Light", "5 Year Warranty"],
-      badge: "New Arrival",
-    },
-    {
-      id: 4,
-      name: "LED Flood Light 50W",
-      category: "Flood Lights",
-      image:
-        "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80",
-      originalPrice: 1299,
-      offerPrice: 899,
-      discount: "31% OFF",
-      features: ["Waterproof", "High Brightness", "3 Year Warranty"],
-      badge: "Hot Deal",
-    },
-    {
-      id: 5,
-      name: "LED Street Light 30W",
-      category: "Street Lights",
-      image:
-        "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80",
-      originalPrice: 1599,
-      offerPrice: 1199,
-      discount: "25% OFF",
-      features: ["Weather Resistant", "Auto On/Off", "5 Year Warranty"],
-      badge: "Professional",
-    },
-    {
-      id: 6,
-      name: "LED Downlight 12W",
-      category: "Downlights",
-      image:
-        "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80",
-      originalPrice: 499,
-      offerPrice: 349,
-      discount: "30% OFF",
-      features: ["Recessed Design", "Dimmable", "3 Year Warranty"],
-      badge: "Premium",
-    },
-  ];
+  const [offers, setOffers] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchOffers = async () => {
+      try {
+        const response = await getAllProducts();
+        const products = response.data || response; // Handle both response.data and direct array
+
+        // Transform API data to offers format
+        const transformedOffers = products.map((product, index) => ({
+          id: product._id,
+          name: product.name,
+          category: product.categoryName?.[0] || "LED Products",
+          image: product.images?.[0]?.url || "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80",
+          originalPrice: product.price + Math.floor(product.price * 0.3), // Add 30% as original price
+          offerPrice: product.price,
+          discount: "30% OFF",
+          features: product.highlights || ["Energy Efficient", "Long Lasting", "Warranty"],
+          badge: index === 0 ? "Best Seller" : index === 1 ? "Limited Time" : index === 2 ? "New Arrival" : "Hot Deal",
+          slug: product.slug
+        }));
+
+        setOffers(transformedOffers);
+      } catch (error) {
+        console.error('Failed to load offers:', error);
+        // Fallback to empty array or keep static data
+        setOffers([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchOffers();
+  }, []);
 
   const getBadgeColor = (badge) => {
     switch (badge) {
@@ -189,28 +151,18 @@ const Offers = () => {
                       </span>
                     </div>
 
-                    <h3 className="text-xl font-bold text-gray-800 mb-3  transition-colors duration-300">
+                    <h3 className="text-sm font-bold text-gray-800 mb-3 h-[2rem]  transition-colors duration-300">
                       {offer.name}
                     </h3>
 
                     {/* Features */}
-                    <ul className="mb-4 space-y-1">
-                      {offer.features.map((feature, idx) => (
-                        <li
-                          key={idx}
-                          className="text-sm text-gray-600 flex items-center"
-                        >
-                          <span className="w-1.5 h-1.5 bg-orange-500 rounded-full mr-2"></span>
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
+                    
 
                     {/* Pricing */}
                     <div className="flex items-center justify-between mb-4">
                       <div>
                         <span
-                          className="text-2xl font-bold"
+                          className="text-sm font-bold " 
                           style={{ color: "#313841" }}
                         >
                           ₹{offer.offerPrice}
@@ -275,9 +227,9 @@ const Offers = () => {
         </div>
 
         {/* Call to Action */}
-        <div className="text-center mt-12">
+        {/* <div className="text-center mt-12">
           <button
-            className="text-white px-8 py-3 rounded-full font-bold text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+            className="text-white px-8 py-3 hover:cursor-pointer rounded-full font-bold text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
             style={{
               backgroundColor: "#313841",
             }}
@@ -286,7 +238,7 @@ const Offers = () => {
           >
             View All Products
           </button>
-        </div>
+        </div> */}
       </div>
 
       <style jsx global>{`
