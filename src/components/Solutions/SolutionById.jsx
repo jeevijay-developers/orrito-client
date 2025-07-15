@@ -14,8 +14,11 @@ import {
 } from "@/server/solutionServer";
 import Link from "next/link";
 import { useQuery } from "@/context/QueryContext";
+import { Minus, Plus, Trash2 } from "lucide-react";
 export default function SolutionById({ id }) {
-  const { addToQuery } = useQuery();
+  const { addToQuery, queryItems, updateQuantity, deleteQuery, checkQuery } =
+    useQuery();
+  
   const [solution, setSolution] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -325,22 +328,95 @@ export default function SolutionById({ id }) {
                   </div>
                 )}
 
-                {solution.stock > 0 ? (
+                {solution.stock ? (
                   <div className="flex flex-col sm:flex-row gap-4 mb-4">
-                    <button
-                      className="flex-1 cursor-pointer bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg  transition-colors flex items-center justify-center gap-2"
-                      onClick={() => {
-                        addToQuery({
-                          id: solution._id,
-                          name: solution.name,
-                          price: solution.price,
-                          quantity: 1,
-                        });
-                      }}
-                    >
-                      <ShoppingCart size={20} />
-                      Add to Cart
-                    </button>
+                    {checkQuery(solution._id) ? (
+                      <div className="flex-1 flex items-center justify-center gap-2 border border-gray-200 rounded-lg p-2 max-w-xs mx-auto sm:mx-0 bg-gray-200">
+                        <button
+                          className="p-1.5 text-gray-600 hover:text-orange-500 transition-colors rounded-full hover:bg-gray-100"
+                          onClick={() => {
+                            const item = queryItems.find(
+                              (item) => item.id === solution._id
+                            );
+                            if (item && item.quantity > 1) {
+                              updateQuantity(solution._id, item.quantity - 1);
+                            } else {
+                              deleteQuery(solution._id);
+                            }
+                          }}
+                        >
+                          <Minus size={20} />
+                        </button>
+
+                        <div className="flex flex-col items-center">
+                          <input
+                            type="number"
+                            className="text-gray-800 font-medium text-lg w-full text-center bg-white rounded border border-gray-300"
+                            value={
+                              queryItems.find((item) => item.id === solution._id)
+                                ?.quantity ?? ""
+                            }
+                            onChange={(e) => {
+                              const val = e.target.value;
+                              if (val === "") {
+                                updateQuantity(solution._id, "");
+                              } else {
+                                const num = parseInt(val);
+                                if (!isNaN(num) && num >= 0) {
+                                  updateQuantity(solution._id, num);
+                                }
+                              }
+                            }}
+                            onBlur={(e) => {
+                              const val = e.target.value.trim();
+                              const num = parseInt(val);
+                              if (val === "" || isNaN(num) || num < 1) {
+                                updateQuantity(solution._id, 1);
+                              }
+                            }}
+                            // min="0"
+                            max={solution.stock}
+                          />
+                          {/* <span className="text-xs text-gray-500">in cart</span> */}
+                        </div>
+
+                        <button
+                          className="p-2 text-gray-600 hover:text-orange-500 transition-colors rounded-full hover:bg-gray-100"
+                          onClick={() => {
+                            const item = queryItems.find(
+                              (item) => item.id === solution._id
+                            );
+                            if (item) {
+                              updateQuantity(solution._id, item.quantity + 1);
+                            }
+                          }}
+                        >
+                          <Plus size={20} />
+                        </button>
+
+                        <button
+                          className="p-2 text-gray-600 hover:text-red-500 transition-colors rounded-full hover:bg-gray-100 ml-2"
+                          onClick={() => deleteQuery(solution._id)}
+                        >
+                          <Trash2 size={20} />
+                        </button>
+                      </div>
+                    ) : (
+                      <button
+                        className="flex-1 cursor-pointer bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg transition-colors flex items-center justify-center gap-2"
+                        onClick={() => {
+                          addToQuery({
+                            id: solution._id,
+                            name: solution.name,
+                            price: solution.price,
+                            quantity: 1,
+                          });
+                        }}
+                      >
+                        <ShoppingCart size={20} />
+                        Add to Cart
+                      </button>
+                    )}
                   </div>
                 ) : (
                   <div className="flex flex-col sm:flex-row gap-4 mb-4">

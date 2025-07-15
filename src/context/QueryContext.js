@@ -33,7 +33,14 @@ export const QueryProvider = ({ children }) => {
       }
     });
   };
-
+  const checkQuery = (id) => {
+    const index = queryItems.findIndex((i) => i.id === id);
+    if (index !== -1) {
+      return true;
+    } else {
+      return false;
+    }
+  };
   const updateQuantity = (id, newQuantity) => {
     setQueryItems((prev) =>
       prev.map((item) =>
@@ -58,6 +65,7 @@ export const QueryProvider = ({ children }) => {
         updateQuantity,
         deleteQuery,
         deleteAllQuery,
+        checkQuery,
       }}
     >
       {children}

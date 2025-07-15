@@ -8,7 +8,7 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { useQuery } from "@/context/QueryContext";
 
 const Offers = () => {
-  const { addToQuery } = useQuery();
+  const { addToQuery, queryItems, updateQuantity, deleteQuery, checkQuery } = useQuery();
   const offers = [
     {
       id: 1,
@@ -226,39 +226,66 @@ const Offers = () => {
 
                     {/* Action Buttons */}
                     <div className="flex gap-2">
-                      <button
-                        className="flex-1 cursor-pointer text-white py-2 px-4 rounded-lg font-semibold transition-colors duration-300 transform hover:scale-105"
-                        style={{ backgroundColor: "#313841" }}
-                        onMouseEnter={(e) =>
-                          (e.target.style.backgroundColor = "#2a3038")
-                        }
-                        onMouseLeave={(e) =>
-                          (e.target.style.backgroundColor = "#313841")
-                        }
-                        onClick={() => addToQuery({ ...offer, quantity: 1 })}
-                      >
-                        Add to Cart
-                      </button>
-
-                      {/* <button 
-                          className="px-4 py-2 rounded-lg transition-all duration-300"
-                          style={{ 
-                            border: '1px solid #313841',
-                            color: '#313841'
-                          }}
-                          onMouseEnter={(e) => {
-                            e.target.style.backgroundColor = '#313841'
-                            e.target.style.color = 'white'
-                          }}
-                          onMouseLeave={(e) => {
-                            e.target.style.backgroundColor = 'transparent'
-                            e.target.style.color = '#313841'
-                          }}
+                      {checkQuery(offer.id) ? (
+                        <div className="flex-1 flex items-center justify-between border border-gray-200 rounded-lg">
+                          <button
+                            className="px-3 py-2 text-gray-600 hover:text-orange-500 transition-colors"
+                            onClick={() => {
+                              const item = queryItems.find(item => item.id === offer.id);
+                              if (item && item.quantity > 1) {
+                                updateQuantity(offer.id, item.quantity - 1);
+                              } else {
+                                deleteQuery(offer.id);
+                              }
+                            }}
+                          >
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                              <path fillRule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
+                            </svg>
+                          </button>
+                          
+                          <span className="text-gray-800 font-medium">
+                            {queryItems.find(item => item.id === offer.id)?.quantity || 0}
+                          </span>
+                          
+                          <button
+                            className="px-3 py-2 text-gray-600 hover:text-orange-500 transition-colors"
+                            onClick={() => {
+                              const item = queryItems.find(item => item.id === offer.id);
+                              if (item) {
+                                updateQuantity(offer.id, item.quantity + 1);
+                              }
+                            }}
+                          >
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                              <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
+                            </svg>
+                          </button>
+                          
+                          <button 
+                            className="px-3 py-2 text-gray-600 hover:text-red-500 transition-colors"
+                            onClick={() => deleteQuery(offer.id)}
+                          >
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                              <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
+                            </svg>
+                          </button>
+                        </div>
+                      ) : (
+                        <button
+                          className="flex-1 cursor-pointer text-white py-2 px-4 rounded-lg font-semibold transition-colors duration-300 transform hover:scale-105"
+                          style={{ backgroundColor: "#313841" }}
+                          onMouseEnter={(e) =>
+                            (e.target.style.backgroundColor = "#2a3038")
+                          }
+                          onMouseLeave={(e) =>
+                            (e.target.style.backgroundColor = "#313841")
+                          }
+                          onClick={() => addToQuery({ ...offer, quantity: 1 })}
                         >
-                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                          </svg>
-                        </button> */}
+                          Add to Cart
+                        </button>
+                      )}
                     </div>
                   </div>
 
