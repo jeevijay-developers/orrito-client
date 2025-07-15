@@ -23,6 +23,17 @@ export const solutionCategories = async() => {
   }
 }
 
+export const getAllProducts = async () => {
+  try {
+    const response = await apiClient.get("/api/v1/products/all-products");
+    console.log("Response from getAllProducts:", response);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching all products:", error);
+    throw error;
+  }
+}
+
 // export const solarCategories = [
 //     { 
 //         name: 'Solar Street Lights', 

@@ -9,8 +9,11 @@ import {
   productCategories as fetchProductCategories,
   solutionCategories as fetchSolutionCategories,
   solarCategories as fetchSolarCategories,
+  getAllProducts,
 } from "@/service/Data";
 import { useQuery } from "@/context/QueryContext";
+
+
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProductDropdownOpen, setIsProductDropdownOpen] = useState(false);
@@ -25,6 +28,10 @@ const Navbar = () => {
   const [productCategories, setProductCategories] = useState([]);
   const [solutionCategories, setSolutionCategories] = useState([]);
   const [solarCategories, setSolarCategories] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const dropdownRef = useRef(null);
   const productLinkRef = useRef(null);
   const solutionDropdownRef = useRef(null);
@@ -60,6 +67,12 @@ const Navbar = () => {
         setSolarCategories(Array.isArray(solar) ? solar : []);
       } catch {
         setSolarCategories([]);
+      }
+      try {
+        const products = await getAllProducts();
+        setAllProducts(Array.isArray(products) ? products : []);
+      } catch {
+        setAllProducts([]);
       }
     }
     fetchCategories();
@@ -136,6 +149,51 @@ const Navbar = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // Close search suggestions when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      const searchContainer = event.target.closest('.relative');
+      if (!searchContainer || !searchContainer.querySelector('input[placeholder*="looking"]')) {
+        setShowSuggestions(false);
+      }
+    };
+
+    if (showSuggestions) {
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => document.removeEventListener("mousedown", handleClickOutside);
+    }
+  }, [showSuggestions]);
+
+  // Handle search input
+  const handleSearchChange = (e) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+
+    if (query.trim().length > 0) {
+      const filtered = allProducts.filter((product) =>
+        product.name.toLowerCase().includes(query.toLowerCase())
+      );
+      setFilteredProducts(filtered);
+      setShowSuggestions(true);
+    } else {
+      setShowSuggestions(false);
+      setFilteredProducts([]);
+    }
+  };
+
+  const handleProductSelect = (product) => {
+    setSearchQuery(product.name);
+    setShowSuggestions(false);
+    // Navigate to product page
+    window.location.href = `/products/product/${product.slug}`;
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    setShowSuggestions(false);
+    // Handle search submit logic here
+  };
+
   return (
     <nav className="bg-white shadow-md border-b border-gray-200 fixed top-12 left-0 w-full z-40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -176,9 +234,8 @@ const Navbar = () => {
               >
                 <span>Product</span>
                 <FiChevronDown
-                  className={`w-4 h-4 transition-transform duration-200 ${
-                    isProductDropdownOpen ? "rotate-180" : ""
-                  }`}
+                  className={`w-4 h-4 transition-transform duration-200 ${isProductDropdownOpen ? "rotate-180" : ""
+                    }`}
                 />
               </Link>
 
@@ -206,9 +263,8 @@ const Navbar = () => {
               >
                 <span>Solution</span>
                 <FiChevronDown
-                  className={`w-4 h-4 transition-transform duration-200 ${
-                    isSolutionDropdownOpen ? "rotate-180" : ""
-                  }`}
+                  className={`w-4 h-4 transition-transform duration-200 ${isSolutionDropdownOpen ? "rotate-180" : ""
+                    }`}
                 />
               </Link>
               {isSolutionDropdownOpen && (
@@ -234,9 +290,8 @@ const Navbar = () => {
               >
                 <span>Solar</span>
                 <FiChevronDown
-                  className={`w-4 h-4 transition-transform duration-200 ${
-                    isSolarDropdownOpen ? "rotate-180" : ""
-                  }`}
+                  className={`w-4 h-4 transition-transform duration-200 ${isSolarDropdownOpen ? "rotate-180" : ""
+                    }`}
                 />
               </Link>
               {isSolarDropdownOpen && (
@@ -273,26 +328,76 @@ const Navbar = () => {
           <div className="flex items-center space-x-4">
             {/* Desktop Search Bar */}
             <div className="hidden md:block relative">
-              <input
-                type="text"
-                placeholder="Search bar"
-                className="w-64 px-4 py-2 pr-10 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-0 focus:border-orange-500 bg-white"
-              />
-              <div className="absolute inset-y-0 right-0 flex items-center pr-3">
-                <svg
-                  className="w-4 h-4 text-gray-500"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  />
-                </svg>
-              </div>
+              <form onSubmit={handleSearchSubmit}>
+                <input
+                  type="text"
+                  placeholder="What are you looking for... ?"
+                  className="w-64 px-4 py-2 pr-10 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-0 focus:border-orange-500 bg-white"
+                  value={searchQuery}
+                  onChange={handleSearchChange}
+                  onFocus={() => searchQuery.length > 0 && setShowSuggestions(true)}
+                />
+                <div className="absolute inset-y-0 right-0 flex items-center pr-3">
+                  <svg
+                    className="w-4 h-4 text-gray-500"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    />
+                  </svg>
+                </div>
+              </form>
+
+              {/* Search Suggestions */}
+              {showSuggestions && filteredProducts.length > 0 && (
+                <div className="absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-lg shadow-lg z-50 mt-1 max-h-80 overflow-hidden">
+                  <div className="py-2">
+                    <div className="px-3 py-2 text-xs text-gray-500 border-b border-gray-100">
+                      Found {filteredProducts.length} product{filteredProducts.length !== 1 ? 's' : ''}
+                    </div>
+                    <div className="max-h-60 overflow-y-auto">
+                      {filteredProducts.slice(0, 5).map((product, index) => (
+                        <div
+                          key={product._id || index}
+                          className="flex items-center px-3 py-2 hover:bg-gray-50 cursor-pointer border-b border-gray-50 last:border-b-0"
+                          onClick={() => handleProductSelect(product)}
+                        >
+                          {product.images && product.images.length > 0 ? (
+                            <img
+                              src={product.images[0].url}
+                              alt={product.name}
+                              className="w-10 h-10 object-cover rounded mr-3 flex-shrink-0"
+                            />
+                          ) : (
+                            <div className="w-10 h-10 bg-gray-200 rounded mr-3 flex items-center justify-center flex-shrink-0">
+                              <span className="text-gray-400 text-xs">📷</span>
+                            </div>
+                          )}
+                          <div className="flex-1 min-w-0">
+                            <div className="text-sm font-medium text-gray-900 truncate">
+                              {product.name}
+                            </div>
+                            <div className="text-xs text-gray-500 truncate">
+                              {product.categoryName && product.categoryName[0]}
+                            </div>
+                          </div>
+                          {product.price && (
+                            <div className="text-sm font-medium text-orange-600 ml-2">
+                              ₹{product.price}
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
             {/* Shopping Cart Icon */}
             <Link
@@ -302,8 +407,7 @@ const Navbar = () => {
               <FiShoppingCart size={24} />
               {cartQuantity > 0 && (
                 <span
-                  className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs font-bold px-1.5 py-0.5 rounded-full
-"
+                  className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs font-bold px-1.5 py-0.5 rounded-full"
                 >
                   {cartQuantity}
                 </span>
@@ -360,26 +464,88 @@ const Navbar = () => {
               {/* Mobile Search Bar */}
               <div className="px-3 py-2">
                 <div className="relative">
-                  <input
-                    type="text"
-                    placeholder="Search bar"
-                    className="w-full px-4 py-2 pr-10 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                  />
-                  <div className="absolute inset-y-0 right-0 flex items-center pr-3">
-                    <svg
-                      className="w-4 h-4 text-gray-500"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                      />
-                    </svg>
-                  </div>
+                  <form onSubmit={handleSearchSubmit}>
+                    <input
+                      type="text"
+                      placeholder="What are you looking for... ?"
+                      className="w-full px-4 py-2 pr-10 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                      value={searchQuery}
+                      onChange={handleSearchChange}
+                      onFocus={() => searchQuery.length > 0 && setShowSuggestions(true)}
+                    />
+                    <div className="absolute inset-y-0 right-0 flex items-center pr-3">
+                      <svg
+                        className="w-4 h-4 text-gray-500"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                        />
+                      </svg>
+                    </div>
+                  </form>
+
+                  {/* Mobile Search Suggestions */}
+                  {showSuggestions && filteredProducts.length > 0 && (
+                    <div className="absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-lg shadow-lg z-50 mt-1 max-h-60 overflow-hidden">
+                      <div className="py-2">
+                        <div className="px-3 py-2 text-xs text-gray-500 border-b border-gray-100">
+                          Found {filteredProducts.length} product{filteredProducts.length !== 1 ? 's' : ''}
+                        </div>
+                        <div className="max-h-48 overflow-y-auto">
+                          {filteredProducts.slice(0, 5).map((product, index) => (
+                            <div
+                              key={product._id || index}
+                              className="flex items-center px-3 py-2 hover:bg-gray-50 cursor-pointer border-b border-gray-50 last:border-b-0"
+                              onClick={() => {
+                                handleProductSelect(product);
+                                setIsMenuOpen(false);
+                              }}
+                            >
+                              {product.images && product.images.length > 0 ? (
+                                <img
+                                  src={product.images[0].url}
+                                  alt={product.name}
+                                  className="w-8 h-8 object-cover rounded mr-3 flex-shrink-0"
+                                />
+                              ) : (
+                                <div className="w-8 h-8 bg-gray-200 rounded mr-3 flex items-center justify-center flex-shrink-0">
+                                  <span className="text-gray-400 text-xs">📷</span>
+                                </div>
+                              )}
+                              <div className="flex-1 min-w-0">
+                                <div className="text-sm font-medium text-gray-900 truncate">
+                                  {product.name}
+                                </div>
+                                <div className="text-xs text-gray-500 truncate">
+                                  {product.categoryName && product.categoryName[0]}
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                          {filteredProducts.length > 5 && (
+                            <div className="px-3 py-2 text-center">
+                              <button
+                                className="text-orange-500 text-sm font-medium hover:text-orange-600"
+                                onClick={() => {
+                                  setShowSuggestions(false);
+                                  setIsMenuOpen(false);
+                                  window.location.href = `/search?q=${encodeURIComponent(searchQuery)}`;
+                                }}
+                              >
+                                View all {filteredProducts.length} results
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
 
@@ -410,9 +576,8 @@ const Navbar = () => {
                     className="text-gray-700 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 border border-l-0 border-gray-300 rounded-r-md text-base font-medium transition-colors duration-200 flex items-center"
                   >
                     <FiChevronDown
-                      className={`w-4 h-4 transition-transform duration-200 ${
-                        isMobileProductDropdownOpen ? "rotate-180" : ""
-                      }`}
+                      className={`w-4 h-4 transition-transform duration-200 ${isMobileProductDropdownOpen ? "rotate-180" : ""
+                        }`}
                     />
                   </button>
                 </div>
@@ -454,9 +619,8 @@ const Navbar = () => {
                     className="text-gray-700 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 border border-l-0 border-gray-300 rounded-r-md text-base font-medium transition-colors duration-200 flex items-center"
                   >
                     <FiChevronDown
-                      className={`w-4 h-4 transition-transform duration-200 ${
-                        isMobileSolutionDropdownOpen ? "rotate-180" : ""
-                      }`}
+                      className={`w-4 h-4 transition-transform duration-200 ${isMobileSolutionDropdownOpen ? "rotate-180" : ""
+                        }`}
                     />
                   </button>
                 </div>
@@ -496,9 +660,8 @@ const Navbar = () => {
                     className="text-gray-700 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 border border-l-0 border-gray-300 rounded-r-md text-base font-medium transition-colors duration-200 flex items-center"
                   >
                     <FiChevronDown
-                      className={`w-4 h-4 transition-transform duration-200 ${
-                        isMobileSolarDropdownOpen ? "rotate-180" : ""
-                      }`}
+                      className={`w-4 h-4 transition-transform duration-200 ${isMobileSolarDropdownOpen ? "rotate-180" : ""
+                        }`}
                     />
                   </button>
                 </div>
