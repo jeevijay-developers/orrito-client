@@ -9,9 +9,14 @@ import { useQuery } from "@/context/QueryContext";
 import { getAllProducts } from "@/service/Data";
 
 const Offers = () => {
-  const { addToQuery } = useQuery();
+  const { addToQuery, queryItems, updateQuantity, deleteQuery } = useQuery();
   const [offers, setOffers] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  // Check if item is in query
+  const checkQuery = (id) => {
+    return queryItems.some(item => item.id === id);
+  };
 
   useEffect(() => {
     const fetchOffers = async () => {
@@ -156,7 +161,17 @@ const Offers = () => {
                     </h3>
 
                     {/* Features */}
-                    
+                    {/* <ul className="mb-4 space-y-1">
+                      {offer.features.slice(0, 3).map((feature, idx) => (
+                        <li
+                          key={idx}
+                          className="text-xs text-gray-600 flex items-center"
+                        >
+                          <span className="w-1 h-1 bg-orange-500 rounded-full mr-2"></span>
+                          {feature}
+                        </li>
+                      ))}
+                    </ul> */}
 
                     {/* Pricing */}
                     <div className="flex items-center justify-between mb-4">
