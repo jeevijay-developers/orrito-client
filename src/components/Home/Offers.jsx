@@ -22,6 +22,8 @@ const Offers = () => {
     const fetchOffers = async () => {
       try {
         const response = await getAllProducts();
+        console.log("Fetched offers:", response);
+        
         const products = response.data || response; // Handle both response.data and direct array
 
         // Transform API data to offers format
@@ -163,18 +165,12 @@ const Offers = () => {
                     <div className="flex items-center justify-between mb-4">
                       <div>
                         <span
-                          className="text-sm font-bold " 
+                          className="text-lg font-bold " 
                           style={{ color: "#313841" }}
                         >
                           ₹{offer.offerPrice}
                         </span>
-                        {/* <span className="text-sm text-gray-500 line-through ml-2">
-                          ₹{offer.originalPrice}
-                        </span> */}
                       </div>
-                      {/* <div className="text-sm text-green-600 font-semibold">
-                        Save ₹{offer.originalPrice - offer.offerPrice}
-                      </div> */}
                     </div>
 
                     {/* Action Buttons */}
