@@ -22,8 +22,6 @@ const Offers = () => {
     const fetchOffers = async () => {
       try {
         const response = await getAllProducts();
-        console.log("Fetched offers:", response);
-        
         const products = response.data || response; // Handle both response.data and direct array
 
         // Transform API data to offers format
