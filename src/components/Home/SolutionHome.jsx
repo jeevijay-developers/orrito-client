@@ -1,44 +1,26 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
-
-const solutions = [
-	{
-		name: "Instant Geyser",
-		img: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80",
-		btn: "Solution1",
-	},
-	{
-		name: "Aeon BLDC Fan",
-		img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
-		btn: "Solution2",
-	},
-	{
-		name: "Aerosense BLDC Fan",
-		img: "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80",
-		btn: "Solution3",
-	},
-	{
-		name: "Coffee Machines",
-		img: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
-		btn: "Solution4",
-	},
-	{
-		name: "LED Panel Light",
-		img: "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=600&q=80",
-		btn: "LED Panel",
-	},
-	{
-		name: "LED Strip Light",
-		img: "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=600&q=80",
-		btn: "LED Strip",
-	},
-];
+import { solutionCategories } from "@/service/Data";
+import Link from "next/link";
 
 const SolutionHome = () => {
+	const [categories, setCategories] = useState([]);
+
+    useEffect(() => {
+            async function getCategories() {
+                try {
+                    const data = await solutionCategories();
+                    setCategories(Array.isArray(data) ? data : []);
+                } catch (err) {
+                    setCategories([]);
+                }
+            }
+            getCategories();
+        }, []);
 	return (
 		<section className="py-12">
 			<h2 className="text-4xl font-light text-center mb-10 text-gray-800">
@@ -96,18 +78,20 @@ const SolutionHome = () => {
                         
 					}}
 				>
-					{solutions.map((sol) => (
-						<SwiperSlide key={sol.name}>
-							<div className="flex flex-col items-center rounded-2xl overflow-hidden mx-auto pb-4 px-1 w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-sm">
-								<img
-									src={sol.img}
-									alt={sol.name}
-									className="w-full h-80 sm:h-96 md:h-[450px] lg:h-[520px] object-cover rounded-2xl"
-								/>
-								<button className="mt-4 py-2 px-5 bg-gray-900 text-white rounded-full font-semibold text-xs sm:text-sm hover:bg-orange-500 transition-colors duration-200 focus:outline-none ">
-									{sol.btn}
-								</button>
-							</div>
+					{categories.map((sol) => (
+						<SwiperSlide key={sol._id || sol.id || sol.name}>
+							<Link href={`/solutions/${encodeURIComponent(sol.name)}`} className="block w-full h-full">
+								<div className="flex flex-col items-center rounded-2xl overflow-hidden mx-auto pb-4 px-1 w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-sm">
+									<img
+										src={sol.image?.url || sol.img || sol.src || '/img/corporate/placeholder.png'}
+										alt={sol.name}
+										className="w-full h-80 sm:h-96 md:h-[450px] lg:h-[520px] object-cover rounded-2xl"
+									/>
+									<button className="mt-4 py-2 px-5 bg-gray-900 text-white rounded-full font-semibold text-xs sm:text-sm hover:bg-orange-500 transition-colors duration-200 focus:outline-none ">
+										{sol.btn}
+									</button>
+								</div>
+							</Link>
 						</SwiperSlide>
 					))}
 				</Swiper>
