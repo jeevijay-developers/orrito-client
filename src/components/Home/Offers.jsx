@@ -168,9 +168,9 @@ const Offers = () => {
                         >
                           ₹{offer.offerPrice}
                         </span>
-                        <span className="text-sm text-gray-500 line-through ml-2">
+                        {/* <span className="text-sm text-gray-500 line-through ml-2">
                           ₹{offer.originalPrice}
-                        </span>
+                        </span> */}
                       </div>
                       {/* <div className="text-sm text-green-600 font-semibold">
                         Save ₹{offer.originalPrice - offer.offerPrice}
