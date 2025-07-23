@@ -363,9 +363,10 @@ export default function OrittoCorporate() {
                         </div>
 
                         <div className="mb-16 w-full">
-                            <h3 className="text-3xl font-bold mb-8 text-center text-gray-800">Process Flow</h3>
-                            <Card className="p-8">
-                                <div className="flex flex-wrap justify-center items-center gap-4">
+                            <h3 className="text-2xl md:text-3xl font-bold mb-8 text-center text-gray-800">Process Flow</h3>
+                            <Card className="p-4 md:p-8 bg-gradient-to-br from-gray-50 to-white shadow-lg">
+                                {/* Desktop View - Single Line */}
+                                <div className="hidden lg:flex justify-center items-center gap-1 xl:gap-2 overflow-x-auto">
                                     {[
                                         "Raw Materials",
                                         "Processing",
@@ -375,11 +376,55 @@ export default function OrittoCorporate() {
                                         "Packaging",
                                         "Distribution",
                                     ].map((step, index) => (
-                                        <div key={index} className=" flex items-center">
-                                            <div className="bg-orange-600 text-white px-4 py-2 rounded-lg font-semibold">{step}</div>
-                                            {index < 6 && <ChevronRight className="h-6 w-6 text-gray-400 mx-2" />}
+                                        <div key={index} className="flex items-center flex-shrink-0">
+                                            <div className="bg-gradient-to-r from-orange-600 to-red-600 text-white px-3 py-2 xl:px-4 xl:py-3 rounded-xl font-semibold shadow-md text-xs xl:text-sm whitespace-nowrap">
+                                                {step}
+                                            </div>
+                                            {index < 6 && (
+                                                <ChevronRight className="h-4 w-4 xl:h-5 xl:w-5 text-orange-400 mx-1 animate-pulse flex-shrink-0" />
+                                            )}
                                         </div>
                                     ))}
+                                </div>
+
+                                {/* Mobile/Tablet View */}
+                                <div className="lg:hidden">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        {[
+                                            "Raw Materials",
+                                            "Processing",
+                                            "Quality Control",
+                                            "Assembly",
+                                            "Testing",
+                                            "Packaging",
+                                            "Distribution",
+                                        ].map((step, index) => (
+                                            <div key={index} className="relative">
+                                                <div className="bg-gradient-to-r from-orange-600 to-red-600 text-white p-4 rounded-xl font-semibold shadow-md text-center">
+                                                    <div className="flex items-center justify-center gap-2">
+                                                        <span className="bg-white text-orange-600 rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">
+                                                            {index + 1}
+                                                        </span>
+                                                        <span className="text-sm sm:text-base">{step}</span>
+                                                    </div>
+                                                </div>
+                                                {index < 6 && (
+                                                    <div className="hidden sm:flex absolute -right-2 top-1/2 transform -translate-y-1/2 z-10">
+                                                        <div className="bg-white rounded-full p-1 shadow-md">
+                                                            <ChevronRight className="h-4 w-4 text-orange-400" />
+                                                        </div>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    {/* Mobile Flow Indicator */}
+                                    <div className="sm:hidden mt-6 flex justify-center">
+                                        <div className="text-xs text-gray-500 bg-gray-100 px-3 py-2 rounded-full">
+                                            ↓ Sequential Process Flow ↓
+                                        </div>
+                                    </div>
                                 </div>
                             </Card>
                         </div>
@@ -489,39 +534,240 @@ export default function OrittoCorporate() {
             </section>
 
             {/* Management Team */}
-            <section className="py-20 bg-white">
+            <section className="py-12 md:py-20 bg-white">
                 <div className="container mx-auto px-4">
-                    <div className="max-w-6xl mx-auto">
-                        <h2 className="text-4xl font-bold text-center mb-16 text-gray-800">Oritto Pillars - Our Leadership Team</h2>
+                    <div className="max-w-7xl mx-auto">
+                        <div className="text-center mb-12 md:mb-16">
+                            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                                Oritto Pillars - Our Leadership Team
+                            </h2>
+                            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                                Meet the visionary leaders driving innovation and excellence in our organization
+                            </p>
+                        </div>
 
-                        <Swiper
-                            modules={[Navigation, Autoplay]}
-                            spaceBetween={30}
-                            slidesPerView={4}
-                            autoplay={{ delay: 3000, disableOnInteraction: false }}
-                            navigation
-                            loop={true}
-                            pagination={{ clickable: true }}
-                            className="team-carousel"
-                        >
-                            {teamMembers.map((member, index) => (
-                                <SwiperSlide key={index}>
-                                    <Card className="p-6 text-center hover:shadow-lg transition-shadow">
-                                        <Image
-                                            src={member.image || "/placeholder.svg"}
-                                            alt={member.name}
-                                            width={200}
-                                            height={200}
-                                            className="rounded-full mx-auto mb-4"
-                                        />
-                                        <h3 className="text-xl font-bold mb-2 text-gray-800">{member.name}</h3>
-                                        <p className="text-gray-600 mb-4">{member.position}</p>
-                                    </Card>
-                                </SwiperSlide>
-                            ))}
-                        </Swiper>
+                        <div className="relative">
+                            {/* Left Navigation Button */}
+                            <button className="team-button-prev group absolute left-0 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-12 h-12 md:w-14 md:h-14 bg-white border-2 border-orange-500 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 hover:bg-gradient-to-r hover:from-orange-500 hover:to-red-500 focus:outline-none focus:ring-2 focus:ring-orange-400 -ml-6 md:-ml-8">
+                                <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-orange-500 group-hover:text-white rotate-180 group-hover:-translate-x-0.5 transition-all duration-300" />
+                            </button>
+
+                            {/* Right Navigation Button */}
+                            <button className="team-button-next group absolute right-0 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-12 h-12 md:w-14 md:h-14 bg-white border-2 border-orange-500 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 hover:bg-gradient-to-r hover:from-orange-500 hover:to-red-500 focus:outline-none focus:ring-2 focus:ring-orange-400 -mr-6 md:-mr-8">
+                                <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-orange-500 group-hover:text-white group-hover:translate-x-0.5 transition-all duration-300" />
+                            </button>
+
+                            <Swiper
+                                modules={[Navigation, Autoplay, Pagination]}
+                                spaceBetween={20}
+                                autoplay={{ 
+                                    delay: 4000, 
+                                    disableOnInteraction: false,
+                                    pauseOnMouseEnter: true 
+                                }}
+                                loop={true}
+                                navigation={{
+                                    nextEl: '.team-button-next',
+                                    prevEl: '.team-button-prev',
+                                }}
+                                pagination={{
+                                    clickable: true,
+                                    dynamicBullets: true,
+                                }}
+                                breakpoints={{
+                                    320: {
+                                        slidesPerView: 1,
+                                        spaceBetween: 16,
+                                    },
+                                    640: {
+                                        slidesPerView: 2,
+                                        spaceBetween: 20,
+                                    },
+                                    1024: {
+                                        slidesPerView: 3,
+                                        spaceBetween: 24,
+                                    },
+                                    1280: {
+                                        slidesPerView: 4,
+                                        spaceBetween: 30,
+                                    }
+                                }}
+                                className="leadership-swiper !pb-16"
+                            >
+                                {teamMembers.map((member, index) => (
+                                    <SwiperSlide key={index}>
+                                        <div className="group h-full">
+                                            <Card className="relative p-3 sm:p-4 md:p-6 bg-white border-0 shadow-lg hover:shadow-2xl transition-all duration-500 rounded-2xl overflow-hidden h-full min-h-[280px] sm:min-h-[320px] md:min-h-[350px]">
+                                                {/* Background Gradient */}
+                                                <div className="absolute inset-0 bg-gradient-to-br from-orange-50 via-white to-red-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                                
+                                                {/* Content */}
+                                                <div className="relative z-10 text-center h-full flex flex-col justify-center">
+                                    {/* Profile Image */}
+                                    <div className="relative mb-3 sm:mb-4 md:mb-6">
+                                        <div className="w-28 h-28 sm:w-32 sm:h-32 md:w-28 md:h-28 lg:w-32 lg:h-32 mx-auto relative">
+                                            <Image
+                                                src={member.image || "/placeholder.svg"}
+                                                alt={member.name}
+                                                fill
+                                                className="rounded-full object-cover border-4 border-white shadow-xl group-hover:scale-110 transition-transform duration-500"
+                                            />
+                                            {/* Ring Animation */}
+                                            <div className="absolute inset-0 rounded-full border-2 border-orange-400 opacity-0 group-hover:opacity-100 group-hover:scale-125 transition-all duration-500"></div>
+                                        </div>
+                                    </div>
+
+                                    {/* Name & Position */}
+                                    <div className="space-y-1 sm:space-y-2 flex-1 flex flex-col justify-center">
+                                        <h3 className="text-lg sm:text-xl md:text-xl lg:text-2xl font-bold text-gray-900 group-hover:text-orange-600 transition-colors duration-300 leading-tight">
+                                            {member.name.trim()}
+                                        </h3>
+                                        <p className="text-sm sm:text-base md:text-base lg:text-lg text-gray-600 font-medium leading-tight px-1 sm:px-2 md:px-0">
+                                            {member.position.trim()}
+                                        </p>
+                                    </div>                                                    {/* Decorative Element */}
+                                                    <div className="mt-2 sm:mt-4 flex justify-center">
+                                                        <div className="w-12 sm:w-16 md:w-20 h-1 bg-gradient-to-r from-orange-400 to-red-500 rounded-full transform scale-0 group-hover:scale-100 transition-transform duration-500"></div>
+                                                    </div>
+                                                </div>
+
+                                                {/* Corner Accent */}
+                                                <div className="absolute top-0 right-0 w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-orange-400 to-red-500 opacity-0 group-hover:opacity-20 transition-opacity duration-500 rounded-bl-full"></div>
+                                            </Card>
+                                        </div>
+                                    </SwiperSlide>
+                                ))}
+                            </Swiper>
+                        </div>
                     </div>
                 </div>
+
+                <style jsx>{`
+                    .leadership-swiper {
+                        padding: 0 20px 60px 20px;
+                        position: relative;
+                        overflow: visible;
+                    }
+                    
+                    /* Hide default Swiper navigation */
+                    .leadership-swiper .swiper-button-next,
+                    .leadership-swiper .swiper-button-prev {
+                        display: none;
+                    }
+                    
+                    /* Custom Navigation Buttons */
+                    .team-button-next,
+                    .team-button-prev {
+                        cursor: pointer;
+                        user-select: none;
+                        position: absolute;
+                        z-index: 20;
+                        opacity: 0.9;
+                        backdrop-filter: blur(4px);
+                    }
+                    
+                    .team-button-next:hover,
+                    .team-button-prev:hover {
+                        opacity: 1;
+                    }
+                    
+                    .team-button-next:active,
+                    .team-button-prev:active {
+                        transform: scale(0.95) translateY(-50%);
+                    }
+                    
+                    /* Mobile navigation button styling */
+                    @media (max-width: 480px) {
+                        .team-button-next,
+                        .team-button-prev {
+                            width: 44px;
+                            height: 44px;
+                            opacity: 0.95;
+                        }
+                        
+                        .team-button-next {
+                            right: 15px;
+                        }
+                        
+                        .team-button-prev {
+                            left: 15px;
+                        }
+                    }
+                    
+                    /* Medium mobile screens */
+                    @media (min-width: 481px) and (max-width: 640px) {
+                        .team-button-next {
+                            right: 10px;
+                        }
+                        
+                        .team-button-prev {
+                            left: 10px;
+                        }
+                    }
+                    
+                    /* Pagination Styling */
+                    .leadership-swiper .swiper-pagination {
+                        bottom: 10px !important;
+                        position: relative !important;
+                        margin-top: 20px;
+                    }
+                    
+                    .leadership-swiper .swiper-pagination-bullet {
+                        width: 10px;
+                        height: 10px;
+                        background: #d1d5db;
+                        border-radius: 50%;
+                        opacity: 1;
+                        transition: all 0.3s ease;
+                        cursor: pointer;
+                        margin: 0 3px;
+                    }
+                    
+                    @media (min-width: 768px) {
+                        .leadership-swiper .swiper-pagination-bullet {
+                            width: 12px;
+                            height: 12px;
+                            margin: 0 4px;
+                        }
+                    }
+                    
+                    .leadership-swiper .swiper-pagination-bullet-active {
+                        background: linear-gradient(45deg, #f97316, #ef4444);
+                        transform: scale(1.2);
+                    }
+                    
+                    @media (min-width: 768px) {
+                        .leadership-swiper .swiper-pagination-bullet-active {
+                            transform: scale(1.3);
+                        }
+                    }
+                    
+                    /* Card responsiveness */
+                    @media (max-width: 640px) {
+                        .leadership-swiper {
+                            padding: 0 10px 50px 10px;
+                        }
+                    }
+                    
+                    /* Ensure cards fill container width properly */
+                    .leadership-swiper .swiper-slide {
+                        height: auto;
+                        display: flex;
+                        flex-direction: column;
+                    }
+                    
+                    .leadership-swiper .swiper-wrapper {
+                        align-items: stretch;
+                    }
+                    
+                    /* Container spacing for navigation buttons */
+                    @media (min-width: 640px) {
+                        .max-w-7xl {
+                            padding-left: 3rem;
+                            padding-right: 3rem;
+                        }
+                    }
+                `}</style>
             </section>
 
             {/* Clientele Ticker */}
