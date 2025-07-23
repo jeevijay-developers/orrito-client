@@ -112,7 +112,7 @@ export default function SolarById({ id }) {
               {solar.categoryName?.map((cat, index) => (
                 <span
                   key={index}
-                  className="inline-block bg-blue-100 text-orange-800 text-xs px-2 py-1 rounded-full font-medium"
+                  className="inline-block bg-gray-200 text-black-800 text-xs px-2 py-1 rounded-full font-medium"
                 >
                   {formatCategoryName(cat)}
                 </span>
@@ -138,9 +138,9 @@ export default function SolarById({ id }) {
                 {categorySolars.map((s) => (
                   <Link key={s._id} href={`/solar/product/${s._id}`}>
                     <span
-                      className={`block cursor-pointer text-sm py-2 px-3 rounded border-b border-gray-100 hover:bg-gray-50 transition-colors ${
+                      className={`block cursor-pointer text-sm py-2 px-3 rounded border-b border-gray-100 hover:bg-gray-100 transition-colors ${
                         s._id === id
-                          ? "bg-blue-50 text-orange-700 font-semibold"
+                          ? "bg-gray-100 text-black-700 font-semibold"
                           : "text-gray-600"
                       }`}
                     >

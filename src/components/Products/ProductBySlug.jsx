@@ -178,9 +178,9 @@ export default function ProductBySlug({ slug }) {
                 {categoryProducts.map((p) => (
                   <Link key={p._id} href={`/products/product/${p.slug}`}>
                     <span
-                      className={`block cursor-pointer text-sm py-2 px-3 rounded border-b border-gray-100 hover:bg-gray-50 transition-colors ${
+                      className={`block cursor-pointer text-sm py-2 px-3 rounded border-b border-gray-100 hover:bg-gray-100 transition-colors ${
                         p.slug === slug
-                          ? "bg-blue-50 text-orange-700 font-semibold"
+                          ? "bg-gray-100 text-black-700 font-semibold"
                           : "text-gray-600"
                       }`}
                     >
