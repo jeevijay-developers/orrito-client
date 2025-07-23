@@ -158,7 +158,7 @@ const SolutionCategoryPage = ({ solution }) => {
                           solution.categoryName.map((cat, index) => (
                             <span
                               key={index}
-                              className="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-medium"
+                              className="inline-block bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full font-medium"
                             >
                               {formatCategoryName(cat)}
                             </span>

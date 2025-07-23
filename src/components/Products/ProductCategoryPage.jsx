@@ -130,10 +130,10 @@ const ProductCategoryPage = ({ category }) => {
               .map((product) => (
                 <div
                   key={product._id}
-                  className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 group"
+                  className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 group flex flex-col relative"
                 >
-                  <div className="cursor-pointer">
-                    <Link href={`/products/product/${product.slug}`}>
+                  <div className="cursor-pointer flex-1 flex flex-col">
+                    <Link href={`/products/product/${product.slug}`} className="flex-1 flex flex-col">{/* Product Image */}
                       {/* Product Image */}
                       <div className="relative h-48 bg-gray-100 overflow-hidden">
                         {product.images && product.images.length > 0 ? (
@@ -152,14 +152,14 @@ const ProductCategoryPage = ({ category }) => {
                       </div>
 
                       {/* Product Details */}
-                      <div className="p-4">
+                      <div className="p-4 flex-1">
                         {/* Category Badge */}
                         <div className="flex flex-wrap gap-1 mb-2">
                           {product.categoryName &&
                             product.categoryName.map((cat, index) => (
                               <span
                                 key={index}
-                                className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full font-medium"
+                                className="inline-block bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full font-medium"
                               >
                                 {formatCategoryName(cat)}
                               </span>
@@ -185,8 +185,8 @@ const ProductCategoryPage = ({ category }) => {
                       </div>
                     </Link>
                     
-                    {/* Add to Cart Section - Fixed Position */}
-                    <div className="p-4 pt-0">
+                    {/* Add to Cart Section - Fixed Position at Bottom */}
+                    <div className="p-4 pt-0 mt-auto">{/* This will always be at the bottom */}
                       {product.stock > 0 ? (
                         checkQuery(product._id) ? (
                           <div className="flex items-center justify-between border border-gray-200 rounded-lg bg-gray-100 p-1">

@@ -249,12 +249,12 @@ export default function SolarById({ id }) {
                   </div>
                 )}
 
-                {solar.stock ? (
+                {solar.stock > 0 ? (
                   <div className="flex flex-col sm:flex-row gap-4 mb-4">
                     {checkQuery(solar._id) ? (
-                      <div className="flex-1 flex items-center justify-center gap-2 border border-gray-200 rounded-lg p-2 max-w-xs mx-auto sm:mx-0 bg-gray-200">
+                      <div className="flex items-center justify-between border border-gray-200 rounded-lg bg-gray-50 p-2 max-w-xs mx-auto sm:mx-0">
                         <button
-                          className="p-1.5 text-gray-600 hover:text-orange-500 transition-colors rounded-full hover:bg-gray-100"
+                          className="w-8 h-8 flex items-center justify-center text-gray-600 hover:text-orange-500 hover:bg-white rounded transition-colors"
                           onClick={() => {
                             const item = queryItems.find(
                               (item) => item.id === solar._id
@@ -266,43 +266,16 @@ export default function SolarById({ id }) {
                             }
                           }}
                         >
-                          <Minus size={20} />
+                          <Minus className="w-4 h-4" />
                         </button>
 
-                        <div className="flex flex-col items-center">
-                          <input
-                            type="number"
-                            className="text-gray-800 font-medium text-lg w-full text-center bg-white rounded border border-gray-300"
-                            value={
-                              queryItems.find((item) => item.id === solar._id)
-                                ?.quantity ?? ""
-                            }
-                            onChange={(e) => {
-                              const val = e.target.value;
-                              if (val === "") {
-                                updateQuantity(solar._id, "");
-                              } else {
-                                const num = parseInt(val);
-                                if (!isNaN(num) && num >= 0) {
-                                  updateQuantity(solar._id, num);
-                                }
-                              }
-                            }}
-                            onBlur={(e) => {
-                              const val = e.target.value.trim();
-                              const num = parseInt(val);
-                              if (val === "" || isNaN(num) || num < 1) {
-                                updateQuantity(solar._id, 1);
-                              }
-                            }}
-                            // min="0"
-                            max={solar.stock}
-                          />
-                          {/* <span className="text-xs text-gray-500">in cart</span> */}
-                        </div>
+                        <span className="text-gray-800 font-medium px-3">
+                          {queryItems.find((item) => item.id === solar._id)
+                            ?.quantity || 0}
+                        </span>
 
                         <button
-                          className="p-2 text-gray-600 hover:text-orange-500 transition-colors rounded-full hover:bg-gray-100"
+                          className="w-8 h-8 flex items-center justify-center text-gray-600 hover:text-orange-500 hover:bg-white rounded transition-colors"
                           onClick={() => {
                             const item = queryItems.find(
                               (item) => item.id === solar._id
@@ -312,19 +285,26 @@ export default function SolarById({ id }) {
                             }
                           }}
                         >
-                          <Plus size={20} />
+                          <Plus className="w-4 h-4" />
                         </button>
 
                         <button
-                          className="p-2 text-gray-600 hover:text-red-500 transition-colors rounded-full hover:bg-gray-100 ml-2"
+                          className="w-8 h-8 flex items-center justify-center text-gray-600 hover:text-red-500 hover:bg-red-50 rounded transition-colors ml-2"
                           onClick={() => deleteQuery(solar._id)}
                         >
-                          <Trash2 size={20} />
+                          <Trash2 className="w-4 h-4" />
                         </button>
                       </div>
                     ) : (
                       <button
-                        className="flex-1 cursor-pointer bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg transition-colors flex items-center justify-center gap-2"
+                        className="flex-1 cursor-pointer text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-300 transform hover:scale-[1.02] flex items-center justify-center gap-2"
+                        style={{ backgroundColor: "#313841" }}
+                        onMouseEnter={(e) =>
+                          (e.target.style.backgroundColor = "#2a3038")
+                        }
+                        onMouseLeave={(e) =>
+                          (e.target.style.backgroundColor = "#313841")
+                        }
                         onClick={() => {
                           addToQuery({
                             id: solar._id,
@@ -341,9 +321,12 @@ export default function SolarById({ id }) {
                   </div>
                 ) : (
                   <div className="flex flex-col sm:flex-row gap-4 mb-4">
-                    <button className="flex-1 cursor-not-allowed bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-lg  transition-colors flex items-center justify-center gap-2">
+                    <button 
+                      disabled
+                      className="flex-1 bg-gray-300 text-gray-500 px-6 py-3 rounded-lg text-sm font-medium cursor-not-allowed flex items-center justify-center gap-2"
+                    >
                       <ShoppingCart size={20} />
-                      Out Of Stock
+                      Out of Stock
                     </button>
                   </div>
                 )}

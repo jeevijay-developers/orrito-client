@@ -111,13 +111,13 @@ const SolarCategoryPage = ({ id }) => {
             {solarProducts.map((product) => (
               <div
                 key={product._id}
-                className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 group"
+                className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 group flex flex-col h-[400px]"
               >
       
-                  <div className="cursor-pointer">
+                  <div className="cursor-pointer flex flex-col flex-1">
                     {/* Solar Product Image */}
                     <Link href={`/solar/product/${product._id}`}>
-                    <div className="relative h-48 bg-gray-100 overflow-hidden">
+                    <div className="relative h-48 bg-gray-100 overflow-hidden flex-shrink-0">
                       {product.images && product.images.length > 0 ? (
                         <Image
                           src={product.images[0].url}
@@ -134,7 +134,7 @@ const SolarCategoryPage = ({ id }) => {
                     </div>
 
                     {/* Solar Product Details */}
-                    <div className="p-4">
+                    <div className="p-4 flex-1 flex flex-col">
                       {/* Category Badge */}
                       <div className="flex flex-wrap gap-1 mb-2">
                         {product.categoryName &&
@@ -149,41 +149,14 @@ const SolarCategoryPage = ({ id }) => {
                       </div>
 
                       {/* Product Name */}
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-gray-950 transition-colors">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-gray-950 transition-colors flex-1">
                         {formatCategoryName(product.name)}
                       </h3>
-
-                      {/* Overview */}
-                      {/* <div
-                        className="text-gray-700 text-sm mb-2 line-clamp-2"
-                        dangerouslySetInnerHTML={{
-                          __html: product.productOverview,
-                        }}
-                      ></div> */}
-
-                      {/* Power & Status */}
-                      {/* <div className="flex items-center justify-between">
-                        <div className="flex flex-col">
-                          {product.power && (
-                            <span className="text-yellow-600 text-sm font-medium">
-                              {product.power}W
-                            </span>
-                          )}
-                          <span className="text-yellow-600 text-sm font-medium">
-                            {product.status || "Available"}
-                          </span>
-                        </div>
-                        <span className="text-gray-500 text-xs">
-                          {product.updatedAt
-                            ? new Date(product.updatedAt).toLocaleDateString()
-                            : ""}
-                        </span>
-                      </div> */}
                     </div>
                     </Link>
                     
                     {/* Add to Cart Section - Fixed Position */}
-                    <div className="p-4 pt-0">
+                    <div className="p-4 pt-0 mt-auto flex-shrink-0">
                       {product.stock > 0 ? (
                         checkQuery(product._id) ? (
                           <div className="flex items-center justify-between border border-gray-200 rounded-lg bg-gray-100 p-1">
