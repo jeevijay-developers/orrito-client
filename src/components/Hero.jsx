@@ -52,7 +52,7 @@ const Hero = () => {
       >
         {[1, 2, 3, 4].map((num) => (
           <SwiperSlide key={num}>
-            <div className="relative w-full overflow-hidden h-[60vh] md:h-[85vh]">
+            <div className="relative w-full overflow-hidden h-[60vh] md:h-[95vh]">
               <Image
                 src={`/img/corporate/${num}.jpg`}
                 alt={`Corporate Image ${num}`}

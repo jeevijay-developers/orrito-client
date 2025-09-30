@@ -61,7 +61,7 @@ const ProductHome = () => {
                 className="block w-full h-full"
               >
                 <div className="flex flex-col items-center">
-                  <div className="w-28 h-28 lg:w-36 lg:h-36 rounded-full bg-orange-50 flex items-center justify-center mb-3 shadow-sm overflow-hidden">
+                  <div className="w-28 h-28 lg:w-36 lg:h-36 rounded-4xl bg-orange-50 flex items-center justify-center mb-3 shadow-sm overflow-hidden">
                     <img
                       src={
                         cat.image?.url ||
@@ -70,7 +70,7 @@ const ProductHome = () => {
                         "/img/corporate/placeholder.png"
                       }
                       alt={cat.name}
-                      className="w-full h-full object-cover rounded-full cursor-pointer transition-transform duration-200 hover:scale-105 "
+                      className="w-full h-full object-cover rounded-4xl cursor-pointer transition-transform duration-200 hover:scale-105 "
                     />
                   </div>
                   <span className="text-gray-700 font-medium text-lg text-center whitespace-nowrap">

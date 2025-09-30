@@ -195,7 +195,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white shadow-md border-b border-gray-200 fixed top-12 left-0 w-full z-40">
+    <nav className="bg-white shadow-md border-b border-gray-200 w-full z-40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div
           className="flex justify-between items-center"
@@ -216,7 +216,7 @@ const Navbar = () => {
           <div className="hidden lg:flex items-center space-x-2">
             <Link
               href="/corporate"
-              className="text-gray-700 hover:bg-orange-500 hover:text-white px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200"
+              className="text-gray-700 hover:text-orange-500 px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200"
             >
               Corporate
             </Link>
@@ -230,7 +230,7 @@ const Navbar = () => {
               <Link
                 href="/products"
                 ref={productLinkRef}
-                className="cursor-pointer  text-gray-700 hover:bg-orange-500 hover:text-white px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200 flex items-center mr-2"
+                className="cursor-pointer text-gray-700 hover:text-orange-500 px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 flex items-center mr-2"
               >
                 <span>Product</span>
                 <FiChevronDown
@@ -259,7 +259,7 @@ const Navbar = () => {
               <Link
                 href="/solutions"
                 ref={solutionLinkRef}
-                className="cursor-pointer  text-gray-700 hover:bg-orange-500 hover:text-white px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200 flex items-center space-x-1 mr-2"
+                className="cursor-pointer text-gray-700 hover:text-orange-500 px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 flex items-center space-x-1 mr-2"
               >
                 <span>Solution</span>
                 <FiChevronDown
@@ -286,7 +286,7 @@ const Navbar = () => {
               <Link
                 href="/solar"
                 ref={solarLinkRef}
-                className=" cursor-pointer text-gray-700 hover:bg-orange-500 hover:text-white px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200 flex items-center space-x-1 mr-2"
+                className="cursor-pointer text-gray-700 hover:text-orange-500 px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 flex items-center space-x-1 mr-2"
               >
                 <span>Solar</span>
                 <FiChevronDown
@@ -306,19 +306,19 @@ const Navbar = () => {
 
             <Link
               href="/offer"
-              className="text-gray-700 hover:bg-orange-500 hover:text-white px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200"
+              className="text-gray-700 hover:text-orange-500 px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200"
             >
               Offer
             </Link>
             <Link
               href="/support"
-              className="text-gray-700 hover:bg-orange-500 hover:text-white px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200"
+              className="text-gray-700 hover:text-orange-500 px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200"
             >
               Support
             </Link>
             <Link
               href="/distribution-enquiry"
-              className="text-gray-700 hover:bg-orange-500 hover:text-white px-4 py-2 border border-gray-300 rounded-md text-sm font-medium transition-colors duration-200"
+              className="text-gray-700 hover:text-orange-500 px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200"
             >
               Distribution Enquiry
             </Link>
@@ -332,7 +332,7 @@ const Navbar = () => {
                 <input
                   type="text"
                   placeholder="What are you looking for... ?"
-                  className="w-64 px-4 py-2 pr-10 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-0 focus:border-orange-500 bg-white"
+                  className="w-64 px-4 py-2 pr-10 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-0 bg-white"
                   value={searchQuery}
                   onChange={handleSearchChange}
                   onFocus={() => searchQuery.length > 0 && setShowSuggestions(true)}
@@ -417,7 +417,7 @@ const Navbar = () => {
             {/* Mobile menu button */}
             <div className="lg:hidden flex items-center space-x-2">
               {/* Mobile Search Button */}
-              <button className="text-gray-700  p-2 border border-gray-300 rounded">
+              <button className="text-gray-700 hover:text-orange-500 p-2 rounded transition-colors duration-200">
                 <svg
                   className="w-5 h-5"
                   fill="none"
@@ -434,7 +434,7 @@ const Navbar = () => {
               </button>
               <button
                 onClick={toggleMenu}
-                className="text-gray-700  focus:outline-none p-2 border border-gray-300 rounded"
+                className="text-gray-700 hover:text-orange-500 focus:outline-none p-2 rounded transition-colors duration-200"
                 aria-label="Toggle menu"
               >
                 <svg
@@ -551,7 +551,7 @@ const Navbar = () => {
 
               <Link
                 href="/corporate"
-                className="text-gray-700 hover:text-orange-500 hover:bg-orange-50 block px-3 py-2 border border-gray-300 rounded-md text-base font-medium transition-colors duration-200 mx-3"
+                className="text-gray-700 hover:text-orange-500 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 mx-3"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Corporate
@@ -562,7 +562,7 @@ const Navbar = () => {
                 <div className="flex items-center">
                   <Link
                     href="/products"
-                    className="flex-1 text-gray-700 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 border border-gray-300 rounded-l-md text-base font-medium transition-colors duration-200"
+                    className="flex-1 text-gray-700 hover:text-orange-500 px-3 py-2 rounded-l-md text-base font-medium transition-colors duration-200"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Product
@@ -573,7 +573,7 @@ const Navbar = () => {
                         !isMobileProductDropdownOpen
                       )
                     }
-                    className="text-gray-700 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 border border-l-0 border-gray-300 rounded-r-md text-base font-medium transition-colors duration-200 flex items-center"
+                    className="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-r-md text-base font-medium transition-colors duration-200 flex items-center"
                   >
                     <FiChevronDown
                       className={`w-4 h-4 transition-transform duration-200 ${isMobileProductDropdownOpen ? "rotate-180" : ""
@@ -587,7 +587,7 @@ const Navbar = () => {
                       <Link
                         key={index}
                         href={`/products/${category.name}`}
-                        className="text-gray-600 hover:text-orange-500 hover:bg-orange-50 block px-3 py-2 rounded-md text-sm transition-colors duration-200"
+                        className="text-gray-600 hover:text-orange-500 block px-3 py-2 rounded-md text-sm transition-colors duration-200"
                         onClick={() => {
                           setIsMenuOpen(false);
                           setIsMobileProductDropdownOpen(false);
@@ -605,7 +605,7 @@ const Navbar = () => {
                 <div className="flex items-center">
                   <Link
                     href="/solutions"
-                    className="flex-1 text-gray-700 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 border border-gray-300 rounded-l-md text-base font-medium transition-colors duration-200"
+                    className="flex-1 text-gray-700 hover:text-orange-500 px-3 py-2 rounded-l-md text-base font-medium transition-colors duration-200"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Solution
@@ -616,7 +616,7 @@ const Navbar = () => {
                         !isMobileSolutionDropdownOpen
                       )
                     }
-                    className="text-gray-700 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 border border-l-0 border-gray-300 rounded-r-md text-base font-medium transition-colors duration-200 flex items-center"
+                    className="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-r-md text-base font-medium transition-colors duration-200 flex items-center"
                   >
                     <FiChevronDown
                       className={`w-4 h-4 transition-transform duration-200 ${isMobileSolutionDropdownOpen ? "rotate-180" : ""
@@ -630,7 +630,7 @@ const Navbar = () => {
                       <Link
                         key={index}
                         href={`/solutions/${category.name}`}
-                        className="text-gray-600 hover:text-orange-500 hover:bg-orange-50 block px-3 py-2 rounded-md text-sm transition-colors duration-200"
+                        className="text-gray-600 hover:text-orange-500 block px-3 py-2 rounded-md text-sm transition-colors duration-200"
                         onClick={() => {
                           setIsMenuOpen(false);
                           setIsMobileSolutionDropdownOpen(false);
@@ -648,7 +648,7 @@ const Navbar = () => {
                 <div className="flex items-center">
                   <Link
                     href="/solar"
-                    className="flex-1 text-gray-700 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 border border-gray-300 rounded-l-md text-base font-medium transition-colors duration-200"
+                    className="flex-1 text-gray-700 hover:text-orange-500 px-3 py-2 rounded-l-md text-base font-medium transition-colors duration-200"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Solar
@@ -657,7 +657,7 @@ const Navbar = () => {
                     onClick={() =>
                       setIsMobileSolarDropdownOpen(!isMobileSolarDropdownOpen)
                     }
-                    className="text-gray-700 hover:text-orange-500 hover:bg-orange-50 px-3 py-2 border border-l-0 border-gray-300 rounded-r-md text-base font-medium transition-colors duration-200 flex items-center"
+                    className="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-r-md text-base font-medium transition-colors duration-200 flex items-center"
                   >
                     <FiChevronDown
                       className={`w-4 h-4 transition-transform duration-200 ${isMobileSolarDropdownOpen ? "rotate-180" : ""
@@ -671,7 +671,7 @@ const Navbar = () => {
                       <Link
                         key={index}
                         href={`/products/${category.name}`}
-                        className="text-gray-600 hover:text-orange-500 hover:bg-orange-50 block px-3 py-2 rounded-md text-sm transition-colors duration-200"
+                        className="text-gray-600 hover:text-orange-500 block px-3 py-2 rounded-md text-sm transition-colors duration-200"
                         onClick={() => {
                           setIsMenuOpen(false);
                           setIsMobileSolarDropdownOpen(false);
@@ -686,14 +686,14 @@ const Navbar = () => {
 
               <Link
                 href="/offer"
-                className="text-gray-700 hover:text-orange-500 hover:bg-orange-50 block px-3 py-2 border border-gray-300 rounded-md text-base font-medium transition-colors duration-200 mx-3"
+                className="text-gray-700 hover:text-orange-500 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 mx-3"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Offer
               </Link>
               <Link
                 href="/support"
-                className="text-gray-700 hover:text-orange-500 hover:bg-orange-50 block px-3 py-2 border border-gray-300 rounded-md text-base font-medium transition-colors duration-200 mx-3"
+                className="text-gray-700 hover:text-orange-500 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 mx-3"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Support
@@ -703,7 +703,7 @@ const Navbar = () => {
               <div className="pt-2 px-3">
                 <Link
                   href="/distribution-enquiry"
-                  className="text-gray-700 hover:text-orange-500 hover:bg-orange-50 block px-3 py-2 border border-gray-300 rounded-md text-base font-medium transition-colors duration-200 mx-3"
+                  className="text-gray-700 hover:text-orange-500 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 mx-3"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Distribution Enquiry

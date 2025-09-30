@@ -30,9 +30,9 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         suppressHydrationWarning
       >
-        <TopBar />
         <QueryProvider>
         <BreadcrumbProvider>
+        <TopBar />
         <Navbar />
         <DynamicBreadcrumb />
         {children}
