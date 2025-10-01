@@ -8,21 +8,95 @@ import { Autoplay, Navigation } from "swiper/modules";
 import Link from "next/link";
 
 const ProductHome = () => {
-  const [categories, setCategories] = useState([]);
+  // const [categories, setCategories] = useState([]);
 
-  useEffect(() => {
-    async function getCategories() {
-      try {
-        const data = await fetchProductCategories();
-        console.log("Fetched product categories:", data);
+  // useEffect(() => {
+  //   async function getCategories() {
+  //     try {
+  //       const data = await fetchProductCategories();
+  //       console.log("Fetched product categories:", data);
 
-        setCategories(Array.isArray(data) ? data : []);
-      } catch (err) {
-        setCategories([]);
-      }
+  //       setCategories(Array.isArray(data) ? data : []);
+  //     } catch (err) {
+  //       setCategories([]);
+  //     }
+  //   }
+  //   getCategories();
+  // }, []);
+
+  // Static data for now
+  const categories = [
+    {
+      image: {
+        url: '/categories/ceiling_fan.png',
+        public_id: 'products/fk35pxdnybjlxrnyfyya'
+      },
+      name: 'Ceiling fans',
+      products: [
+        "683ffe52d7dc0b9ccea9bb35",
+        "685f8fd368e2c0833d033fea",
+        "685f901b0d17d6dcf96e6378",
+        "686f5b2ee00da0c00dac2aa6",
+        "6870d6fd78ae731f43906d2e"
+      ]
+    },
+    {
+      image: {
+        url: '/categories/diwali_lights.png',
+        public_id: 'products/abc123'
+      },
+      name: 'Diwali lights',
+      products: [
+        "111111111111111111111111",
+        "222222222222222222222222",
+        "333333333333333333333333",
+        "444444444444444444444444",
+        "555555555555555555555555"
+      ]
+    },
+    {
+      image: {
+        url: '/categories/led_bulb.png',
+        public_id: 'products/def456'
+      },
+      name: 'LED Bulbs',
+      products: [
+        "666666666666666666666666",
+        "777777777777777777777777",
+        "888888888888888888888888",
+        "999999999999999999999999",
+        "000000000000000000000000"
+      ]
+    },
+    {
+      image: {
+        url: '/categories/bedroom_lamp.png',
+        public_id: 'products/ghi789'
+      },
+      name: 'Bedroom lamps',
+      products: [
+        "aaaaaaaabbbbbbbbcccccccc",
+        "ddddddddeeeeeeeefffffff",
+        "gggggggghhhhhhhhiiiiiii",
+        "jjjjjjjjkkkkkkkklllllll",
+        "mmmmmmmmmnnnnnnnnoooooo"
+      ]
+    },
+    {
+      image: {
+        url: '/categories/backlit_led.png',
+        public_id: 'products/jkl012'
+      },
+      name: 'Backlit LEDs',
+      products: [
+        "ppppppppqqqqqqqqrrrrrrrr",
+        "ssssssssttttttttuuuuuuuu",
+        "vvvvvvvvwwwwwwwwxxxxxxxx",
+        "yyyyyyyyzzzzzzzz11111111",
+        "222222223333333344444444"
+      ]
     }
-    getCategories();
-  }, []);
+  ];
   return (
     <section className="py-12">
       <h2 className="text-4xl font-light text-center mb-10 text-gray-800">
@@ -61,7 +135,7 @@ const ProductHome = () => {
                 className="block w-full h-full"
               >
                 <div className="flex flex-col items-center">
-                  <div className="w-28 h-28 lg:w-36 lg:h-36 rounded-4xl bg-orange-50 flex items-center justify-center mb-3 shadow-sm overflow-hidden">
+                  <div className="w-28 h-28 lg:w-36 lg:h-36 rounded-4xl  flex items-center justify-center mb-3 overflow-hidden">
                     <img
                       src={
                         cat.image?.url ||

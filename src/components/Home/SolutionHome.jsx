@@ -8,23 +8,67 @@ import { solutionCategories } from "@/service/Data";
 import Link from "next/link";
 
 const SolutionHome = () => {
-	const [categories, setCategories] = useState([]);
+	// const [categories, setCategories] = useState([]);
 
-    useEffect(() => {
-            async function getCategories() {
-                try {
-                    const data = await solutionCategories();
-                    setCategories(Array.isArray(data) ? data : []);
-                } catch (err) {
-                    setCategories([]);
-                }
-            }
-            getCategories();
-        }, []);
+    // useEffect(() => {
+    //         async function getCategories() {
+    //             try {
+    //                 const data = await solutionCategories();
+    //                 setCategories(Array.isArray(data) ? data : []);
+    //             } catch (err) {
+    //                 setCategories([]);
+    //             }
+    //         }
+    //         getCategories();
+    //     }, []);
+
+	const categories = [
+	{
+		image: {
+			url: '/solutions/offices_solution.jpg',
+			public_id: 'solutions/solution1'
+		},
+		name: 'Smart Office',
+		btn: 'Explore Office Solutions'
+	},
+	{
+		image: {
+			url: '/solutions/retail_solution.jpg',
+			public_id: 'solutions/solution2'
+		},
+		name: 'Retail Lighting',
+		btn: 'Explore Retail Solutions'
+	},
+	{
+		image: {
+			url: '/solutions/healthcare_solution.webp',
+			public_id: 'solutions/solution3'
+		},
+		name: 'Healthcare Spaces',
+		btn: 'Explore Healthcare Solutions'
+	},
+	{
+		image: {
+			url: '/solutions/hospitality_solution.jpg',
+			public_id: 'solutions/solution4'
+		},
+		name: 'Hospitality',
+		btn: 'Explore Hospitality Solutions'
+	},
+	{
+		image: {
+			url: '/solutions/industrial_solution.png',
+			public_id: 'solutions/solution5'
+		},
+		name: 'Industrial',
+		btn: 'Explore Industrial Solutions'
+	}
+	]
+
 	return (
 		<section className="py-12">
 			<h2 className="text-4xl font-light text-center mb-10 text-gray-800">
-				Solution By Categories
+				Categories By Solution
 			</h2>
 			<div className="relative px-6 md:px-20">
 				<button className="solution-swiper-prev absolute left-10 md:left-22  top-3/7 -translate-y-1/2 z-20 bg-gray-800/80 text-white border border-white shadow-lg rounded-full w-10 h-10 flex items-center justify-center hover:cursor-pointer transition-colors duration-200 focus:outline-none ">
@@ -87,7 +131,7 @@ const SolutionHome = () => {
 										alt={sol.name}
 										className="w-full h-80 sm:h-96 md:h-[450px] lg:h-[520px] object-cover rounded-2xl"
 									/>
-									<button className="mt-4 py-2 px-5 bg-gray-900 text-white rounded-full font-semibold text-xs sm:text-sm hover:bg-orange-500 transition-colors duration-200 focus:outline-none ">
+									<button className="mt-4 py-2 px-5 bg-gray-900 text-white rounded-full font-semibold text-xs sm:text-sm hover:bg-orange-700 transition-colors duration-200 focus:outline-none ">
 										{sol.btn}
 									</button>
 								</div>
