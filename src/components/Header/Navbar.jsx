@@ -216,7 +216,7 @@ const Navbar = () => {
           <div className="hidden lg:flex items-center space-x-2">
             <Link
               href="/corporate"
-              className="text-white hover:text-orange-500 px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+              className="text-white  px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200"
             >
               Corporate
             </Link>
@@ -230,7 +230,7 @@ const Navbar = () => {
               <Link
                 href="/products"
                 ref={productLinkRef}
-                className="cursor-pointer text-white hover:text-orange-500 px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 flex items-center mr-2"
+                className="cursor-pointer text-white   px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 flex items-center mr-2"
               >
                 <span>Product</span>
                 <FiChevronDown
@@ -259,7 +259,7 @@ const Navbar = () => {
               <Link
                 href="/solutions"
                 ref={solutionLinkRef}
-                className="cursor-pointer text-white hover:text-orange-500 px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 flex items-center space-x-1 mr-2"
+                className="cursor-pointer text-white   px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 flex items-center space-x-1 mr-2"
               >
                 <span>Solution</span>
                 <FiChevronDown
@@ -286,7 +286,7 @@ const Navbar = () => {
               <Link
                 href="/solar"
                 ref={solarLinkRef}
-                className="cursor-pointer text-white hover:text-orange-500 px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 flex items-center space-x-1 mr-2"
+                className="cursor-pointer text-white   px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 flex items-center space-x-1 mr-2"
               >
                 <span>Solar</span>
                 <FiChevronDown
@@ -306,19 +306,19 @@ const Navbar = () => {
 
             <Link
               href="/offer"
-              className="text-white hover:text-orange-500 px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+              className="text-white  px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200"
             >
               Offer
             </Link>
             <Link
               href="/support"
-              className="text-white hover:text-orange-500 px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+              className="text-white  px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200"
             >
               Support
             </Link>
             <Link
               href="/distribution-enquiry"
-              className="text-white hover:text-orange-500 px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+              className="text-white  px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200"
             >
               Distribution Enquiry
             </Link>
@@ -402,7 +402,7 @@ const Navbar = () => {
             {/* Shopping Cart Icon */}
             <Link
               href="/cart"
-              className="relative text-gray-700 hover:text-orange-500 focus:outline-none"
+              className="relative text-white  focus:outline-none"
             >
               <FiShoppingCart size={24} />
               {cartQuantity > 0 && (
