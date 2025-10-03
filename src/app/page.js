@@ -3,6 +3,7 @@ import TopBar from '@/components/Header/TopBar'
 import Hero from '@/components/Hero'
 import Gallery from '@/components/Home/Gallery'
 import Offers from '@/components/Home/Offers'
+import Offers2 from '@/components/Home/Offers2'
 import OurClients from '@/components/Home/OurClients'
 
 import ProductHome from '@/components/Home/ProductHome'
@@ -18,6 +19,7 @@ const page = () => {
       <SolutionHome />
       <WhyOritto />
       <Offers />
+      <Offers2 />
       <OurClients />
       <Gallery />
     </div>

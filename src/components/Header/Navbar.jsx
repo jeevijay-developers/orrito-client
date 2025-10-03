@@ -195,7 +195,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white shadow-md border-b border-gray-200 w-full z-40">
+    <nav className="bg-gradient-to-r from-[#e7333e] to-[#ee6339] shadow-md w-full z-40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div
           className="flex justify-between items-center"
@@ -205,9 +205,9 @@ const Navbar = () => {
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center">
               <img
-                src="/img/logo/logo.png"
+                src="/img/logo/whitelogo.png"
                 alt="Oritto Logo"
-                className="h-22 w-auto object-contain"
+                className="h-12 w-auto object-contain"
               />
             </Link>
           </div>
@@ -216,7 +216,7 @@ const Navbar = () => {
           <div className="hidden lg:flex items-center space-x-2">
             <Link
               href="/corporate"
-              className="text-gray-700 hover:text-orange-500 px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+              className="text-white hover:text-orange-500 px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200"
             >
               Corporate
             </Link>
@@ -230,7 +230,7 @@ const Navbar = () => {
               <Link
                 href="/products"
                 ref={productLinkRef}
-                className="cursor-pointer text-gray-700 hover:text-orange-500 px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 flex items-center mr-2"
+                className="cursor-pointer text-white hover:text-orange-500 px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 flex items-center mr-2"
               >
                 <span>Product</span>
                 <FiChevronDown
@@ -259,7 +259,7 @@ const Navbar = () => {
               <Link
                 href="/solutions"
                 ref={solutionLinkRef}
-                className="cursor-pointer text-gray-700 hover:text-orange-500 px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 flex items-center space-x-1 mr-2"
+                className="cursor-pointer text-white hover:text-orange-500 px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 flex items-center space-x-1 mr-2"
               >
                 <span>Solution</span>
                 <FiChevronDown
@@ -286,7 +286,7 @@ const Navbar = () => {
               <Link
                 href="/solar"
                 ref={solarLinkRef}
-                className="cursor-pointer text-gray-700 hover:text-orange-500 px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 flex items-center space-x-1 mr-2"
+                className="cursor-pointer text-white hover:text-orange-500 px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 flex items-center space-x-1 mr-2"
               >
                 <span>Solar</span>
                 <FiChevronDown
@@ -306,19 +306,19 @@ const Navbar = () => {
 
             <Link
               href="/offer"
-              className="text-gray-700 hover:text-orange-500 px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+              className="text-white hover:text-orange-500 px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200"
             >
               Offer
             </Link>
             <Link
               href="/support"
-              className="text-gray-700 hover:text-orange-500 px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+              className="text-white hover:text-orange-500 px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200"
             >
               Support
             </Link>
             <Link
               href="/distribution-enquiry"
-              className="text-gray-700 hover:text-orange-500 px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+              className="text-white hover:text-orange-500 px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200"
             >
               Distribution Enquiry
             </Link>

@@ -29,7 +29,7 @@ const Hero = () => {
       </button>
 
       {/* Swiper with Autoplay + Navigation */}
-      <Swiper
+      {/* <Swiper
         modules={[Autoplay, Navigation]}
         spaceBetween={30}
         slidesPerView={1}
@@ -64,7 +64,16 @@ const Hero = () => {
             </div>
           </SwiperSlide>
         ))}
-      </Swiper>
+      </Swiper> */}
+    <Image
+      src={`/img/corporate/1.jpg`}
+      alt={`Corporate Image 1`}
+      width={1920}
+      height={1080}
+      className=" w-full h-[60vh] md:h-[95vh] object-cover object-center"
+      sizes="100vw"
+      priority={true}
+    />
     </div>
   )
 }

@@ -7,8 +7,9 @@ import "swiper/css/pagination";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { getAllProducts } from "@/service/Data";
 import ProductCard from "./ProductCard";
+import ProductCard2 from "./ProductCard2";
 
-const Offers = () => {
+const Offers2 = () => {
   const [offers, setOffers] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -115,7 +116,7 @@ const Offers = () => {
           >
             {offers.map((offer, index) => (
               <SwiperSlide key={offer.id}>
-                <ProductCard product={offer} />
+                <ProductCard2 product={offer} />
               </SwiperSlide>
             ))}
           </Swiper>
@@ -168,4 +169,4 @@ const Offers = () => {
   );
 };
 
-export default Offers;
+export default Offers2;
