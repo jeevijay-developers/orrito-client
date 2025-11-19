@@ -122,8 +122,8 @@ const Offers2 = () => {
           </Swiper>
 
           {/* Custom Navigation Buttons */}
-          <div className="swiper-button-prev !text-white !w-10 !h-10 !mt-0 !left-0 !top-1/2 !transform !-translate-y-1/2 bg-black/80 !rounded-full !shadow-lg  hover:!text-white !transition-all !duration-300"></div>
-          <div className="swiper-button-next !text-white !w-10 !h-10 !mt-0 !right-0 !top-1/2 !transform !-translate-y-1/2 bg-black/80 !rounded-full !shadow-lg  hover:!text-white !transition-all !duration-300"></div>
+          {/* <div className="swiper-button-prev !text-white !w-10 !h-10 !mt-0 !left-0 !top-1/2 !transform !-translate-y-1/2 bg-black/80 !rounded-full !shadow-lg  hover:!text-white !transition-all !duration-300"></div>
+          <div className="swiper-button-next !text-white !w-10 !h-10 !mt-0 !right-0 !top-1/2 !transform !-translate-y-1/2 bg-black/80 !rounded-full !shadow-lg  hover:!text-white !transition-all !duration-300"></div> */}
         </div>
 
         {/* Call to Action */}
