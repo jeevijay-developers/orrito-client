@@ -1,8 +1,13 @@
 "use client";
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 const OurClients = () => {
   const carouselRef = useRef(null)
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
 
   const clientLogos = [
     {
@@ -111,8 +116,8 @@ const OurClients = () => {
 
   const containerStyle = {
     background: '#ffffff',
-    borderRadius: window.innerWidth < 640 ? '8px' : '15px',
-    padding: window.innerWidth < 640 ? '20px 10px' : window.innerWidth < 768 ? '30px 15px' : '40px 20px',
+    borderRadius: isMounted && window.innerWidth < 640 ? '8px' : '15px',
+    padding: isMounted && window.innerWidth < 640 ? '20px 10px' : isMounted && window.innerWidth < 768 ? '30px 15px' : '40px 20px',
     margin: '0 auto',
     maxWidth: '1200px',
     width: '90%',
@@ -144,8 +149,8 @@ const OurClients = () => {
     // boxShadow: '0 10px 30px rgba(242, 109, 49, 0.15)',
     transition: 'all 0.3s ease',
     border: '1px solid rgba(242, 109, 49, 0.1)',
-    height: window.innerWidth < 640 ? '60px' : window.innerWidth < 768 ? '80px' : '100px',
-    width: window.innerWidth < 640 ? '90px' : window.innerWidth < 768 ? '120px' : '150px',
+    height: isMounted && window.innerWidth < 640 ? '60px' : isMounted && window.innerWidth < 768 ? '80px' : '100px',
+    width: isMounted && window.innerWidth < 640 ? '90px' : isMounted && window.innerWidth < 768 ? '120px' : '150px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
