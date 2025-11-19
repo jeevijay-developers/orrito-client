@@ -28,10 +28,10 @@ const ProductHome = () => {
   const categories = [
     {
       image: {
-        url: '/categories/ceiling_fan.png',
+        url: '/categories/floodLight.png',
         public_id: 'products/fk35pxdnybjlxrnyfyya'
       },
-      name: 'Ceiling fans',
+      name: 'Flood Lights',
       products: [
         "683ffe52d7dc0b9ccea9bb35",
         "685f8fd368e2c0833d033fea",
@@ -42,7 +42,7 @@ const ProductHome = () => {
     },
     {
       image: {
-        url: '/categories/diwali_lights.png',
+        url: '/categories/diwali.png',
         public_id: 'products/abc123'
       },
       name: 'Diwali lights',
@@ -70,7 +70,7 @@ const ProductHome = () => {
     },
     {
       image: {
-        url: '/categories/bedroom_lamp.png',
+        url: '/categories/lamp.png',
         public_id: 'products/ghi789'
       },
       name: 'Bedroom lamps',
@@ -135,7 +135,7 @@ const ProductHome = () => {
                 className="block w-full h-full"
               >
                 <div className="flex flex-col items-center">
-                  <div className="w-28 h-28 lg:w-36 lg:h-36 rounded-4xl  flex items-center justify-center mb-3 overflow-hidden">
+                  <div className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-36 lg:h-36 rounded-4xl flex items-center justify-center mb-3 overflow-hidden">
                     <img
                       src={
                         cat.image?.url ||
@@ -147,7 +147,7 @@ const ProductHome = () => {
                       className="w-full h-full object-cover rounded-4xl cursor-pointer transition-transform duration-200 hover:scale-105 "
                     />
                   </div>
-                  <span className="text-gray-700 font-medium text-lg text-center whitespace-nowrap">
+                  <span className="text-gray-700 font-medium text-sm sm:text-base lg:text-lg text-center whitespace-nowrap">
                     {cat.name}
                   </span>
                 </div>

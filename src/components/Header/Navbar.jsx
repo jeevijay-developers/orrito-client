@@ -339,7 +339,7 @@ const Navbar = () => {
                 />
                 <div className="absolute inset-y-0 right-0 flex items-center pr-3">
                   <svg
-                    className="w-4 h-4 text-gray-500"
+                    className="w-4 h-4 text-white"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -417,7 +417,7 @@ const Navbar = () => {
             {/* Mobile menu button */}
             <div className="lg:hidden flex items-center space-x-2">
               {/* Mobile Search Button */}
-              <button className="text-gray-700 hover:text-orange-500 p-2 rounded transition-colors duration-200">
+              <button className="text-white hover:text-orange-500 p-2 rounded transition-colors duration-200">
                 <svg
                   className="w-5 h-5"
                   fill="none"
@@ -434,7 +434,7 @@ const Navbar = () => {
               </button>
               <button
                 onClick={toggleMenu}
-                className="text-gray-700 hover:text-orange-500 focus:outline-none p-2 rounded transition-colors duration-200"
+                className="text-white hover:text-orange-500 focus:outline-none p-2 rounded transition-colors duration-200"
                 aria-label="Toggle menu"
               >
                 <svg

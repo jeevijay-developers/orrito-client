@@ -35,14 +35,14 @@ const WhyOrrito = () => {
       <div className="container mx-auto px-4 max-w-5xl">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3">
             Why Choose <span className="text-orange-600">Orrito</span>?
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-[#e85a35] to-[#e9383b] mx-auto rounded-full"></div>
         </div>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 ">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((feature, index) => (
             <div 
               key={index}
@@ -50,9 +50,9 @@ const WhyOrrito = () => {
             >
               {/* Icon Container with Circular Background */}
               <div className="relative mb-6">
-                <div className="w-22 h-22 md:w-30 md:h-30 rounded-full bg-gradient-to-br from-orange-600 to-yellow-500 flex items-center justify-center group-hover:shadow-lg transition-all duration-300">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 rounded-full bg-gradient-to-br from-orange-600 to-yellow-500 flex items-center justify-center group-hover:shadow-lg transition-all duration-300">
                   {/* Placeholder for illustration */}
-                  <div className="w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br from-orange-200 to-yellow-200 rounded-full flex items-center justify-center">
+                  <div className="w-14 h-14 sm:w-18 sm:h-18 md:w-20 md:h-20 lg:w-24 lg:h-24 bg-gradient-to-br from-orange-200 to-yellow-200 rounded-full flex items-center justify-center">
                     <Image src={feature.icon} alt={feature.title} width={100} height={100} className='rounded-full' />
                   </div>
                   {/* You can replace the above placeholder with: */}

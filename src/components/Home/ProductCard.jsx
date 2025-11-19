@@ -8,20 +8,20 @@ const ProductCard = ({ product }) => {
     <div className="group bg-gray-100 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200 flex flex-col h-full">
       {/* Product Image */}
       <Link href={`/products/product/${product.slug}`} className="block">
-        <div className="relative h-48 bg-gray-50 overflow-hidden">
+        <div className="relative h-32 sm:h-40 md:h-48 bg-gray-50 overflow-hidden">
           <img
             src={"/categories/ceiling_fan.png" || product.image}
             alt={product.name}
-            className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-full object-contain p-2 sm:p-3 md:p-4 group-hover:scale-105 transition-transform duration-300"
           />
         </div>
       </Link>
 
       {/* Product Details */}
-      <div className="p-4 flex flex-col flex-grow">
+      <div className="p-3 sm:p-4 flex flex-col flex-grow">
         {/* Product Name */}
         <Link href={`/products/product/${product.slug}`}>
-          <h3 className="text-lg font-semibold text-gray-800 mb-2 line-clamp-2 min-h-[40px] hover:text-orange-500 transition-colors">
+          <h3 className="text-sm sm:text-base md:text-lg font-semibold text-gray-800 mb-2 line-clamp-2 min-h-[40px] hover:text-orange-500 transition-colors">
             {product.name}
           </h3>
         </Link>
@@ -32,10 +32,10 @@ const ProductCard = ({ product }) => {
 
         {/* Price */}
         <div className="mb-3">
-          <span className="text-lg font-bold text-gray-900">
+          <span className="text-base sm:text-lg font-bold text-gray-900">
             ₹{product.offerPrice}
           </span>
-            <span className="text-sm text-gray-400 line-through ml-2">
+            <span className="text-xs sm:text-sm text-gray-400 line-through ml-2">
               ₹{product?.originalPrice || "99999"}
             </span>
         </div>

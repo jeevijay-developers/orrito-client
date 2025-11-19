@@ -68,11 +68,11 @@ const Offers2 = () => {
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Header */}
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-800 mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-4">
             Special <span className="text-orange-500">Offers</span>
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-orange-500 to-yellow-400 mx-auto mb-4 rounded-full"></div>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
             Discover amazing deals on premium LED lighting solutions. Limited
             time offers on our best-selling products!
           </p>
@@ -82,8 +82,8 @@ const Offers2 = () => {
         <div className="relative">
           <Swiper
             modules={[Autoplay, Pagination]}
-            spaceBetween={24}
-            slidesPerView={1}
+            spaceBetween={12}
+            slidesPerView={2}
             autoplay={{
               delay: 3000,
               disableOnInteraction: false,

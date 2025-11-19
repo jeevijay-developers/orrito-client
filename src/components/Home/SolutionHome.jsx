@@ -125,13 +125,13 @@ const SolutionHome = () => {
 					{categories.map((sol) => (
 						<SwiperSlide key={sol._id || sol.id || sol.name}>
 							<Link href={`/solutions/${encodeURIComponent(sol.name)}`} className="block w-full h-full">
-								<div className="flex flex-col items-center rounded-2xl overflow-hidden mx-auto pb-4 px-1 w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-sm">
+								<div className="flex flex-col items-center rounded-2xl overflow-hidden mx-auto pb-4 px-1 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-sm">
 									<img
 										src={sol.image?.url || sol.img || sol.src || '/img/corporate/placeholder.png'}
 										alt={sol.name}
-										className="w-full h-80 sm:h-96 md:h-[450px] lg:h-[520px] object-cover rounded-2xl"
+										className="w-full h-48 sm:h-64 md:h-80 lg:h-96 object-cover rounded-2xl"
 									/>
-									<button className="mt-4 py-2 px-5 bg-gray-900 text-white rounded-full font-semibold text-xs sm:text-sm hover:bg-orange-700 transition-colors duration-200 focus:outline-none ">
+									<button className="mt-3 py-1.5 px-4 sm:py-2 sm:px-5 bg-gray-900 text-white rounded-full font-semibold text-xs sm:text-sm hover:bg-orange-700 transition-colors duration-200 focus:outline-none ">
 										{sol.btn}
 									</button>
 								</div>

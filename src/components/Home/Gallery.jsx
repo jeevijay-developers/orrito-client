@@ -8,49 +8,49 @@ const Gallery = () => {
     {
       id: 1,
       name: "LED Smart Bulb 12W",
-      image: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80",
+      image: "/gallery/led.jpg",
       category: "Smart Lighting",
       size: "large"
     },
     {
       id: 2,
       name: "Vintage Edison Bulb",
-      image: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&w=600&q=80",
+      image: "/gallery/vintage.png",
       category: "Decorative",
       size: "medium"
     },
     {
       id: 3,
       name: "LED Panel Light 24W",
-      image: "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80",
+      image: "/gallery/panellight.png",
       category: "Panel Lights",
       size: "tall"
     },
     {
       id: 4,
       name: "RGB Color Bulb",
-      image: "https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?auto=format&fit=crop&w=600&q=80",
+      image: "/gallery/rgb.png",
       category: "RGB Lighting",
       size: "small"
     },
     {
       id: 5,
       name: "LED Tube Light 18W",
-      image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
+      image: "/gallery/led18w.png",
       category: "Tube Lights",
       size: "wide"
     },
     {
       id: 6,
       name: "Flood Light 50W",
-      image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
+      image: "/gallery/floodlight.png",
       category: "Outdoor",
       size: "medium"
     },
     {
       id: 7,
       name: "Industrial LED 36W",
-      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=600&q=80",
+      image: "/gallery/industrial36w.png",
       category: "Industrial",
       size: "medium"
     }
@@ -59,17 +59,17 @@ const Gallery = () => {
   const getSizeClasses = (size) => {
     switch (size) {
       case 'large':
-        return 'col-span-2 row-span-2 h-80'
+        return 'col-span-2 row-span-2 h-48 sm:h-64 md:h-80'
       case 'tall':
-        return 'col-span-1 row-span-2 h-80'
+        return 'col-span-1 row-span-2 h-48 sm:h-64 md:h-80'
       case 'wide':
-        return 'col-span-2 row-span-1 h-48'
+        return 'col-span-2 row-span-1 h-32 sm:h-40 md:h-48'
       case 'medium':
-        return 'col-span-1 row-span-1 h-48'
+        return 'col-span-1 row-span-1 h-32 sm:h-40 md:h-48'
       case 'small':
-        return 'col-span-1 row-span-1 h-36'
+        return 'col-span-1 row-span-1 h-28 sm:h-32 md:h-36'
       default:
-        return 'col-span-1 row-span-1 h-48'
+        return 'col-span-1 row-span-1 h-32 sm:h-40 md:h-48'
     }
   }
 
@@ -87,21 +87,21 @@ const Gallery = () => {
         <div className="container mx-auto px-4 max-w-7xl">
           {/* Header */}
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
               Our <span className="text-orange-500">LED Gallery</span>
             </h2>
             <div className="w-20 h-1 bg-gradient-to-r from-orange-500 to-yellow-400 mx-auto mb-4 rounded-full"></div>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
               Explore our comprehensive collection of premium LED lighting solutions designed for every space and need.
             </p>
           </div>
 
           {/* Modern Mesh Gallery Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-min max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3 md:gap-4 auto-rows-min max-w-6xl mx-auto">
             {galleryItems.map((item, index) => (
               <div
                 key={item.id}
-                className={`group relative overflow-hidden rounded-2xl cursor-pointer transition-all duration-700 hover:scale-[1.02] hover:shadow-2xl hover:z-10 ${getSizeClasses(item.size)}`}
+                className={`group relative overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl cursor-pointer transition-all duration-700 hover:scale-[1.02] hover:shadow-2xl hover:z-10 ${getSizeClasses(item.size)}`}
                 style={{
                   animationDelay: `${index * 0.15}s`,
                   animation: 'fadeInUp 1s ease-out forwards'
@@ -116,25 +116,25 @@ const Gallery = () => {
                 />
                 
                 {/* Modern Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-transparent via-black/10 to-black/60 opacity-70 group-hover:opacity-90 transition-all duration-500"></div>
+                {/* <div className="absolute inset-0 bg-gradient-to-br from-transparent via-black/10 to-black/60 opacity-70 group-hover:opacity-90 transition-all duration-500"></div> */}
                 
                 {/* Animated Border */}
-                <div className="absolute inset-0 border-2 border-transparent  rounded-2xl transition-all duration-500"></div>
+                <div className="absolute inset-0 border-2 border-transparent rounded-lg sm:rounded-xl md:rounded-2xl transition-all duration-500"></div>
                 
                 {/* Content with Modern Typography */}
-                <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+                <div className="absolute bottom-0 left-0 right-0 p-2 sm:p-3 md:p-4 text-white">
                   <div className="transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                    <span className="inline-block px-3 py-1 backdrop-blur-sm text-xs font-bold rounded-full mb-2 shadow-lg">
+                    <span className="inline-block px-2 py-0.5 sm:px-3 sm:py-1 backdrop-blur-sm text-xs font-bold rounded-full mb-1 sm:mb-2 shadow-lg">
                       {item.category}
                     </span>
-                    <h3 className="text-sm md:text-lg font-bold mb-1 transition-colors duration-300 leading-tight">
+                    <h3 className="text-xs sm:text-sm md:text-lg font-bold mb-1 transition-colors duration-300 leading-tight">
                       {item.name}
                     </h3>
                   </div>
                 </div>
 
                 {/* Hover Glow Effect */}
-                <div className="absolute inset-0  group-hover:opacity-100 duration-700 rounded-2xl"></div>
+                {/* <div className="absolute inset-0 group-hover:opacity-100 duration-700 rounded-lg sm:rounded-xl md:rounded-2xl"></div> */}
               </div>
             ))}
           </div>
@@ -143,7 +143,7 @@ const Gallery = () => {
 
       {/* Modal */}
       {selectedImage && (
-        <div className="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center p-4" onClick={closeModal}>
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={closeModal}>
           <div className="relative max-w-4xl w-full bg-white rounded-2xl overflow-hidden" onClick={(e) => e.stopPropagation()}>
             {/* Close Button */}
             <button

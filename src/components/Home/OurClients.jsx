@@ -111,8 +111,8 @@ const OurClients = () => {
 
   const containerStyle = {
     background: '#ffffff',
-    borderRadius: '20px',
-    padding: '40px 20px',
+    borderRadius: window.innerWidth < 640 ? '8px' : '15px',
+    padding: window.innerWidth < 640 ? '20px 10px' : window.innerWidth < 768 ? '30px 15px' : '40px 20px',
     margin: '0 auto',
     maxWidth: '1200px',
     width: '90%',
@@ -144,8 +144,8 @@ const OurClients = () => {
     // boxShadow: '0 10px 30px rgba(242, 109, 49, 0.15)',
     transition: 'all 0.3s ease',
     border: '1px solid rgba(242, 109, 49, 0.1)',
-    height: '140px',
-    width: '200px',
+    height: window.innerWidth < 640 ? '60px' : window.innerWidth < 768 ? '80px' : '100px',
+    width: window.innerWidth < 640 ? '90px' : window.innerWidth < 768 ? '120px' : '150px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -166,10 +166,10 @@ const OurClients = () => {
       <div className="container-fluid">
         <div className="row justify-content-center">
           <div className="col-12">
-            <h2 style={headingStyle}>
-              <span style={{ color: 'black' }}>Join our </span>
-              <span style={{ color: '#f97316' }}>400+ Happy Clients</span>
-              <span style={{ color: 'black' }}> Family</span>
+            <h2 style={headingStyle} >
+              <span style={{ color: 'black' }} className='text-2xl sm:text-3xl md:text-4xl font-bold'>Join our </span>
+              <span style={{ color: '#f97316' }} className='text-2xl sm:text-3xl md:text-4xl font-bold'>400+ Happy Clients</span>
+              <span style={{ color: 'black' }} className='text-2xl sm:text-3xl md:text-4xl font-bold'> Family</span>
             </h2>
           </div>
         </div>
